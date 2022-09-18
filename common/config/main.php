@@ -42,8 +42,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.163.com',
-                'username' => 'yancheng@sungotech.com',
-                'password' => '1qaz2wsx',
+                'username' => '',
+                'password' => '',
             ],
         ],
         'log' => [

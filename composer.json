@@ -1,0 +1,84 @@
+{
+    "name": "yiisoft/yii2-app-advanced",
+    "description": "Yii 2 Advanced Project Template",
+    "keywords": [
+        "yii2",
+        "framework",
+        "advanced",
+        "project template"
+    ],
+    "homepage": "http://www.yiiframework.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.1.0",
+        "yiisoft/yii2": "^2.0.15.0",
+        "yiisoft/yii2-bootstrap": "*",
+        "dektrium/yii2-rbac": "1.0.0-alpha@dev",
+        "kop/yii2-scroll-pager": "dev-master",
+        "almasaeed2010/adminlte": "~2.0",
+        "rmrevin/yii2-fontawesome": "~2.15",
+        "light/yii2-lock-form": "^1.0",
+        "light/yii2-sweet-submit": "^1.0",
+        "abhi1693/yii2-config": "^1.0",
+        "denisogr/yii2-cronjobs": "dev-master",
+        "2amigos/yii2-ckeditor-widget": "^2.1",
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "hyii2/yii2-avatar": "dev-master",
+        "yiisoft/yii2-imagine": "^2.1",
+        "kartik-v/yii2-widget-datetimepicker": "^1.4",
+        "kartik-v/yii2-widget-datepicker": "^1.4",
+        "himiklab/yii2-easy-thumbnail-image-helper": "*",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "yiisoft/yii2-shell": "^2.0",
+        "yiisoft/yii2-httpclient": "^2.0",
+        "2amigos/yii2-chartjs-widget": "^2.1",
+        "yiisoft/yii2-swiftmailer": "^2.1",
+        "bower-asset/blueimp-gallery": "^2.21",
+        "kartik-v/yii2-widgets": "^3.4"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.1.0",
+        "yiisoft/yii2-gii": "~2.1.0",
+        "yiisoft/yii2-faker": "~2.0.0"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        },
+        "sort-packages": true,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        },
+        "bootstrap": "backend\\modules\\rbac\\Bootstrap"
+    },
+    "scripts": {
+        "post-install-cmd": "php init --env=Development --overwrite=n"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        },
+        "0": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    }
+}

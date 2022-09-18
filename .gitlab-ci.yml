@@ -1,0 +1,23 @@
+stages:
+- test
+- deploy
+test_job:
+  stage: test
+  tags:
+    - test
+  script:
+    - cd /alidata1/wwwroot/wechat.papv2.sungotech.com
+    - git checkout test
+    - git pull
+    - echo "done"
+  only:
+    - test
+deploy_job:
+  stage: deploy
+  tags:
+    - deploy
+  script:
+    - ssh root@172.16.5.76 "cd /alidata1/wwwroot/papweixin.ilvzhou.com; git pull; ./yii migrate --interactive=0;"
+    - echo "done"
+  only:
+    - master

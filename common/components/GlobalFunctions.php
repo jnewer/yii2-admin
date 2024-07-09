@@ -30,12 +30,12 @@ if (!function_exists('db')) {
     }
 }
 
-if (!function_exists('slaveDb')) {
+if (!function_exists('slave_db')) {
     /**
      * Returns the database connection component.
      * @return \yii\db\Connection
      */
-    function slaveDb()
+    function slave_db()
     {
         return app()->get('slaveDb');
     }
@@ -81,13 +81,13 @@ if (!function_exists('post')) {
     }
 }
 
-if (!function_exists('isGet')) {
+if (!function_exists('is_get')) {
     /**
      * @inheritdoc
      */
-    function isGet()
+    function is_get()
     {
-        return request()->getIsGet();
+        return request()->getis_get();
     }
 }
 
@@ -101,13 +101,13 @@ if (!function_exists('get')) {
     }
 }
 
-if (!function_exists('isOptions')) {
+if (!function_exists('is_options')) {
     /**
      * @inheritdoc
      */
-    function isOptions()
+    function is_options()
     {
-        return request()->getIsOptions();
+        return request()->getis_options();
     }
 }
 
@@ -122,33 +122,33 @@ if (!function_exists('config')) {
     }
 }
 
-if (!function_exists('getConfig')) {
+if (!function_exists('get_config')) {
 
     /**
      * @inheritdoc
      */
-    function getConfig($name, $default = null)
+    function get_config($name, $default = null)
     {
         return Yii::$app->config->get($name, $default);
     }
 }
 
-if (!function_exists('setConfig')) {
+if (!function_exists('set_config')) {
 
     /**
      * @inheritdoc
      */
-    function setConfig($name, $value = null)
+    function set_config($name, $value = null)
     {
         return Yii::$app->config->set($name, $value);
     }
 }
 
-if (!function_exists('getMyId')) {
+if (!function_exists('admin_id')) {
     /**
      * @return int|string
      */
-    function getMyId()
+    function admin_id()
     {
         return Yii::$app->user->getId();
     }
@@ -195,13 +195,13 @@ if (!function_exists('session')) {
 }
 
 
-if (!function_exists('setFlash')) {
+if (!function_exists('set_flash')) {
     /**
      * @inheritdoc
      */
-    function setFlash($key, $value = true, $removeAfterAccess = true)
+    function set_flash($key, $value = true, $removeAfterAccess = true)
     {
-        session()->setFlash($key, $value, $removeAfterAccess);
+        session()->set_flash($key, $value, $removeAfterAccess);
     }
 }
 
@@ -215,31 +215,31 @@ if (!function_exists('cache')) {
     }
 }
 
-if (!function_exists('getCache')) {
+if (!function_exists('get_cache')) {
     /**
      * @inheritdoc
      */
-    function getCache($key)
+    function get_cache($key)
     {
         cache()->get($key);
     }
 }
 
-if (!function_exists('setCache')) {
+if (!function_exists('set_cache')) {
     /**
      * @inheritdoc
      */
-    function setCache($key, $value, $duration = null, $dependency = null)
+    function set_cache($key, $value, $duration = null, $dependency = null)
     {
         cache()->set($key, $value, $duration, $dependency);
     }
 }
 
-if (!function_exists('deleteCache')) {
+if (!function_exists('delete_cache')) {
     /**
      * @inheritdoc
      */
-    function deleteCache($key)
+    function delete_cache($key)
     {
         cache()->delete($key);
     }
@@ -286,23 +286,23 @@ if (!function_exists('formatter')) {
     }
 }
 
-if (!function_exists('basePath')) {
+if (!function_exists('bash_path')) {
     /**
      * @inheritdoc
      */
-    function basePath()
+    function bash_path()
     {
-        return app()->basePath;
+        return app()->bash_path;
     }
 }
 
-if (!function_exists('runtimePath')) {
+if (!function_exists('runtime_path')) {
     /**
      * @inheritdoc
      */
-    function runtimePath()
+    function runtime_path()
     {
-        return app()->runtimePath;
+        return app()->runtime_path;
     }
 }
 
@@ -317,17 +317,17 @@ if (!function_exists('user')) {
     }
 }
 
-if (!function_exists('isAdmin')) {
+if (!function_exists('is_admin')) {
     /**
      * @inheritdoc
      */
-    function isAdmin()
+    function is_admin()
     {
-        return user()->getIsAdmin();
+        return user()->getis_admin();
     }
 }
 
-if (!function_exists('hasRole')) {
+if (!function_exists('is_role')) {
     /**
      * @inheritdoc
      */
@@ -338,12 +338,12 @@ if (!function_exists('hasRole')) {
 }
 
 
-if (!function_exists('dbCmd')) {
+if (!function_exists('db_cmd')) {
 
     /**
      * @inheritdoc
      */
-    function dbCmd($sql = null, $params = [])
+    function db_cmd($sql = null, $params = [])
     {
         return db()->createCommand($sql, $params);
     }

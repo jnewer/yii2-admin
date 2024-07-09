@@ -41,7 +41,7 @@ use backend\widgets\Alert;
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright <?php echo getConfig('site_copyright', 'jcoder') ?> &copy; <?php echo date('Y') ?>.</strong>
+    <strong>Copyright <?php echo get_config('site_copyright', 'jcoder') ?> &copy; <?php echo date('Y') ?>.</strong>
 </footer>
 
 <!-- Control Sidebar -->

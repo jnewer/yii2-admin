@@ -126,7 +126,7 @@ class ActiveRecord extends BaseActiveRecord
         $className = explode('\\', get_class($this));
         $className = array_pop($className);
 
-        $extensions = $extensions ? $extensions : getConfig('upload_allow_file', []);
+        $extensions = $extensions ? $extensions : get_config('upload_allow_file', []);
         $validator = new FileValidator(['skipOnEmpty' => true, 'extensions' => $extensions]);
         foreach ($attributes as $attribute) {
             $file = UploadedFile::getInstance($this, $attribute);
@@ -155,7 +155,7 @@ class ActiveRecord extends BaseActiveRecord
     {
         $className = explode('\\', get_class($this));
         $className = array_pop($className);
-        $extensions = $extensions ? $extensions : getConfig('upload_allow_image', []);
+        $extensions = $extensions ? $extensions : get_config('upload_allow_image', []);
         $validator = new ImageValidator(['skipOnEmpty' => true, 'extensions' => $extensions, 'maxSize' => $maxSize, 'tooBig' => '图片文件体积过大，不能超过{formattedLimit}.']);
         foreach ($attributes as $attribute) {
             $file = UploadedFile::getInstance($this, $attribute);

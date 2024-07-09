@@ -37,3 +37,5 @@ phpunit.phar
 .tags_sorted_by_file
 
 .vscode/
+
+vendor/

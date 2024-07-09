@@ -14,19 +14,13 @@ git clone https://github.com/jnewer/yii2-admin.git
 composer install
 ```
 
-3. 初始化
-
-```
-php init
-```
-
-4. 配置数据库
+3. 配置数据库
 
 ```
 common/config/main-local.php
 ```
 
-5. 导入数据库
+4. 导入数据库
 
 ```
 1.php yii migrate/up
@@ -39,8 +33,11 @@ common/config/main-local.php
 ```
 3.php yii migrate/up --migrationPath=@yii/log/migrations
 ```
+```
+yii migrate/up --migrationPath=@vendor/abhi1693/yii2-config/migrations
+```
 
-6. 启动服务
+5. 启动服务
 
 ```
 php yii serve

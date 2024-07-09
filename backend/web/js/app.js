@@ -1,21 +1,32 @@
 $(function() {
     // 替换yii2默认的js对话框
     yii.confirm = function(message, ok, cancel) {
-        swal({
-            title: message,
-            text: null,
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
-            closeOnConfirm: true
-        }, function(isConfirm) {
-            if (isConfirm) {
-                !ok || ok();
-            } else {
-                !cancel || cancel();
-            }
+        // swal({
+        //     title: message,
+        //     text: null,
+        //     type: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonColor: "#DD6B55",
+        //     confirmButtonText: "确定",
+        //     cancelButtonText: "取消",
+        //     closeOnConfirm: true
+        // }, function(isConfirm) {
+        //     if (isConfirm) {
+        //         !ok || ok();
+        //     } else {
+        //         !cancel || cancel();
+        //     }
+        // });
+        layer.confirm(message, {
+            title: '删除确认',
+            icon: 3,
+            btn: ['确定', '取消'] //按钮
+        }, function(index) {
+            layer.close(index);
+            ok();
+        }, function(index) {
+            layer.close(index);
+            cancel();
         });
         // confirm will always return false on the first call
         // to cancel click handler

@@ -31,6 +31,7 @@ class AppAsset extends AssetBundle
         'js/webuploader.min.js',
         'js/zoomify.min.js',
         // 'js/upload.js',
+        'layer/layer.js',
         'js/app.js',
     ];
     public $depends = [

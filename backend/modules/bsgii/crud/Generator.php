@@ -56,9 +56,10 @@ class Generator extends \yii\gii\generators\crud\Generator
             operations for the specified data model.';
     }
 
-    public function generate() {
+    public function generate()
+    {
         $tableSchema = $this->getTableSchema();
-        foreach($tableSchema->columns as $attribute=>$column) {
+        foreach ($tableSchema->columns as $attribute => $column) {
             $this->getForeignKeyClassName($column->name);
         }
         return parent::generate();
@@ -89,7 +90,8 @@ class Generator extends \yii\gii\generators\crud\Generator
     }
 
     // 根据反射提取类常量字段
-    public function getConstsAttributes() {
+    public function getConstsAttributes()
+    {
         $rec = new \ReflectionClass($this->modelClass);
         $consts = $rec->getConstants();
         $constsAttributes = [];
@@ -101,24 +103,27 @@ class Generator extends \yii\gii\generators\crud\Generator
         return array_unique($constsAttributes);
     }
 
-    public function getForeignKeyClassName($attribute) {
+    public function getForeignKeyClassName($attribute)
+    {
         $suffix = substr($attribute, -3);
-        if($suffix !== '_id') return;
+        if ($suffix !== '_id') {
+            return;
+        }
         $attribute = substr($attribute, 0, strlen($attribute)-3);
         $namespace = substr($this->modelClass, 0, strrpos($this->modelClass, '\\'));
         $className = '\\'.$namespace.'\\'.ucfirst($attribute);
         eval("use $className;");
-        if(\class_exists($className)) {
+        if (\class_exists($className)) {
             $this->foreignKeyClassNames[ucfirst($attribute)] = $className;
             return [ucfirst($attribute), $className];
         }
 
         $aliases = Yii::$aliases;
-        foreach($aliases as $alias => $path){
+        foreach ($aliases as $alias => $path) {
             $namespace = substr($alias, 1).'\\models';
             $className = '\\'.$namespace.'\\'.ucfirst($attribute);
             eval("use $className;");
-            if(\class_exists($className)) {
+            if (\class_exists($className)) {
                 $this->foreignKeyClassNames[ucfirst($attribute)] = $className;
                 return [ucfirst($attribute), $className];
             }
@@ -155,7 +160,7 @@ class Generator extends \yii\gii\generators\crud\Generator
             return "\$form->field(\$model, '$attribute')->widget(backend\widgets\FileInput::class)->hint('支持JPG、PNG格式，不要超过500KB为宜')";
         } elseif ($column->type === 'string' && in_array(strtolower($column->name), $this->getConstsAttributes())) {
             return "\$form->field(\$model, '$attribute')->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."'), ['class'=>'select2', 'style'=>'width:100%', 'data-placeholder'=>'{$column->comment}', 'prompt'=>''])";
-        }else {
+        } else {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
                 $input = 'passwordInput';
             } else {
@@ -167,7 +172,7 @@ class Generator extends \yii\gii\generators\crud\Generator
                     $dropDownOptions[$enumValue] = Inflector::humanize($enumValue);
                 }
                 return "\$form->field(\$model, '$attribute')->dropDownList("
-                    . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)).", ['prompt' => ''])";
+                    . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)).", ['class'=>'select2', 'style'=>'width:100%', 'data-placeholder'=>'{$column->comment}', 'prompt'=>''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
                 return "\$form->field(\$model, '$attribute')->$input()";
             } else {

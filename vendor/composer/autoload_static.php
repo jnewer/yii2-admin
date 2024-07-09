@@ -75,7 +75,6 @@ class ComposerStaticInit3500d265274b57946b7c0556d26229c9
         'h' => 
         array (
             'hyii2\\avatar\\' => 13,
-            'himiklab\\thumbnail\\' => 19,
         ),
         'd' => 
         array (
@@ -277,10 +276,6 @@ class ComposerStaticInit3500d265274b57946b7c0556d26229c9
         'hyii2\\avatar\\' => 
         array (
             0 => __DIR__ . '/..' . '/hyii2/yii2-avatar',
-        ),
-        'himiklab\\thumbnail\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/himiklab/yii2-easy-thumbnail-image-helper',
         ),
         'dosamigos\\ckeditor\\' => 
         array (

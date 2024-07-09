@@ -61,7 +61,8 @@ class Generator extends \yii\gii\generators\model\Generator
         return 'This generator generates an ActiveRecord class for the specified database table.';
     }
 
-    public function generateModelName($tableName) {
+    public function generateModelName($tableName)
+    {
         $db = $this->getDbConnection();
         $table_schema = substr($db->dsn, strrpos($db->dsn, '=')+1);
         $sql = "SELECT table_comment FROM information_schema.TABLES WHERE table_schema = '{$table_schema}' AND table_name = '$tableName'";
@@ -82,12 +83,12 @@ class Generator extends \yii\gii\generators\model\Generator
                 continue;
             }
             if (!$column->allowNull && $column->defaultValue === null) {
-                if(!in_array($column->name, ['created_at', 'updated_at'])){
+                if (!in_array($column->name, ['created_at', 'updated_at'])) {
                     if ($column->type === 'string' && in_array($column->name, ['image', 'photo', 'filepath', 'screenshot', 'attach'])) {
                         $types['required_enableClientValidation_false'][] = $column->name;
                         $types['image'][] = $column->name;
                         $this->fileAttributes[] = "'$column->name'";
-                    }else{
+                    } else {
                         $types['required'][] = $column->name;
                     }
                 }
@@ -105,7 +106,9 @@ class Generator extends \yii\gii\generators\model\Generator
                     $types['boolean'][] = $column->name;
                     break;
                 case Schema::TYPE_TINYINT:
-                    if(strpos($column->name, 'is_')===0) $types['boolean'][] = $column->name;
+                    if (strpos($column->name, 'is_')===0) {
+                        $types['boolean'][] = $column->name;
+                    }
                     break;
                 case Schema::TYPE_FLOAT:
                 case 'double': // Schema::TYPE_DOUBLE, which is available since Yii 2.0.3
@@ -133,15 +136,12 @@ class Generator extends \yii\gii\generators\model\Generator
             if ($driverName === 'pgsql' && $type === 'integer') {
                 $rules[] = "[['" . implode("', '", $columns) . "'], 'default', 'value' => null]";
             }
-            if($type=='required_enableClientValidation_false'){
+            if ($type=='required_enableClientValidation_false') {
                 $rules[] = "[['" . implode("', '", $columns) . "'], 'required', 'enableClientValidation'=>false]";
-            }
-            elseif($type=='image'){
+            } elseif ($type=='image') {
                 $rules[] = "[['" . implode("', '", $columns) . "'], '$type', 'extensions'=>['jpg', 'png', 'gif'], 'maxSize'=>2*1024*1024]";
-            }
-            else{
+            } else {
                 $rules[] = "[['" . implode("', '", $columns) . "'], '$type']";
-
             }
         }
         foreach ($lengths as $length => $columns) {

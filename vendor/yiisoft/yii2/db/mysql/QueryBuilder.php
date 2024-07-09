@@ -259,10 +259,17 @@ class QueryBuilder extends \yii\db\QueryBuilder
         if (!$columns instanceof Query && empty($names)) {
             $tableSchema = $this->db->getSchema()->getTableSchema($table);
             if ($tableSchema !== null) {
-                $columns = !empty($tableSchema->primaryKey) ? $tableSchema->primaryKey : [reset($tableSchema->columns)->name];
+                if (!empty($tableSchema->primaryKey)) {
+                    $columns = $tableSchema->primaryKey;
+                    $defaultValue = 'NULL';
+                } else {
+                    $columns = [reset($tableSchema->columns)->name];
+                    $defaultValue = 'DEFAULT';
+                }
+                
                 foreach ($columns as $name) {
                     $names[] = $this->db->quoteColumnName($name);
-                    $placeholders[] = 'DEFAULT';
+                    $placeholders[] = $defaultValue;
                 }
             }
         }
@@ -403,7 +410,7 @@ class QueryBuilder extends \yii\db\QueryBuilder
         }
         $version = $cache ? $cache->get($key) : null;
         if (!$version) {
-            $version = $this->db->getSlavePdo()->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            $version = $this->db->getSlavePdo(true)->getAttribute(\PDO::ATTR_SERVER_VERSION);
             if ($cache) {
                 $cache->set($key, $version, $this->db->schemaCacheDuration);
             }

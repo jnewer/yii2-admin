@@ -26,14 +26,14 @@ use common\components\behaviors\DatetimeBehavior;
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
  *
-<?php foreach ($tableSchema->columns as $column): ?>
- * @property <?= "{$column->phpType} \${$column->name}\n" ?>
+<?php foreach ($tableSchema->columns as $column) : ?>
+ * @property <?= "{$column->phpType} \${$column->name}". ' ' . "[$column->dbType]" . ' ' . ($labels[$column->name] ?? '') . "\n"; ?>
 <?php endforeach; ?>
-<?php if (!empty($relations)): ?>
+<?php if (!empty($relations)) : ?>
  *
-<?php foreach ($relations as $name => $relation): ?>
+    <?php foreach ($relations as $name => $relation) : ?>
  * @property <?= $relation[1] . ($relation[2] ? '[]' : '') . ' $' . lcfirst($name) . "\n" ?>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 <?php endif; ?>
  */
 class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
@@ -48,8 +48,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     {
         return '<?= $generator->generateTableName($tableName) ?>';
     }
-<?php if ($generator->db !== 'db'): ?>
-
+<?php if ($generator->db !== 'db') : ?>
     /**
      * @return \yii\db\Connection the database connection used by this AR class.
      */
@@ -59,7 +58,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     }
 
 <?php endif; ?>
-<?php if(array_key_exists('created_at', $labels)||array_key_exists('updated_at', $labels)): ?>
+<?php if (array_key_exists('created_at', $labels)||array_key_exists('updated_at', $labels)) : ?>
     public function behaviors()
     {
         return [
@@ -82,13 +81,12 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     public function attributeLabels()
     {
         return [
-<?php foreach ($labels as $name => $label): ?>
+<?php foreach ($labels as $name => $label) : ?>
             <?= "'$name' => " . $generator->generateString($label) . ",\n" ?>
 <?php endforeach; ?>
         ];
     }
-<?php foreach ($relations as $name => $relation): ?>
-
+<?php foreach ($relations as $name => $relation) : ?>
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -97,11 +95,11 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
         <?= $relation[0] . "\n" ?>
     }
 <?php endforeach; ?>
-<?php if ($queryClassName): ?>
-<?php
+<?php if ($queryClassName) : ?>
+    <?php
     $queryClassFullName = ($generator->ns === $generator->queryNs) ? $queryClassName : '\\' . $generator->queryNs . '\\' . $queryClassName;
     echo "\n";
-?>
+    ?>
     /**
      * @inheritdoc
      * @return <?= $queryClassFullName ?> the active query used by this AR class.

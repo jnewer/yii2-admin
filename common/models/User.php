@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use backend\components\OperationLogBehavior;
@@ -228,9 +229,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         parent::beforeValidate();
 
-        if(Yii::$app->has('authManager')){
+        if (Yii::$app->has('authManager')) {
             $roles = Yii::$app->authManager->getRolesByUser($this->id);
-            if(count($roles)>0){
+            if (count($roles) > 0) {
                 $roles = array_keys($roles);
                 $this->roles = $roles[0];
             }
@@ -240,7 +241,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function afterSave($insert, $changedAttributes)
     {
         Yii::$app->authManager->revokeAll($this->id);
-        if(!empty($this->roles)){
+        if (!empty($this->roles)) {
             // 授予角色
             $role = Yii::$app->authManager->getRole($this->roles);
             Yii::$app->authManager->assign($role, $this->id);
@@ -258,12 +259,13 @@ class User extends ActiveRecord implements IdentityInterface
         $roles = Yii::$app->authManager->getRolesByUser($this->id);
 
         $names = [];
-        foreach($roles as $role)
-        {
-            $names[$role->name] = $role->description&&!$as_array ? $role->description : $role->name;
+        foreach ($roles as $role) {
+            $names[$role->name] = $role->description && !$as_array ? $role->description : $role->name;
         }
 
-        if($as_array) return $names;
+        if ($as_array) {
+            return $names;
+        }
 
         return implode('/', $names);
     }

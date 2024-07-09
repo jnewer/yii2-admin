@@ -1,7 +1,7 @@
 <?php
+
 namespace backend\components;
 
-use Yii;
 use yii\base\ActionFilter;
 
 /**
@@ -11,10 +11,10 @@ class BlankUrlFilter extends ActionFilter
 {
     public function afterAction($action, $result)
     {
-        if(is_string($result)){
+        if (is_string($result)) {
             $pattern = '/<a.+?>.+?<\/a>/i';
-            $result = preg_replace_callback($pattern, function($matches){
-                if(strpos($matches[0], 'href=')===false){
+            $result = preg_replace_callback($pattern, function ($matches) {
+                if (strpos($matches[0], 'href=') === false) {
                     return '';
                 }
                 return $matches[0];

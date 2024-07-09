@@ -28,8 +28,8 @@ use yii\helpers\Inflector;
  * where `<route>` is a route to a controller action and the params will be populated as properties of a command.
  * See [[options()]] for details.
  *
- * @property-read string $help The help information for this controller.
- * @property-read string $helpSummary The one-line short summary describing this controller.
+ * @property-read string $help
+ * @property-read string $helpSummary
  * @property-read array $passedOptionValues The properties corresponding to the passed options.
  * @property-read array $passedOptions The names of the options passed during execution.
  *
@@ -400,12 +400,19 @@ class Controller extends \yii\base\Controller
      *
      * @param string $prompt the prompt message
      * @param array $options Key-value array of options to choose from
+     * @param string|null $default value to use when the user doesn't provide an option.
+     * If the default is `null`, the user is required to select an option.
      *
      * @return string An option character the user chose
+     * @since 2.0.49 Added the $default argument
      */
-    public function select($prompt, $options = [])
+    public function select($prompt, $options = [], $default = null)
     {
-        return Console::select($prompt, $options);
+        if ($this->interactive) {
+            return Console::select($prompt, $options, $default);
+        }
+
+        return $default;
     }
 
     /**
@@ -701,7 +708,7 @@ class Controller extends \yii\base\Controller
     protected function parseDocCommentTags($reflection)
     {
         $comment = $reflection->getDocComment();
-        $comment = "@description \n" . strtr(trim(preg_replace('/^\s*\**( |\t)?/m', '', trim($comment, '/'))), "\r", '');
+        $comment = "@description \n" . strtr(trim(preg_replace('/^\s*\**([ \t])?/m', '', trim($comment, '/'))), "\r", '');
         $parts = preg_split('/^\s*@/m', $comment, -1, PREG_SPLIT_NO_EMPTY);
         $tags = [];
         foreach ($parts as $part) {
@@ -744,7 +751,7 @@ class Controller extends \yii\base\Controller
      */
     protected function parseDocCommentDetail($reflection)
     {
-        $comment = strtr(trim(preg_replace('/^\s*\**( |\t)?/m', '', trim($reflection->getDocComment(), '/'))), "\r", '');
+        $comment = strtr(trim(preg_replace('/^\s*\**([ \t])?/m', '', trim($reflection->getDocComment(), '/'))), "\r", '');
         if (preg_match('/^\s*@\w+/m', $comment, $matches, PREG_OFFSET_CAPTURE)) {
             $comment = trim(substr($comment, 0, $matches[0][1]));
         }

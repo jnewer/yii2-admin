@@ -1,5 +1,6 @@
 <?php
 namespace backend\components;
+
 use yii\web\User as BaseUser;
 use yii;
 
@@ -29,8 +30,7 @@ class User extends BaseUser
         $roles = Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
 
         $names = [];
-        foreach($roles as $role)
-        {
+        foreach ($roles as $role) {
             $names[$role->name] = $role->description ? $role->description : $role->name;
         }
 

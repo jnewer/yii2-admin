@@ -4,9 +4,10 @@
 namespace backend\components;
 
 use Yii;
+use yii\helpers\Json;
+use yii\base\UserException;
 use backend\models\OperationLog;
 use common\components\behaviors\ActiveRecordBehavior;
-use yii\base\UserException;
 
 class OperationLogBehavior extends ActiveRecordBehavior
 {
@@ -41,7 +42,9 @@ class OperationLogBehavior extends ActiveRecordBehavior
     private function saveLogs($event, $act)
     {
         // 只记录后台操作
-        if (basename(Yii::$app->basePath) != 'backend') return false;
+        if (basename(Yii::$app->basePath) != 'backend') {
+            return false;
+        }
         $newattributes = $this->owner->getAttributes();
         $oldattributes = $this->getOldAttributes();
         // 获得该操作资源的类名
@@ -51,8 +54,12 @@ class OperationLogBehavior extends ActiveRecordBehavior
         $resource_name = $model_vars['modelName'];
         // 获得该操作资源的主键
         $pk = $this->owner->getPrimaryKey();
-        if (is_array($pk)) $pk = implode(',', $pk);
-        if (!$pk) $pk = 0;
+        if (is_array($pk)) {
+            $pk = implode(',', $pk);
+        }
+        if (!$pk) {
+            $pk = 0;
+        }
         //后台log
         $log = new OperationLog();
         //LOG 一级大类
@@ -78,7 +85,9 @@ class OperationLogBehavior extends ActiveRecordBehavior
         $log->attributes = $info;
         $log->save();
 
-        if ($log->getErrors()) throw new UserException(\GuzzleHttp\json_encode($log->getErrors(), JSON_UNESCAPED_UNICODE));
+        if ($log->getErrors()) {
+            throw new UserException(Json::encode($log->getErrors(), JSON_UNESCAPED_UNICODE));
+        }
     }
 
     public function getOldAttributes()

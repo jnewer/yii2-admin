@@ -49,7 +49,7 @@ class BaseStringHelper
             $length = static::byteLength($string);
         }
 
-        return mb_substr($string, $start, $length, '8bit');
+        return mb_substr((string)$string, $start, $length, '8bit');
     }
 
     /**
@@ -67,6 +67,8 @@ class BaseStringHelper
      */
     public static function basename($path, $suffix = '')
     {
+        $path = (string)$path;
+
         $len = mb_strlen($suffix);
         if ($len > 0 && mb_substr($path, -$len) === $suffix) {
             $path = mb_substr($path, 0, -$len);
@@ -93,7 +95,7 @@ class BaseStringHelper
     public static function dirname($path)
     {
         $normalizedPath = rtrim(
-            str_replace('\\', '/', $path),
+            str_replace('\\', '/', (string)$path),
             '/'
         );
         $separatorPosition = mb_strrpos($normalizedPath, '/');
@@ -122,6 +124,8 @@ class BaseStringHelper
      */
     public static function truncate($string, $length, $suffix = '...', $encoding = null, $asHtml = false)
     {
+        $string = (string)$string;
+
         if ($encoding === null) {
             $encoding = Yii::$app ? Yii::$app->charset : 'UTF-8';
         }
@@ -233,6 +237,9 @@ class BaseStringHelper
      */
     public static function startsWith($string, $with, $caseSensitive = true)
     {
+        $string = (string)$string;
+        $with = (string)$with;
+
         if (!$bytes = static::byteLength($with)) {
             return true;
         }
@@ -257,6 +264,9 @@ class BaseStringHelper
      */
     public static function endsWith($string, $with, $caseSensitive = true)
     {
+        $string = (string)$string;
+        $with = (string)$with;
+
         if (!$bytes = static::byteLength($with)) {
             return true;
         }
@@ -476,7 +486,7 @@ class BaseStringHelper
             return $string;
         }
 
-        $parts = preg_split('/(\s+[^\w]+\s+|^[^\w]+\s+|\s+)/u', $string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        $parts = preg_split('/(\s+\W+\s+|^\W+\s+|\s+)/u', $string, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
         $ucfirstEven = trim(mb_substr($parts[0], -1, 1, $encoding)) === '';
         foreach ($parts as $key => $value) {
             $isEven = (bool)($key % 2);

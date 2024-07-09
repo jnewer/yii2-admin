@@ -30,9 +30,7 @@ return [
             'cacheDuration' => 100                                   // Cache Expiration time in seconds. 0 means never expire. Defaults to 0 (Optional)
         ],
         'session' => [
-            'class' => 'yii\web\DbSession',
-            // 'db' => 'db',
-            // 'sessionTable' => 'session',
+            'class' => 'yii\web\Session',
             'timeout' => 24 * 3600,
         ],
         'mailer' => [

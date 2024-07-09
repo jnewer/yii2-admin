@@ -6,7 +6,6 @@ use Yii;
 use common\models\Log;
 use common\models\search\LogSearch;
 use backend\components\Controller;
-use yii\web\NotFoundHttpException;
 
 /**
  * LogController implements the CRUD actions for Log model.

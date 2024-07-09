@@ -31,7 +31,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'password', 'listprojects'],
+                        'actions' => ['logout', 'index', 'password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -91,18 +91,18 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            // 记录登陆日志
-            $login_log = new LoginLog();
-            $login_log->user_id = Yii::$app->user->identity->id;
-            $login_log->username = Yii::$app->user->identity->username;
-            $login_log->login_ip = Yii::$app->request->getUserIP();
-            $login_log->save();
+            $log = new LoginLog();
+            $log->user_id = Yii::$app->user->identity->id;
+            $log->username = Yii::$app->user->identity->username;
+            $log->login_ip = Yii::$app->request->getUserIP();
+            $log->save();
+
             return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
     /**

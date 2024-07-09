@@ -68,15 +68,15 @@ class Controller extends BaseController
         ];
     }
 
-    
+
     protected function getSearchModelClass()
     {
         $modelClass = $this->modelClass;
 
-        $lastSlash = strrpos($modelClass, '\\')+1;
-        $searchModelClass = substr($modelClass, 0, $lastSlash-1)."\\search\\". substr($modelClass, $lastSlash).'Search';
+        $lastSlash = strrpos($modelClass, '\\') + 1;
+        $searchModelClass = substr($modelClass, 0, $lastSlash - 1) . "\\search\\" . substr($modelClass, $lastSlash) . 'Search';
         if (!class_exists($searchModelClass)) {
-            $searchModelClass = substr($modelClass, 0, $lastSlash-1)."\\query\\". substr($modelClass, $lastSlash).'Query';
+            $searchModelClass = substr($modelClass, 0, $lastSlash - 1) . "\\query\\" . substr($modelClass, $lastSlash) . 'Query';
         }
 
         return $searchModelClass;
@@ -110,7 +110,7 @@ class Controller extends BaseController
         if (($model = $this->modelClass::findOne($id)) !== null) {
             return $model;
         }
-        
+
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
@@ -127,15 +127,69 @@ class Controller extends BaseController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        Yii::$app->session->setFlash('warning', $this->modelClass::$modelName . '#' . $model->id . '已成功删除。');
+        $model->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new $this->modelClass();
+        $model->loadDefaultValues();
+
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            // 取消注释来上传文件/图片
+            // $model->uploadImages(['image']);
+
+            if (!$model->hasErrors() && $model->save()) {
+                Yii::$app->session->setFlash('success', $this->modelClass::$modelName . '#' . $model->id . '已添加成功。');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            // 取消注释来上传文件/图片
+            // $model->uploadImages(['image']);
+
+            if (!$model->hasErrors() && $model->save()) {
+                Yii::$app->session->setFlash('success', $this->modelClass::$modelName . '#' . $model->id . '已更新成功。');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 }

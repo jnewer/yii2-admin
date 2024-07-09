@@ -42,7 +42,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
-            'rules' => require __DIR__ . '/url-rules.php',
+            // 'rules' => require __DIR__ . '/url-rules.php',
+            'rules' => [
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
         ],
         'request' => [
             'enableCookieValidation' => false,

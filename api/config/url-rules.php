@@ -1,5 +1,6 @@
 <?php
 return [
+    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     [
         'class' => 'yii\rest\UrlRule', 'prefix' => '<appid:wx\w+>', 'controller' => [],
         'extraPatterns' => [

@@ -36,7 +36,7 @@ use common\components\behaviors\DatetimeBehavior;
     <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
+class <?= $className ?> extends ActiveRecord
 {
     public static $modelName = '<?= $generator->generateModelName($tableName) ?>';
     public $fileAttributes = [<?= implode(",", $generator->fileAttributes) ?>];

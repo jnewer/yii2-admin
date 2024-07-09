@@ -13,16 +13,15 @@ use backend\components\OperationLogBehavior;
 /**
  * User model
  *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
+ * @property integer $id [int(11)] ID
+ * @property string $username [varchar(255)] 用户名
+ * @property string $auth_key [varchar(32)] 授权KEY
+ * @property string $password_hash [varchar(255)] 密码
+ * @property string $password_reset_token [varchar(255)] 密码重置TOKEN
+ * @property string $email [varchar(255)] 邮箱
+ * @property integer $status [smallint(6)] 状态
+ * @property integer $created_at [int(11)] 创建时间
+ * @property integer $updated_at [int(11)] 更新时间
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -66,6 +65,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
+            [['email'], 'email'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
             [['password', 'roles'], 'safe'],

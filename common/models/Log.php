@@ -2,17 +2,19 @@
 
 namespace common\models;
 
+use common\components\ActiveRecord
+
 /**
  * This is the model class for table "log".
  *
- * @property integer $id
- * @property integer $level
- * @property string $category
- * @property double $log_time
- * @property string $prefix
- * @property string $message
+ * @property integer $id [bigint(20)] ID
+ * @property integer $level [int(11)] 级别
+ * @property string $category [varchar(255)] 分类
+ * @property double $log_time [double] 记录时间
+ * @property string $prefix [text] 前缀
+ * @property string $message [text] 错误信息
  */
-class Log extends \common\components\ActiveRecord
+class Log extends ActiveRecord
 {
     public static $modelName = '系统日志';
 

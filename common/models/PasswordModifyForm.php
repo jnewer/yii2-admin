@@ -4,7 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
-use common\components\Password;
 
 /**
  * 修改密码表单模型

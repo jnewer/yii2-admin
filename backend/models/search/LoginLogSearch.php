@@ -11,7 +11,8 @@ use backend\models\LoginLog;
  */
 class LoginLogSearch extends LoginLog
 {
-    public $created_at_from, $created_at_to;
+    public $created_at_from;
+    public $created_at_to;
 
     /**
      * {@inheritdoc}

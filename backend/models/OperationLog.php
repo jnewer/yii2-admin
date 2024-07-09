@@ -3,30 +3,28 @@
 namespace backend\models;
 
 use Yii;
-use yii\behaviors\AttributeBehavior;
 use common\components\ActiveRecord;
-use common\components\behaviors\DatetimeBehavior;
 use yii\helpers\Json;
 
 /**
  * This is the model class for table "operation_log".
  *
- * @property integer $id
- * @property string $date
- * @property integer $time
- * @property string $ip
- * @property integer $operator_id
- * @property string $operator_name
- * @property string $type
- * @property string $category
- * @property string $description
- * @property integer $is_delete
- * @property string $model
- * @property string $model_pk
- * @property string $model_attributes_old
- * @property string $model_attributes_new
+ * @property integer $id [int(11)] ID
+ * @property string $date [datetime] 操作时间
+ * @property integer $time [int(11)] 时间戳
+ * @property string $ip [char(15)] 操作员ip
+ * @property integer $operator_id [int(11)] 操作员id
+ * @property string $operator_name [varchar(50)] 操作员名
+ * @property string $type [varchar(50)] 操作行为的大类
+ * @property string $category [varchar(40)] 该操作属于何种性质的操作(常规维护 或者其它 )
+ * @property string $description [varchar(255)] 操作员输入的操作描述
+ * @property integer $is_delete [tinyint(1)] 是否已标记为删除. 0否, 1是.
+ * @property string $model [varchar(50)] 操作的model
+ * @property string $model_pk [varchar(100)] 操作的model的主键
+ * @property string $model_attributes_old [text] 旧数据
+ * @property string $model_attributes_new [text] 新数据
  */
-class OperationLog extends \common\components\ActiveRecord
+class OperationLog extends ActiveRecord
 {
     public static $modelName = '操作日志表';
 

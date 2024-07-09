@@ -12,7 +12,8 @@ use backend\models\OperationLog;
 class OperationLogSearch extends OperationLog
 {
 
-    public $date_from, $date_to;
+    public $date_from;
+    public $date_to;
 
     /**
      * {@inheritdoc}

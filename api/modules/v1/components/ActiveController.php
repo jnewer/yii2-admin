@@ -1,29 +1,28 @@
 <?php
 
-namespace api\modules\v2\components;
+namespace api\modules\v1\components;
 
 use yii;
+use yii\filters\Cors;
+use yii\helpers\Json;
+use yii\web\Response;
+use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataFilter;
 use yii\data\ActiveDataProvider;
+use common\helpers\DatetimeHelper;
 use yii\filters\ContentNegotiator;
-use yii\filters\Cors;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
-use yii\rest\ActiveController as Controller;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\web\Response;
+use yii\web\ForbiddenHttpException;
+use yii\rest\ActiveController as Controller;
 
 /**
  * ActiveController
  */
 class ActiveController extends Controller
 {
-    public $requestUrl;
-
     public $defaultFilter = [];
 
-        /**
+    /**
      * @var string
      */
     protected $requestId;
@@ -43,17 +42,17 @@ class ActiveController extends Controller
     public function behaviors()
     {
         $behaviors = ArrayHelper::merge(['corsFilter' =>
-            [
-                'class' => Cors::class,
-                'cors' => [
-                    'Origin' => Yii::$app->params['origins'],
-                    'Access-Control-Request-Method' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-                    'Access-Control-Allow-Credentials' => true,
-                    'Access-Control-Max-Age' => 3600,
-                    'Access-Control-Request-Headers' => ['X-Requested-With', 'Content-Type', 'accept', 'Authorization'],
-                    'Access-Control-Expose-Headers' => ['Origin', 'Access-Control-Allow-Origin', 'X-Pagination-Total-Count', 'X-Pagination-Page-Count', 'X-Pagination-Current-Page', 'X-Pagination-Per-Page'],
-                ]
-            ]], parent::behaviors());
+        [
+            'class' => Cors::class,
+            'cors' => [
+                'Origin' => Yii::$app->params['origins'],
+                'Access-Control-Request-Method' => ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Max-Age' => 3600,
+                'Access-Control-Request-Headers' => ['X-Requested-With', 'Content-Type', 'accept', 'Authorization'],
+                'Access-Control-Expose-Headers' => ['Origin', 'Access-Control-Allow-Origin', 'X-Pagination-Total-Count', 'X-Pagination-Page-Count', 'X-Pagination-Current-Page', 'X-Pagination-Per-Page'],
+            ]
+        ]], parent::behaviors());
 
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::class,
@@ -178,14 +177,13 @@ class ActiveController extends Controller
                                     Yii::$app->redis->srem('response-id-list-' . date('W'), $this->requestId);
                                 }
                             }
-                            $response->data = [
+                            $responseData = [
                                 'data' => $response->data,
-                                'status' => $response->statusCode,
-                                'code' => $response->isSuccessful ? 0 : ($response->data['name'] == 'Exception' ? $response->data['code'] : 'unknown code'),
-                                'message' => $response->isSuccessful ? 'ok' : ($response->data['message'] ? $response->data['message'] : 'unknown error'),
-                                'ts' => DatetimeHelper::getMicRoTime(),
-                                'requestId' => $this->requestId ?? StringHelper::createRequestId()
+                                'code' => $response->isSuccessful ? 0 : ($response->data['name'] == 'Exception' ? $response->data['code'] : $response->statusCode),
+                                'message' => $response->isSuccessful ? 'ok' : ($response->data['message'] ?? 'Internal Server Error'),
                             ];
+
+                            $response->data = $responseData;
                         } else {
                             $response->data = null;
                         }
@@ -193,31 +191,7 @@ class ActiveController extends Controller
                 ],
             ]);
         }
-        return parent::beforeAction($action);
-    }
 
-    public function runAction($id, $params = [])
-    {
-        if (Yii::$app->request->isPost) {
-            $post = Yii::$app->request->post();
-            if ($post['requestId']) {
-                $this->requestId = $post['requestId'];
-                $this->requestKey = 'request:' . $this->requestId;
-                if (Yii::$app->redis->sismember('response-id-list-'.date('W'), $this->requestId)) {
-                    $result = Json::decode(Yii::$app->redis->get($this->requestKey));
-                    if (!empty($result)) {
-                        $action = $this->createAction($id);
-                        $this->beforeAction($action);
-                        return $result;
-                    }
-                } else {
-                    Yii::$app->redis->sadd('response-id-list-'.date('W'), $this->requestId);
-                    if (Yii::$app->redis->ttl('response-id-list-'.date('W')) < 1) {
-                        Yii::$app->redis->expire('response-id-list-'.date('W'), 7 * 24 * 3600);
-                    }
-                }
-            }
-        }
-        return parent::runAction($id, $params);
+        return parent::beforeAction($action);
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
 
-namespace api\modules\v2\components\helper;
-
+namespace common\helpers;
 
 class DatetimeHelper
 {

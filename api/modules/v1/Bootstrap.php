@@ -1,6 +1,6 @@
 <?php
 
-namespace api\modules\v2;
+namespace api\modules\v1;
 
 use yii;
 use yii\base\BootstrapInterface;

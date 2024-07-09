@@ -3,7 +3,6 @@
 
 namespace common\components\behaviors;
 
-
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
@@ -29,37 +28,49 @@ class ActiveRecordBehavior extends Behavior
     /**
      * @param $event
      */
-    public function afterInsert($event) {}
+    public function afterInsert($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function afterUpdate($event) {}
+    public function afterUpdate($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function afterDelete($event) {}
+    public function afterDelete($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function afterFind($event) {}
+    public function afterFind($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function beforeInsert($event) {}
+    public function beforeInsert($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function beforeUpdate($event) {}
+    public function beforeUpdate($event)
+    {
+    }
 
     /**
      * @param $event
      */
-    public function beforeDelete($event) {}
-
-
+    public function beforeDelete($event)
+    {
+    }
 }

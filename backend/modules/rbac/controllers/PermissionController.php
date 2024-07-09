@@ -57,8 +57,9 @@ class PermissionController extends BaseController
         // We need the existing operations for comparason
         $authItems = Yii::$app->authManager->getPermissions();
         $existingItems = array();
-        foreach ($authItems as $itemName => $item)
+        foreach ($authItems as $itemName => $item) {
             $existingItems[$itemName] = $itemName;
+        }
 
         // Render the view
         return $this->render('generate', array(

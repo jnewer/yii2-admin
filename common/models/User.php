@@ -2,13 +2,13 @@
 
 namespace common\models;
 
-use backend\components\OperationLogBehavior;
-use common\models\PeVolunteer;
 use Yii;
+use yii\web\IdentityInterface;
+use common\components\ActiveRecord;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use common\components\ActiveRecord;
-use yii\web\IdentityInterface;
+use kartik\password\StrengthValidator;
+use backend\components\OperationLogBehavior;
 
 /**
  * User model
@@ -26,14 +26,13 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    public $modelName = '用户';
+    public static $modelName = '用户';
 
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
     public $password;
     public $roles;
-    public $config_ids;
 
     /**
      * @inheritdoc
@@ -69,7 +68,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
-            [['password', 'roles', 'config_ids'], 'safe'],
+            [['password', 'roles'], 'safe'],
+            [['password'], StrengthValidator::class, 'preset' => 'normal', 'userAttribute' => 'username'],
         ];
     }
 
@@ -83,12 +83,11 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => '用户名',
             'auth_key' => '授权KEY',
             'password' => '密码',
-            'password_hash' => '密码HASH',
+            'password_hash' => '密码',
             'password_reset_token' => '密码重置TOKEN',
-            'email' => 'Email',
+            'email' => '邮箱',
             'status' => '状态',
             'roles' => '系统角色',
-            'config_ids' => '管理项目',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];
@@ -231,7 +230,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         if (Yii::$app->has('authManager')) {
             $roles = Yii::$app->authManager->getRolesByUser($this->id);
-            if (count($roles) > 0) {
+            if (!empty($roles)) {
                 $roles = array_keys($roles);
                 $this->roles = $roles[0];
             }

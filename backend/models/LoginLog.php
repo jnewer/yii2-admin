@@ -20,7 +20,6 @@ use common\components\behaviors\DatetimeBehavior;
 class LoginLog extends \common\components\ActiveRecord
 {
     public static $modelName = '登录日志表';
-    public $fileAttributes = [];
 
     /**
      * @inheritdoc

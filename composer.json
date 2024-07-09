@@ -29,6 +29,7 @@
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
         "denisogr/yii2-cronjobs": "dev-master",
         "hyii2/yii2-avatar": "dev-master",
+        "kartik-v/yii2-password": "^1.5",
         "kartik-v/yii2-widget-activeform": "^1.6",
         "kartik-v/yii2-widget-datepicker": "^1.4",
         "kartik-v/yii2-widget-datetimepicker": "^1.5",
@@ -42,6 +43,8 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-httpclient": "^2.0",
         "yiisoft/yii2-imagine": "^2.1",
+        "yiisoft/yii2-queue": "^2.3",
+        "yiisoft/yii2-redis": "^2.0",
         "yiisoft/yii2-shell": "^2.0",
         "yiisoft/yii2-swiftmailer": "^2.1"
     },
@@ -79,5 +82,10 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
+    },
+    "autoload": {
+        "files": [
+            "common/components/GlobalFunctions.php"
+        ]
     }
 }

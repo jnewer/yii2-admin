@@ -14,8 +14,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
         'options'=>['class'=>'form-inline', 'role'=>'form'],
     ]); ?>
-     <?= $form->field($model, 'level', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'Level']]) ?>
-     <?= $form->field($model, 'category', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'Category']]) ?>
+     <?= $form->field($model, 'level', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'级别']]) ?>
+     <?= $form->field($model, 'category', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'分类']]) ?>
      <?php // echo $form->field($model, 'log_time', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'Log Time']]) ?>
      <?php // echo $form->field($model, 'prefix', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'Prefix']]) ?>
      <?php // echo $form->field($model, 'message', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'Message']]) ?>

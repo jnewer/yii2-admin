@@ -37,11 +37,11 @@ use backend\widgets\Alert;
     </section>
 </div>
 
-<footer class="main-footer">
+<footer class="main-footer text-center">
     <div class="pull-right hidden-xs">
         <b>Version</b> 2.0
     </div>
-    <strong>Copyright jcoder &copy; <?php echo date('Y') ?>.</strong>
+    <strong>Copyright <?php echo getConfig('site_copyright', 'jcoder') ?> &copy; <?php echo date('Y') ?>.</strong>
 </footer>
 
 <!-- Control Sidebar -->

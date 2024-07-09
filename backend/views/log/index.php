@@ -11,7 +11,7 @@ use yii\grid\GridView;
 $this->title = '系统日志管理';
 $this->params['breadcrumbs'][] = $this->title;
 
-$dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 20);
+$dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize', 20);
 ?>
 
 
@@ -30,43 +30,43 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
                     </div> -->
-                                        <?=  $this->render('_search', [
+                    <?= $this->render('_search', [
                         'model' => $searchModel,
                     ]); ?>
-                                        <!-- /.btn-group -->
+                    <!-- /.btn-group -->
                 </div>
                 <!-- /.pull-right -->
             </div>
             <!-- /.box-header -->
-            <?=  GridView::widget([
+            <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "<div class=\"box-body table-responsive\">{items}</div>\n<div class=\"box-footer clearfix\"><div class=\"row\"><div class=\"col-xs-12 col-sm-7\">{pager}</div><div class=\"col-xs-12 col-sm-5 text-right\">{summary}</div></div></div>",
-                'tableOptions'=>['class'=>'table table-bordered table-hover'],
-                'summary'=>'第{page}页，共{pageCount}页，当前第{begin}-{end}项，共{totalCount}项',
-                'filterModel'=>null,
-                'pager'=>[
-                    'class'=>'backend\widgets\LinkPager',
+                'tableOptions' => ['class' => 'table table-bordered table-hover'],
+                'summary' => '第{page}页，共{pageCount}页，当前第{begin}-{end}项，共{totalCount}项',
+                'filterModel' => null,
+                'pager' => [
+                    'class' => 'backend\widgets\LinkPager',
                     'options' => [
                         'class' => 'pagination pagination-sm no-margin',
                     ],
                 ],
                 'columns' => [
-                  'id',
-                  'level',
-                  'category',
-                  'log_time:datetime',
-                  'prefix:ntext',
-                   // 'message:ntext',
+                    'id',
+                    'level',
+                    'category',
+                    'log_time:datetime',
+                    'prefix:ntext',
+                    // 'message:ntext',
 
-                [
-                    'class' => 'yii\grid\ActionColumn',
-                    'header'=>'操作',
-                    'headerOptions'=>['style'=>'width:150px'],
-                    'buttonOptions'=>['class'=>'btn btn-default btn-sm'],
-                    'template'=>'{view}',
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'header' => '操作',
+                        'headerOptions' => ['style' => 'width:150px'],
+                        'buttonOptions' => ['class' => 'btn btn-default btn-sm'],
+                        'template' => '{view}',
+                    ],
                 ],
-            ],
-        ]); ?>
+            ]); ?>
             <!-- /.box-body -->
         </div>
         <!-- /.box -->

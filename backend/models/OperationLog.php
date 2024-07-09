@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\components\ActiveRecord;
 use common\components\behaviors\DatetimeBehavior;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "operation_log".
@@ -28,7 +29,6 @@ use common\components\behaviors\DatetimeBehavior;
 class OperationLog extends \common\components\ActiveRecord
 {
     public static $modelName = '操作日志表';
-    public $fileAttributes = [];
 
     /**
      * @inheritdoc
@@ -79,9 +79,10 @@ class OperationLog extends \common\components\ActiveRecord
         ];
     }
 
-    public function getAttributeDesc() {
-        $model_attributes_old = \GuzzleHttp\json_decode($this->model_attributes_old, true);
-        $model_attributes_new = \GuzzleHttp\json_decode($this->model_attributes_new, true);
+    public function getAttributeDesc()
+    {
+        $model_attributes_old = Json::decode($this->model_attributes_old, true);
+        $model_attributes_new = Json::decode($this->model_attributes_new, true);
 
         $string = '';
         // 日志记录的资源类 如Product、Notice
@@ -90,12 +91,10 @@ class OperationLog extends \common\components\ActiveRecord
         if ($modelclass) {
             $model = new $modelclass;
             $attributeLabels = $model->attributeLabels();
-            if(!empty($attributeLabels))
-            {
+            if (!empty($attributeLabels)) {
                 $string .= "<TABLE class='operation_log' style='width: 100%'>";
                 $string .= "<TBODY><TR><TH style='min-width: 100px;'>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
-                foreach($attributeLabels as $key => $name)
-                {
+                foreach ($attributeLabels as $key => $name) {
                     $old_value = $model_attributes_old[$key];
                     $new_value = $model_attributes_new[$key];
                     $class = $old_value == $new_value ? '' : ' class="update_diff"';
@@ -103,18 +102,21 @@ class OperationLog extends \common\components\ActiveRecord
                 }
                 $string .= "</TBODY></TABLE>";
             }
-        }else {
+        } else {
             $attributeLabels = $model_attributes_old?$model_attributes_old:$model_attributes_new;
             $attributeLabels = array_keys($attributeLabels);
             $string .= "<TABLE class=operation_log style='width: 100%'>";
             $string .= "<TBODY><TR><TH>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
-            foreach($attributeLabels as $key => $name)
-            {
+            foreach ($attributeLabels as $key => $name) {
                 $old_value = $model_attributes_old[$name];
                 $new_value = $model_attributes_new[$name];
                 $class = $old_value == $new_value ? '' : ' class="update_diff"';
-                if (is_array($old_value)) $old_value = implode(',', $old_value);
-                if (is_array($new_value)) $new_value = implode(',', $new_value);
+                if (is_array($old_value)) {
+                    $old_value = implode(',', $old_value);
+                }
+                if (is_array($new_value)) {
+                    $new_value = implode(',', $new_value);
+                }
                 $string .= "<TR".$class."><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
             }
             $string .= "</TBODY></TABLE>";
@@ -122,7 +124,8 @@ class OperationLog extends \common\components\ActiveRecord
         return $string;
     }
 
-    public static function create($type, $category, $attributes_old, $attributes_new) {
+    public static function create($type, $category, $attributes_old, $attributes_new)
+    {
         $log = new OperationLog();
         $info = array(
             'ip'=>Yii::$app->request->getUserIP(),
@@ -132,8 +135,8 @@ class OperationLog extends \common\components\ActiveRecord
             'category'=>$category,
             'model'=>'',
             'model_pk'=>0,
-            'model_attributes_old'=>\GuzzleHttp\json_encode($attributes_old),
-            'model_attributes_new'=>\GuzzleHttp\json_encode($attributes_new),
+            'model_attributes_old'=>Json::encode($attributes_old),
+            'model_attributes_new'=>Json::encode($attributes_new),
             'date'=>date('Y-m-d H:i:s'),
             'time'=>time(),
         );

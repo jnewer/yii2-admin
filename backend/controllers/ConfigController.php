@@ -12,7 +12,7 @@ class ConfigController extends Controller
     {
         if (Yii::$app->request->isPost) {
             $config = Yii::$app->config->getAll();
-            unset($_POST['_csrf']);
+            unset($_POST['_csrf-backend	']);
             Yii::$app->config->set($_POST);
             Yii::$app->getSession()->setFlash('success', '操作成功！');
             OperationLog::create('配置管理', '修改配置', $config, $_POST);

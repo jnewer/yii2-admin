@@ -1,33 +1,36 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\GridView;
-use kartik\form\ActiveForm;
 
-
-$this->title = '系统设置';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = '系统配置';
+$this->params['breadcrumbs'][] = ['label' => '系统配置', 'url' => ['index']];
+$this->params['breadcrumbs'][] = '系统配置';
+echo \yii\bootstrap\Tabs::widget([
+    'id' => 'tabs',
+    'renderTabContent' => false,
+    'items' => [
+        [
+            'label' => '站点配置',
+            'options' => ['id' => 'site'],
+            'active' => true,
+        ],
+        [
+            'label' => '上传配置',
+            'options' => ['id' => 'upload'],
+        ],
+    ],
+]);
 ?>
-<div class="box">
+<div class="box box-info">
+    <div class="box-header">
+        <div class="pull-right">
+            <?= Html::a('<i class="fa fa-reply"></i>', ['index'], ['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
     <div class="box-body">
-        <?php $form = ActiveForm::begin([
-            'enableAjaxValidation' => false,
-            'type' => ActiveForm::TYPE_HORIZONTAL,
-            'options' => ['role' => 'form']
-        ]); ?>
-        <div class="form-group">
-            <label class="col-lg-3 control-label">APP Name</label>
-            <div class="col-lg-9">
-                <input type="text" name="iressa_email" class="form-control"
-                       value="<?php echo $config['app_name'] ?>">
-            </div>
+        <div class="tab-content">
+            <div id="site" class="tab-pane active"><?= $this->render('site', ['config' => $config]) ?></div>
+            <div id="upload" class="tab-pane"><?= $this->render('upload', ['config' => $config]) ?></div>
         </div>
-        <div class="form-group">
-            <div class="col-lg-offset-3 col-lg-9">
-                <button type="submit" class="btn btn-sm btn-primary">保存设置</button>
-            </div>
-        </div>
-        <?php ActiveForm::end(); ?>
     </div>
 </div>

@@ -2,11 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-// use common\components\ActiveRecord;
-// use yii\behaviors\AttributeBehavior;
-//
-
 /**
  * This is the model class for table "log".
  *
@@ -19,9 +14,7 @@ use Yii;
  */
 class Log extends \common\components\ActiveRecord
 {
-    //
-
-    public $modelName = '系统日志';
+    public static $modelName = '系统日志';
 
     /**
      * @inheritdoc
@@ -51,11 +44,11 @@ class Log extends \common\components\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'level' => 'Level',
-            'category' => 'Category',
-            'log_time' => 'Log Time',
-            'prefix' => 'Prefix',
-            'message' => 'Message',
+            'level' => '级别',
+            'category' => '分类',
+            'log_time' => '记录时间',
+            'prefix' => '前缀',
+            'message' => '错误信息',
         ];
     }
 }

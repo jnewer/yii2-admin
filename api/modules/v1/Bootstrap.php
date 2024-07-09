@@ -2,16 +2,24 @@
 
 namespace api\modules\v1;
 
-use yii;
+use Yii;
 use yii\base\BootstrapInterface;
 
 /**
- * adt module bootstrap class
+ * v1 module bootstrap class
  */
 class Bootstrap implements BootstrapInterface
 {
     /** @inheritdoc */
     public function bootstrap($app)
     {
+        Yii::$app->urlManager->addRules([
+            [
+                'class' => 'yii\rest\UrlRule',
+                'controller' => [
+                    'v1/user',
+                ],
+            ],
+        ]);
     }
 }

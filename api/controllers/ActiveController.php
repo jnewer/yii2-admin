@@ -1,6 +1,6 @@
 <?php
 
-namespace api\modules\v1\components;
+namespace api\controllers;
 
 use yii;
 use yii\filters\Cors;
@@ -9,7 +9,6 @@ use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataFilter;
 use yii\data\ActiveDataProvider;
-use common\helpers\DatetimeHelper;
 use yii\filters\ContentNegotiator;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
@@ -87,7 +86,6 @@ class ActiveController extends Controller
 
     public function prepareDataProvider()
     {
-        /* @var $modelClass \yii\db\BaseActiveRecord */
         $modelClass = $this->modelClass;
 
         $lastSlash = strrpos($modelClass, '\\') + 1;

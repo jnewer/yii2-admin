@@ -18,7 +18,6 @@ return [
     'controllerNamespace' => 'api\controllers',
     'defaultRoute' => 'default/index',
     'modules' => [
-
         'v1' => [
             'class' => 'api\modules\v1\Module',
         ],

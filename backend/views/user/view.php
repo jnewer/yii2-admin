@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\User */
+/** @var $this yii\web\View */
+/** @var $model common\models\User */
 
 $this->title = '用户详情';
 $this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']];

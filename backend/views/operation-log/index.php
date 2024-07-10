@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\OperationLogSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var $this yii\web\View */
+/** @var $searchModel backend\models\search\OperationLogSearch */
+/** @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '操作日志';
 $this->params['breadcrumbs'][] = $this->title;

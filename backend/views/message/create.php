@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Message */
+/** @var $this yii\web\View */
+/** @var $model common\models\Message */
 
 $this->title = 'Create Message';
 $this->params['breadcrumbs'][] = ['label' => 'Messages', 'url' => ['index']];

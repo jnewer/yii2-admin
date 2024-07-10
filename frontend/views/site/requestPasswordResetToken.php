@@ -1,8 +1,8 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\PasswordResetRequestForm */
+/** @var $this yii\web\View */
+/** @var $form yii\bootstrap\ActiveForm */
+/** @var $model \frontend\models\PasswordResetRequestForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;

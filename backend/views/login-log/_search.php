@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\search\LoginLogSearch */
-/* @var $form yii\widgets\ActiveForm */
+/** @var $this yii\web\View */
+/** @var $model backend\models\search\LoginLogSearch */
+/** @var $form yii\widgets\ActiveForm */
 ?>
 <div class="sms-search">
 

@@ -18,8 +18,8 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use <?php echo $generator->modelClass ?>;
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/** @var $this yii\web\View */
+/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
 $this->title = <?= $modelClassName ?>::$modelName.'详情 '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'id', 'url' => ['index']];

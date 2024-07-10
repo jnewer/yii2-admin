@@ -16,7 +16,7 @@ if ($modelClass === $searchModelClass) {
     $searchModelAlias = $searchModelClass . 'Search';
 }
 
-/* @var $class ActiveRecordInterface */
+/** @var ActiveRecordInterface $class  */
 $class = $generator->modelClass;
 $pks = $class::primaryKey();
 $urlParams = $generator->generateUrlParams();

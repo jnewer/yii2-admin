@@ -15,8 +15,8 @@ use yii\helpers\Html;
 use <?php echo $generator->modelClass ?>;
 
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/** @var $this yii\web\View */
+/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
 $this->title = '新增'.<?= $modelClassName ?>::$modelName;
 $this->params['breadcrumbs'][] = ['label' => <?= $modelClassName ?>::$modelName.'管理', 'url' => ['index']];

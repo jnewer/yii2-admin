@@ -19,9 +19,9 @@ use yii\helpers\Url;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 use <?php echo $generator->modelClass ?>;
 
-/* @var $this yii\web\View */
-<?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var $this yii\web\View */
+<?= !empty($generator->searchModelClass) ? "/** @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
+/** @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = <?= $modelClassName ?>::$modelName.'管理';
 $this->params['breadcrumbs'][] = $this->title;

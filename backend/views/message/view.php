@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Message */
+/** @var $this yii\web\View */
+/** @var $model common\models\Message */
 
 $this->title = '留言详情 ' .$model->id;
 $this->params['breadcrumbs'][] = ['label' => '留言管理', 'url' => ['index']];

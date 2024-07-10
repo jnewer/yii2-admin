@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\MessageSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var $this yii\web\View */
+/** @var $searchModel common\models\MessageSearch */
+/** @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '留言管理';
 $this->params['breadcrumbs'][] = $this->title;

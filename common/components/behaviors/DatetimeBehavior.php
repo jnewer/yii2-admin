@@ -126,7 +126,7 @@ class DatetimeBehavior extends AttributeBehavior
      */
     public function touch($attribute)
     {
-        /* @var $owner BaseActiveRecord */
+        /** @var $owner BaseActiveRecord */
         $owner = $this->owner;
         if ($owner->getIsNewRecord()) {
             throw new InvalidCallException('Updating the datetime is not possible on a new record.');

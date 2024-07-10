@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\MessageSearch */
-/* @var $form yii\widgets\ActiveForm */
+/** @var $this yii\web\View */
+/** @var $model common\models\MessageSearch */
+/** @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="message-search">

@@ -3,9 +3,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use dosamigos\chartjs\ChartJs;
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
+/** @var $this yii\web\View */
+/** @var $form yii\bootstrap\ActiveForm */
+/** @var $model \common\models\LoginForm */
 
 $this->title = '仪表盘';
 

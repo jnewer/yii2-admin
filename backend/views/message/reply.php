@@ -4,8 +4,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Project */
+/** @var $this yii\web\View */
+/** @var $model common\models\Project */
 
 $this->title = '留言管理';
 $this->params['breadcrumbs'][] = ['label' => '留言回复', 'url' => ['index']];

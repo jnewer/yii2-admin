@@ -5,8 +5,8 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use backend\models\OperationLog;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Sms */
+/** @var $this yii\web\View */
+/** @var $model common\models\Sms */
 
 $this->title = OperationLog::$modelName.'详情 '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'id', 'url' => ['index']];

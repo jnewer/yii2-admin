@@ -25,9 +25,9 @@ use yii\bootstrap\ActiveForm;
 use <?=$foreignKeyClassName?>;
 <?php endforeach;?>
 
-/* @var $this yii\web\View */
-/* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/* @var $form yii\widgets\ActiveForm */
+/** @var $this yii\web\View */
+/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/** @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="box-body">

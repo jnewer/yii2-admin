@@ -34,7 +34,7 @@ common/config/main-local.php
 3.php yii migrate/up --migrationPath=@yii/log/migrations
 ```
 ```
-yii migrate/up --migrationPath=@vendor/abhi1693/yii2-config/migrations
+4.php yii migrate/up --migrationPath=@vendor/abhi1693/yii2-config/migrations
 ```
 
 5. 启动服务

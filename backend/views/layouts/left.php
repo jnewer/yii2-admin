@@ -33,9 +33,12 @@
                         ['label' => '用户管理', 'icon' => 'fa fa-users', 'url' => ['/user']],
                         ['label' => '权限管理', 'icon' => 'fa fa-lock', 'url' => ['/rbac'], 'visible' => Yii::$app->user->isAdmin],
                         ['label' => '配置管理', 'icon' => 'fa fa-cogs', 'url' => ['/config']],
-                        ['label' => '系统日志', 'icon' => 'fa fa-book', 'url' => ['/log'], 'visible' => Yii::$app->user->isAdmin],
-                        ['label' => '登录日志', 'icon' => 'fa fa-book', 'url' => ['/login-log'], 'visible' => Yii::$app->user->isAdmin],
-                        ['label' => '操作日志', 'icon' => 'fa fa-book', 'url' => ['/operation-log'], 'visible' => Yii::$app->user->isAdmin],
+                    ]],
+                    ['label' => '日志管理', 'icon' => 'fa fa-book', 'url' => '#', 'options' => ['class' => 'treeview'], 'items' => [
+                        ['label' => '系统日志', 'icon' => 'fa fa-bug', 'url' => ['/log'], 'visible' => Yii::$app->user->isAdmin],
+                        ['label' => '登录日志', 'icon' => 'fa fa-user', 'url' => ['/login-log'], 'visible' => Yii::$app->user->isAdmin],
+                        ['label' => '操作日志', 'icon' => 'fa fa-history', 'url' => ['/operation-log'], 'visible' => Yii::$app->user->isAdmin],
+                        ['label' => '文件日志', 'icon' => 'fa fa-file-text-o', 'url' => ['/log-reader'], 'visible' => Yii::$app->user->isAdmin]
                     ]],
                     [
                         'label' => '开发工具',

@@ -3,10 +3,10 @@
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/** @var yii\web\View $this */
+/** @var backend\modules\bsgii\crud\Generator $generator  */
 
-/* @var $model \yii\db\ActiveRecord */
+/** @var \yii\db\ActiveRecord $model  */
 $model = new $generator->modelClass();
 $safeAttributes = $model->safeAttributes();
 if (empty($safeAttributes)) {

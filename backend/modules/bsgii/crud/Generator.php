@@ -160,6 +160,8 @@ class Generator extends \yii\gii\generators\crud\Generator
             return "\$form->field(\$model, '$attribute')->widget(backend\widgets\FileInput::class)->hint('支持JPG、PNG格式，不要超过500KB为宜')";
         } elseif ($column->type === 'string' && in_array(strtolower($column->name), $this->getConstsAttributes())) {
             return "\$form->field(\$model, '$attribute')->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."'), ['class'=>'select2', 'style'=>'width:100%', 'data-placeholder'=>'{$column->comment}', 'prompt'=>''])";
+        } elseif (in_array($column->type, ['tinyint', 'smallint']) && in_array(strtolower($column->name), $this->getConstsAttributes())) {
+            return "\$form->field(\$model, '$attribute')->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."_'), ['class'=>'select2', 'style'=>'width:100%', 'data-placeholder'=>'{$column->comment}', 'prompt'=>''])";
         } else {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $column->name)) {
                 $input = 'passwordInput';
@@ -201,6 +203,8 @@ class Generator extends \yii\gii\generators\crud\Generator
             return "\$form->field(\$model, '$attribute', ['labelOptions'=>['class'=>'sr-only']])->checkbox()";
         } elseif ($column->type === 'string' && in_array(strtolower($column->name), $this->getConstsAttributes())) {
             return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."'), ['prompt'=>'', 'data-placeholder'=>'不限{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
+        }elseif (in_array($column->type, ['tinyint', 'smallint']) && in_array(strtolower($column->name), $this->getConstsAttributes())) {
+            return "\$form->field(\$model, '$column->name', ['labelOptions'=>['class'=>'sr-only']])->dropdownList(\$model->getConstOptions('".strtoupper($column->name)."_'), ['prompt'=>'', 'data-placeholder'=>'不限{$column->comment}', 'class'=>'form-control select2', 'style'=>'width:120px'])";
         } else {
             return "\$form->field(\$model, '$attribute', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'{$attributeLables[$attribute]}']])";
         }

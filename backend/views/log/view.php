@@ -25,7 +25,15 @@ $this->params['breadcrumbs'][] = '系统日志详情';
         'template' => '<tr><th width="20%">{label}</th><td>{value}</td></tr>',
         'attributes' => [
             'id',
-            'level',
+            [
+                'attribute' => 'levelName',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::tag('span', $model->levelName, [
+                        'class' => 'label ' . $model->levelClasses[$model->level] ?? 'label-default',
+                    ]);
+                },
+            ],
             'category',
             'log_time',
             'prefix:ntext',

@@ -17,6 +17,24 @@ return [
             'class' => 'backend\modules\rbac\RbacWebModule',
             'admins' => ['admin'],
         ],
+        'log-reader' => [
+            'class' => 'backend\modules\logReader\Module',
+            'aliases' => [
+                'backend-app' => '@backend/runtime/logs/app.log',
+                'backend-debug' => '@backend/runtime/logs/debug.log',
+                'backend-db' => '@backend/runtime/logs/db.log',
+                'backend-email' => '@backend/runtime/logs/email.log',
+                'api-app' => '@api/runtime/logs/app.log',
+                'api-api' => '@api/runtime/logs/api.log',
+                'api-debug' => '@api/runtime/logs/debug.log',
+                'api-db' => '@api/runtime/logs/db.log',
+                'api-email' => '@api/runtime/logs/email.log',
+                'console-app' => '@console/runtime/logs/app.log',
+                'console-debug' => '@console/runtime/logs/debug.log',
+                'console-db' => '@console/runtime/logs/db.log',
+                'console-email' => '@console/runtime/logs/email.log',
+            ],
+        ]
     ],
     'components' => [
         'request' => [

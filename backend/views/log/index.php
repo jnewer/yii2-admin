@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\search\LogSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var common\models\search\LogSearch $searchModel  */
+/** @var yii\data\ActiveDataProvider$dataProvider  */
 
 $this->title = '系统日志管理';
 $this->params['breadcrumbs'][] = $this->title;
@@ -52,7 +52,15 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                 ],
                 'columns' => [
                     'id',
-                    'level',
+                    [
+                        'attribute' => 'levelName',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return Html::tag('span', $model->levelName, [
+                                'class' => 'label ' . $model->levelClasses[$model->level] ?? 'label-default',
+                            ]);
+                        },
+                    ],
                     'category',
                     'log_time:datetime',
                     'prefix:ntext',

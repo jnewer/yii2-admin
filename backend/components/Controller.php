@@ -69,7 +69,7 @@ class Controller extends BaseController
     }
 
 
-    protected function getSearchModelClass()
+    protected function getSearchModel()
     {
         $modelClass = $this->modelClass;
 
@@ -79,17 +79,18 @@ class Controller extends BaseController
             $searchModelClass = substr($modelClass, 0, $lastSlash - 1) . "\\query\\" . substr($modelClass, $lastSlash) . 'Query';
         }
 
-        return $searchModelClass;
+        return new $searchModelClass();
     }
 
     /**
      * Lists all models.
+     *
+     * @desc 列表
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModelClass = $this->getSearchModelClass();
-        $searchModel = new $searchModelClass();
+        $searchModel = $this->getSearchModel();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -101,6 +102,7 @@ class Controller extends BaseController
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
      * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -116,6 +118,8 @@ class Controller extends BaseController
 
     /**
      * Displays a single User model.
+     *
+     * @desc 查看
      * @param integer $id
      * @return mixed
      */
@@ -129,6 +133,8 @@ class Controller extends BaseController
     /**
      * Deletes an existing model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @desc 删除
      * @param integer $id
      * @return mixed
      */
@@ -144,6 +150,9 @@ class Controller extends BaseController
     /**
      * Creates a new model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
+     * @desc 新增
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -170,6 +179,8 @@ class Controller extends BaseController
     /**
      * Updates an existing model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @desc 更新
      * @param integer $id
      * @return mixed
      */

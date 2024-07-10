@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<tr class="application-heading-row">
                             <th>选择</th>
                             <th>授权项</th>
+                            <th>描述</th>
 							<th>源程序位置</th>
 						</tr>
 

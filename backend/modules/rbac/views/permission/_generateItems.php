@@ -15,6 +15,7 @@ use yii\helpers\Html;
 			<tr class="controller-row <?php echo $controllerExists === true ? 'exists' : ''; ?>">
 				<td class="checkbox-column"><?php echo $controllerExists === false ? Html::activeCheckbox($model, 'items[' . $controllerKey . '.*]', ['label' => '']) : ''; ?></td>
 				<td class="name-column"><?php echo ucfirst($item['name']) . '.*'; ?></td>
+				<td class="desc-column"><?php echo $item['desc']; ?></td>
 				<td class="path-column"><?php echo substr($item['path'], $basePathLength + 1); ?></td>
 			</tr>
 
@@ -27,6 +28,7 @@ use yii\helpers\Html;
 				<tr class="action-row<?php echo $actionExists === true ? ' exists' : ''; ?><?php echo ($i++ % 2) === 0 ? ' odd' : ' even'; ?>">
 					<td class="checkbox-column"><?php echo $actionExists === false ? Html::activeCheckbox($model, 'items[' . $actionKey . ']', ['label' => '']) : ''; ?></td>
 					<td class="name-column"><?php echo $action['name']; ?></td>
+					<td class="desc-column"><?php echo $action['desc']; ?></td>
 					<td class="path-column"><?php echo substr($item['path'], $basePathLength + 1) . (isset($action['line']) === true ? ':' . $action['line'] : ''); ?></td>
 				</tr>
 

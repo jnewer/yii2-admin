@@ -6,8 +6,18 @@ use backend\models\OperationLog;
 use Yii;
 use backend\components\Controller;
 
+/**
+ * ConfigController implements the CRUD actions for Log model.
+ *
+ * @desc 配置管理
+ */
 class ConfigController extends Controller
 {
+    /**
+     * @desc 列表
+     *
+     * @return void
+     */
     public function actionIndex()
     {
         if (Yii::$app->request->isPost) {

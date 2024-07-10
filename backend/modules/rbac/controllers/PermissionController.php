@@ -40,6 +40,7 @@ class PermissionController extends BaseController
                 }
 
                 // Add the items to the generator as tasks and operations and run the generator.
+                /** @var Generator $generator */
                 $generator->addItems($items['operations']);
                 if (($generatedItems = $generator->run()) !== false && $generatedItems !== array()) {
                     Yii::$app->getSession()->setFlash(

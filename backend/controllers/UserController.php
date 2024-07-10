@@ -8,14 +8,19 @@ use backend\components\Controller;
 
 /**
  * UserController implements the CRUD actions for User model.
+ *
+ * @desc 用户管理
  */
 class UserController extends Controller
 {
     protected $modelClass = User::class;
 
+    public static $parentActions = ['index', 'view'];
+
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @desc 新增
      * @return mixed
      */
     public function actionCreate()
@@ -54,6 +59,7 @@ class UserController extends Controller
     /**
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @desc 更新
      * @param integer $id
      * @return mixed
      */

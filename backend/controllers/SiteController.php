@@ -14,6 +14,8 @@ use common\models\PasswordModifyForm;
 
 /**
  * Site controller
+ *
+ * @desc 登录管理
  */
 class SiteController extends Controller
 {
@@ -71,6 +73,8 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
+     * @desc 首页
+     *
      * @return string
      */
     public function actionIndex()
@@ -81,6 +85,7 @@ class SiteController extends Controller
     /**
      * Login action.
      *
+     * @desc 登录
      * @return string
      */
     public function actionLogin()
@@ -107,6 +112,7 @@ class SiteController extends Controller
 
     /**
      * Logout action.
+     * @desc 退出登录
      *
      * @return string
      */
@@ -117,6 +123,10 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * @desc 修改密码
+     * @return void
+     */
     public function actionPassword()
     {
         $model = new PasswordModifyForm;

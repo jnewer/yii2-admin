@@ -26,7 +26,7 @@ use yii\helpers\Json;
  */
 class OperationLog extends ActiveRecord
 {
-    public static $modelName = '操作日志表';
+    public static $modelName = '操作日志';
 
     /**
      * @inheritdoc

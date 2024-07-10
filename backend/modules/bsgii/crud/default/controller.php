@@ -22,6 +22,7 @@ $pks = $class::primaryKey();
 $urlParams = $generator->generateUrlParams();
 $actionParams = $generator->generateActionParams();
 $actionParamComments = $generator->generateActionParamComments();
+$modelName = $class::$modelName;
 
 echo "<?php\n";
 ?>
@@ -40,6 +41,7 @@ use yii\web\NotFoundHttpException;
 
 /**
  * <?= $controllerClass ?> implements the CRUD actions for <?= $modelClass ?> model.
+ * @desc <?= $modelName ?>管理
  */
 class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->baseControllerClass) . "\n" ?>
 {

@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\components\ActiveRecord
+use common\components\ActiveRecord;
 
 /**
  * This is the model class for table "log".

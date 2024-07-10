@@ -16,7 +16,7 @@ use yii\web\ForbiddenHttpException;
  *    $behaviors = parent::behaviors();
  *    if ($this->enableIpFilter) {
  *        $behaviors['ipFilter'] = [
- *            'class' => IpFilter::class,
+ *            'class' => \common\filters\IpFilter::class,
  *            'allowedIps' => ['127.0.0.1'],
  *            'allowedActions' => ['*'],
  *        ];

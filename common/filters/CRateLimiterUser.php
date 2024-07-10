@@ -4,35 +4,43 @@ namespace common\filters;
 
 use Yii;
 use yii\base\Action;
-use yii\base\Model;
 use yii\web\Request;
+use yii\filters\RateLimitInterface;
 
-class IpUser extends Model
+class CRateLimiterUser implements RateLimitInterface
 {
     /**
-     * @var string 客户端IP
+     * @var string 限制的key
      */
-    private $ip;
+    public $limitKey;
+
+    /**
+     * @var string 限制的key字段
+     */
+    public $limitKeyField = 'ip';
 
     /**
      * @var int 允许的最大请求数
      */
-    private $rateLimit;
+    public $rateLimit;
 
     /**
      * @var int 时间段
      */
-    private $timePeriod;
+    public $timePeriod;
 
     /**
-     * @param string $ip
+     * @param string $limitKey
+     * @param int $rateLimit
      * @param int $timePeriod
+     * @param string $limitKeyField
      * @return self
      */
-    public static function findByIp($ip, $rateLimit, $timePeriod)
+    public static function findByKey($limitKey, $rateLimit, $timePeriod, $limitKeyField = 'ip')
     {
         $user = new self();
-        $user->ip = $ip;
+        $user->limitKeyField = $limitKeyField;
+        $user->limitKey = $limitKey;
         $user->rateLimit = $rateLimit;
         $user->timePeriod = $timePeriod;
 
@@ -84,16 +92,16 @@ class IpUser extends Model
 
     public function getKeyPrefix($action)
     {
-        return 'user.ratelimit.ip.' . $action->getUniqueId();
+        return 'user.ratelimit.' . $this->limitKeyField . '.' . $action->getUniqueId();
     }
 
     public function getAllowanceKey($action)
     {
-        return md5($this->getKeyPrefix($action) . '.allowance.' . $this->ip);
+        return md5($this->getKeyPrefix($action) . '.allowance.' . $this->limitKey);
     }
 
     public function getAllowanceUpdatedAtKey($action)
     {
-        return md5($this->getKeyPrefix($action) . '.allowance_updated_at.' . $this->ip);
+        return md5($this->getKeyPrefix($action) . '.allowance_updated_at.' . $this->limitKey);
     }
 }

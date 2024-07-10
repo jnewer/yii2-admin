@@ -28,16 +28,12 @@
         "bower-asset/blueimp-gallery": "^2.21",
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
         "denisogr/yii2-cronjobs": "dev-master",
-        "hyii2/yii2-avatar": "dev-master",
         "kartik-v/yii2-password": "^1.5",
         "kartik-v/yii2-widget-activeform": "^1.6",
         "kartik-v/yii2-widget-datepicker": "^1.4",
         "kartik-v/yii2-widget-datetimepicker": "^1.5",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "kartik-v/yii2-widgets": "^3.4",
-        "kop/yii2-scroll-pager": "dev-master",
-        "light/yii2-lock-form": "^1.0",
-        "light/yii2-sweet-submit": "^1.0",
         "rmrevin/yii2-fontawesome": "~2.15",
         "yiisoft/yii2": "^2.0",
         "yiisoft/yii2-bootstrap": "*",
@@ -50,8 +46,8 @@
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
-        "yiisoft/yii2-gii": "~2.1.0",
-        "yiisoft/yii2-faker": "~2.0.0"
+        "yiisoft/yii2-faker": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.1.0"
     },
     "config": {
         "process-timeout": 1800,

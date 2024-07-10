@@ -15,7 +15,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'username' => $this->string(32)->notNull()->unique()->defaultValue('')->comment('用户名'),
-            'realname' => $this->string(32)->notNull()->defaultValue('')->comment('真实姓名'),
+            'nickname' => $this->string(32)->notNull()->defaultValue('')->comment('昵称'),
             'auth_key' => $this->string(32)->notNull()->defaultValue('')->comment('授权KEY'),
             'password_hash' => $this->string(64)->notNull()->defaultValue('')->comment('密码哈希值'),
             'password_reset_token' => $this->string(64)->unique()->comment('密码重置TOKEN'),

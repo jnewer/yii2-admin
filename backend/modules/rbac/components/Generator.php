@@ -108,14 +108,16 @@ class Generator extends \yii\base\Component
             while (feof($file) === false) {
                 ++$lineNumber;
                 $line = fgets($file);
-                preg_match('/public[ \t]+function[ \t]+action([A-Z]{1}[a-zA-Z0-9]+)[ \t]*\(/', $line, $matches);
-                if ($matches !== array()) {
-                    $name = $matches[1];
-                    $actions[strtolower($name)] = array(
-                        'name' => $name,
-                        'desc' => $this->getMethodDesc($controller['class'], 'action' . $name),
-                        'line' => $lineNumber
-                    );
+                if (strpos($line, '//') === false && strpos($line, '/*') === false) {
+                    preg_match('/public[ \t]+function[ \t]+action([A-Z]{1}[a-zA-Z0-9]+)[ \t]*\(/', $line, $matches);
+                    if ($matches !== array()) {
+                        $name = $matches[1];
+                        $actions[strtolower($name)] = array(
+                            'name' => $name,
+                            'desc' => $this->getMethodDesc($controller['class'], 'action' . $name),
+                            'line' => $lineNumber
+                        );
+                    }
                 }
             }
 
@@ -154,7 +156,7 @@ class Generator extends \yii\base\Component
         if (file_exists($path) === true) {
             $controllerDirectory = scandir($path);
             foreach ($controllerDirectory as $entry) {
-                if ($entry[0]!=='.') {
+                if ($entry[0] !== '.') {
                     $entryPath = $path . DIRECTORY_SEPARATOR . $entry;
                     if (strpos(strtolower($entry), 'controller') !== false) {
                         $name = substr($entry, 0, -14);
@@ -303,10 +305,10 @@ class Generator extends \yii\base\Component
         $authItem = explode('.', $authItem);
 
         if (count($authItem) == 2) {
-            $controller = 'backend\\controllers\\'.$authItem[0].'Controller';
+            $controller = 'backend\\controllers\\' . $authItem[0] . 'Controller';
             $action = 'action' . $authItem[1];
         } else {
-            $controller = 'backend\\modules\\'.$authItem[0].'\\controllers\\'.$authItem[1].'Controller';
+            $controller = 'backend\\modules\\' . lcfirst($authItem[0]) . '\\controllers\\' . $authItem[1] . 'Controller';
             $action = 'action' . $authItem[2];
         }
 

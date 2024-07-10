@@ -12,6 +12,10 @@ use backend\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
+/**
+ * DefaultController class
+ * @desc 文件日志
+ */
 class DefaultController extends Controller
 {
     /**
@@ -20,6 +24,7 @@ class DefaultController extends Controller
     public $module;
 
     /**
+     * @desc 列表
      * @return string
      */
     public function actionIndex()
@@ -45,6 +50,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * @desc 查看
      * @param string $slug
      * @param string $stamp
      * @return $this
@@ -78,6 +84,7 @@ class DefaultController extends Controller
     // }
 
     /**
+     * @desc 历史记录
      * @param string $slug
      * @return string
      */
@@ -111,6 +118,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * @desc 删除
      * @param string $slug
      * @param null|string $stamp
      * @param null|string $since
@@ -134,6 +142,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * @desc 下载
      * @param string $slug
      * @param null|string $stamp
      * @return void
@@ -149,6 +158,7 @@ class DefaultController extends Controller
     }
 
     /**
+     * @desc 显示最后100行
      * @param string  $slug
      * @param integer $line
      * @param null|string  $stamp

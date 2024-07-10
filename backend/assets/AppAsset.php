@@ -38,8 +38,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\widgets\ActiveFormAsset',
-        'light\widgets\LockBsFormAsset',
-        'light\widgets\SweetSubmitAsset',
         'backend\assets\BlueimpGalleryAsset',
         'kartik\select2\Select2Asset',
         'kartik\select2\ThemeDefaultAsset',

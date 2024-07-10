@@ -6,9 +6,9 @@ use Yii;
 use yii\web\IdentityInterface;
 use common\components\ActiveRecord;
 use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use kartik\password\StrengthValidator;
 use backend\components\OperationLogBehavior;
+use common\components\behaviors\DatetimeBehavior;
 
 /**
  * User model
@@ -53,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
+            DatetimeBehavior::class,
             OperationLogBehavior::class,
         ];
     }
@@ -66,15 +66,15 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE]],
-            [['username', 'auth_key', 'password_hash', 'email'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'auth_key', 'password_hash', 'email','status'], 'required'],
+            [['status'], 'integer'],
             [['password_hash', 'password_reset_token'], 'string', 'max' => 64],
             [['username','nickname', 'email','auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'email'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
-            [['password', 'roles'], 'safe'],
+            [['password', 'roles', 'created_at', 'updated_at'], 'safe'],
             [['password'], StrengthValidator::class, 'preset' => 'normal', 'userAttribute' => 'username'],
         ];
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b01e750dbdac2178d70b35b0d315675",
+    "content-hash": "3a8a7086ca135ad83af571606fd9bac4",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -875,57 +875,6 @@
                 "source": "https://github.com/FortAwesome/Font-Awesome/tree/v4.7.0"
             },
             "time": "2016-10-24T15:52:54+00:00"
-        },
-        {
-            "name": "hyii2/yii2-avatar",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/org-yii-china/yii2-avatar.git",
-                "reference": "8adb4ccd7aba4fa88f51eb3f71484d29f652f4da"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/org-yii-china/yii2-avatar/zipball/8adb4ccd7aba4fa88f51eb3f71484d29f652f4da",
-                "reference": "8adb4ccd7aba4fa88f51eb3f71484d29f652f4da",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "default-branch": true,
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "hyii2\\avatar\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-4-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Xianan Huang",
-                    "email": "xianan_huang@163.com"
-                }
-            ],
-            "description": "基于cropper的一款头像上传yii2组件",
-            "keywords": [
-                "extension",
-                "yii2"
-            ],
-            "support": {
-                "issues": "https://github.com/org-yii-china/yii2-avatar/issues",
-                "source": "https://github.com/org-yii-china/yii2-avatar/tree/dev"
-            },
-            "time": "2016-08-01T09:28:29+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -2579,161 +2528,6 @@
                 "source": "https://github.com/kartik-v/yii2-widgets/tree/master"
             },
             "time": "2018-10-09T17:40:19+00:00"
-        },
-        {
-            "name": "kop/yii2-scroll-pager",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kop/yii2-scroll-pager.git",
-                "reference": "27720921e60b5df12b73c31429472fe8781e0425"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/27720921e60b5df12b73c31429472fe8781e0425",
-                "reference": "27720921e60b5df12b73c31429472fe8781e0425",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "webcreate/jquery-ias": "^2.2.1",
-                "yiisoft/yii2": "*"
-            },
-            "default-branch": true,
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kop\\y2sp\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ivan Koptiev",
-                    "email": "ivan.koptiev@codex.systems",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Infinite AJAX scrolling for Yii2 ListView widget",
-            "homepage": "http://kop.github.io/yii2-scroll-pager/",
-            "keywords": [
-                "pager",
-                "pagination",
-                "scroll",
-                "scrolling",
-                "yii",
-                "yii2"
-            ],
-            "support": {
-                "issues": "https://github.com/kop/yii2-scroll-pager/issues",
-                "source": "https://github.com/kop/yii2-scroll-pager"
-            },
-            "time": "2020-07-08T07:52:26+00:00"
-        },
-        {
-            "name": "light/yii2-lock-form",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lichunqiang/yii2-lock-form.git",
-                "reference": "d65998d484bb2d2666faece16bfc248848dba045"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lichunqiang/yii2-lock-form/zipball/d65998d484bb2d2666faece16bfc248848dba045",
-                "reference": "d65998d484bb2d2666faece16bfc248848dba045",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "^2.0.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "light\\widgets\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "lichunqiang",
-                    "email": "light-li@hotmail.com"
-                }
-            ],
-            "description": "yii2 activeform ActiveForm bootstrap loading",
-            "support": {
-                "issues": "https://github.com/lichunqiang/yii2-lock-form/issues",
-                "source": "https://github.com/lichunqiang/yii2-lock-form/tree/master"
-            },
-            "time": "2018-09-27T03:10:59+00:00"
-        },
-        {
-            "name": "light/yii2-sweet-submit",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lichunqiang/yii2-sweet-submit.git",
-                "reference": "5ca8381f48fd4b8aa6c73062191737899d1be7ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lichunqiang/yii2-sweet-submit/zipball/5ca8381f48fd4b8aa6c73062191737899d1be7ca",
-                "reference": "5ca8381f48fd4b8aa6c73062191737899d1be7ca",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "^1.11"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "light\\widgets\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "lichunqiang",
-                    "email": "light-li@hotmail.com"
-                }
-            ],
-            "description": "make yii2 form submit sweet",
-            "support": {
-                "issues": "https://github.com/lichunqiang/yii2-sweet-submit/issues",
-                "source": "https://github.com/lichunqiang/yii2-sweet-submit/tree/master"
-            },
-            "time": "2016-01-06T05:27:08+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4615,56 +4409,6 @@
             "time": "2022-07-20T13:00:38+00:00"
         },
         {
-            "name": "webcreate/jquery-ias",
-            "version": "v2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webcreate/infinite-ajax-scroll.git",
-                "reference": "97ba99a34e68a3fc186ceb518c9cff51370be24b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webcreate/infinite-ajax-scroll/zipball/97ba99a34e68a3fc186ceb518c9cff51370be24b",
-                "reference": "97ba99a34e68a3fc186ceb518c9cff51370be24b",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary",
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "fieg",
-                    "email": "jeroen@webcreate.nl",
-                    "homepage": "http://webcreate.nl"
-                }
-            ],
-            "description": "Infinite Ajax Scroll: A jQuery plugin that turns your server-side pagination into an infinite scrolling one using AJAX",
-            "homepage": "https://infiniteajaxscroll.com",
-            "keywords": [
-                "ajax",
-                "ias",
-                "infinite",
-                "jquery",
-                "pagination",
-                "scroll",
-                "scrolling"
-            ],
-            "support": {
-                "issues": "https://github.com/webcreate/infinite-ajax-scroll/issues",
-                "source": "https://github.com/webcreate/infinite-ajax-scroll/tree/master"
-            },
-            "time": "2018-03-21T20:14:31+00:00"
-        },
-        {
             "name": "yiisoft/yii2",
             "version": "2.0.49.4",
             "source": {
@@ -4976,16 +4720,16 @@
         },
         {
             "name": "yiisoft/yii2-httpclient",
-            "version": "2.0.14",
+            "version": "2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-httpclient.git",
-                "reference": "50d670d2e1a30a354c27aeebf806a2db16954836"
+                "reference": "5a8350e15f2db3555ba52830c9c701587c136e87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/50d670d2e1a30a354c27aeebf806a2db16954836",
-                "reference": "50d670d2e1a30a354c27aeebf806a2db16954836",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/5a8350e15f2db3555ba52830c9c701587c136e87",
+                "reference": "5a8350e15f2db3555ba52830c9c701587c136e87",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5061,20 +4805,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-09T21:10:49+00:00"
+            "time": "2023-05-22T18:32:24+00:00"
         },
         {
             "name": "yiisoft/yii2-imagine",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "b103b1b1deb786d4d5fe955898ec866dbee5c1b4"
+                "reference": "7ec4332dc25893aec5a7cf084722b162b3a4d55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/b103b1b1deb786d4d5fe955898ec866dbee5c1b4",
-                "reference": "b103b1b1deb786d4d5fe955898ec866dbee5c1b4",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/7ec4332dc25893aec5a7cf084722b162b3a4d55d",
+                "reference": "7ec4332dc25893aec5a7cf084722b162b3a4d55d",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5150,7 +4894,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-23T17:16:36+00:00"
+            "time": "2022-09-04T10:06:40+00:00"
         },
         {
             "name": "yiisoft/yii2-queue",
@@ -5641,16 +5385,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.1.21",
+            "version": "2.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "fa9fa02e242c1b744eb68045ee8e9d698134836d"
+                "reference": "4d011b9bfc83bde71cde43c9f6837f5a74685ea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/fa9fa02e242c1b744eb68045ee8e9d698134836d",
-                "reference": "fa9fa02e242c1b744eb68045ee8e9d698134836d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/4d011b9bfc83bde71cde43c9f6837f5a74685ea7",
+                "reference": "4d011b9bfc83bde71cde43c9f6837f5a74685ea7",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5733,7 +5477,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-06T17:40:08+00:00"
+            "time": "2023-09-26T15:50:00+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -5893,9 +5637,7 @@
     "stability-flags": {
         "dektrium/yii2-rbac": 20,
         "denisogr/yii2-cronjobs": 20,
-        "hyii2/yii2-avatar": 20,
-        "kartik-v/yii2-widget-fileinput": 20,
-        "kop/yii2-scroll-pager": 20
+        "kartik-v/yii2-widget-fileinput": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

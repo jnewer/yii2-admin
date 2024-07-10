@@ -8,8 +8,13 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'redis' => [
+            'class' => \yii\redis\Connection::class,
+            'retries' => 1,
+        ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+            'redis' => 'redis',
         ],
         'assetManager' => [
             'appendTimestamp' => true,
@@ -18,8 +23,8 @@ return [
             'class' => 'yii\i18n\Formatter',
             'nullDisplay' => '--',
             'defaultTimeZone' => 'Asia/Shanghai',
-            'dateFormat' => 'yy/M/d',
-            'datetimeFormat' => 'yy/M/d HH:mm',
+            'dateFormat' => 'yyyy-MM-dd',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
         ],
         'config' => [
             'class'         => 'abhimanyu\config\components\Config', // Class (Required)
@@ -77,9 +82,9 @@ return [
                     ],
                     'logVars' => ['_GET', '_POST', '_SESSION'],
                     'message' => [
-                        'from' => ['sungolh@163.com' => 'papweixin'],
-                        'to' => ['sungolh@163.com'],
-                        'subject' => '【VRSITE】错误日志邮件通知',
+                        'from' => [],
+                        'to' => [''],
+                        'subject' => '',
                     ],
                 ],
                 'db' => [
@@ -91,7 +96,6 @@ return [
                         'yii\web\HttpException:404',
                         'yii\web\HttpException:400',
                         'yii\web\HttpException:403',
-                        'common\base\*',
                     ],
                 ],
                 'debug' => [
@@ -103,6 +107,11 @@ return [
                     'logFile' => '@runtime/logs/debug.log',
                 ],
             ],
+        ],
+        'queue' => [
+            'class' => \yii\queue\redis\Queue::class,
+            'redis' => 'redis',
+            'as log' => \yii\queue\LogBehavior::class,
         ],
     ],
 ];

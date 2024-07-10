@@ -195,7 +195,7 @@ class Generator extends \yii\base\Component
         if (file_exists($modulePath) === true) {
             $moduleDirectory = scandir($modulePath);
             foreach ($moduleDirectory as $entry) {
-                if (substr($entry, 0, 1) !== '.' && $entry !== 'rbac') {
+                if (substr($entry, 0, 1) !== '.' && !in_array($entry, ['rbac', 'bsgii'])) {
                     $subModulePath = $modulePath . DIRECTORY_SEPARATOR . $entry;
                     if (file_exists($subModulePath) === true) {
                         $items[$entry]['controllers'] = $this->getControllersInPath($subModulePath . DIRECTORY_SEPARATOR . 'controllers');

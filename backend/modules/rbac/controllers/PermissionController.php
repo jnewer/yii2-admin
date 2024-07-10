@@ -53,6 +53,7 @@ class PermissionController extends BaseController
         }
 
         // Get all items that are available to be generated
+        /** @var Generator $generator */
         $items = $generator->getControllerActions();
 
         // We need the existing operations for comparason

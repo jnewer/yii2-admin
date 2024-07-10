@@ -3,16 +3,22 @@
  * This is the template for generating the model class of a specified table.
  */
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\model\Generator */
-/* @var $tableName string full table name */
-/* @var $className string class name */
-/* @var $queryClassName string query class name */
-/* @var $tableSchema yii\db\TableSchema */
-/* @var $labels string[] list of attribute labels (name => label) */
-/* @var $rules string[] list of validation rules */
-/* @var $relations array list of relations (name => relation declaration) */
+/** @var yii\web\View $this */
+/** @var backend\modules\bsgii\model\Generator $generator */
+/** @var string $tableName full table name */
+/** @var string $className class name */
+/** @var string $queryClassName query class name */
+/** @var yii\db\TableSchema $tableSchema */
+/** @var string[] $labels list of attribute labels (name => label) */
+/** @var string[] $rules list of validation rules */
+/** @var array $relations list of relations (name => relation declaration) */
 
+if (array_key_exists('created_at', $labels) || array_key_exists('updated_at', $labels)) {
+    $useDatetimeBehavior = true;
+}
+if (array_key_exists('created_by', $labels) || array_key_exists('updated_by', $labels)) {
+    $useBlameableBehavior = true;
+}
 echo "<?php\n";
 ?>
 
@@ -21,7 +27,12 @@ namespace <?= $generator->ns ?>;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\components\ActiveRecord;
+<?php if (isset($useDatetimeBehavior)) : ?>
 use common\components\behaviors\DatetimeBehavior;
+<?php endif; ?>
+<?php if (isset($useBlameableBehavior)) : ?>
+use yii\behaviors\BlameableBehavior;
+<?php endif; ?>
 
 /**
  * This is the model class for table "<?= $generator->generateTableName($tableName) ?>".
@@ -58,12 +69,16 @@ class <?= $className ?> extends ActiveRecord
     }
 
 <?php endif; ?>
-<?php if (array_key_exists('created_at', $labels)||array_key_exists('updated_at', $labels)) : ?>
+<?php if (isset($useDatetimeBehavior) || isset($useBlameableBehavior)) : ?>
     public function behaviors()
     {
         return [
-            DatetimeBehavior::class,
-        ];
+    <?php if (isset($useDatetimeBehavior)) : ?>
+        DatetimeBehavior::class,
+    <?php endif; ?>
+    <?php if (isset($useBlameableBehavior)) : ?>
+        BlameableBehavior::class,
+    <?php endif; ?>];
     }
 
 <?php endif; ?>

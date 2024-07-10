@@ -3,10 +3,10 @@
  * This is the template for generating the ActiveQuery class.
  */
 
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\model\Generator */
-/* @var $className string class name */
-/* @var $modelClassName string related model class name */
+/** @var yii\web\View $this */
+/** @var backend\modules\bsgii\model\Generator $generator */
+/** @var string $className class name */
+/** @var string $modelClassName related model class name */
 
 $modelFullClassName = $modelClassName;
 if ($generator->ns !== $generator->queryNs) {

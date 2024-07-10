@@ -55,27 +55,27 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                 'columns' => [
                     'id',
                     'username',
-                    // 'auth_key',
-                    // 'password_hash',
-                    // 'password_reset_token',
-                    'email:email',
+                    'email',
                     'RoleNames:text:角色',
                     'status',
-                    'created_at',
                     [
-                        'label' => '管理项目',
-                        'value' => function ($model)
-                        {
-                            return empty($model->wechat) ? '' : $model->wechat;
-                        },
+                        'attribute' => 'created_at',
+                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
                     ],
-                    // 'updated_at',
-
+                    [
+                        'attribute' => 'updated_at',
+                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
+                    ],
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header'=>'操作',
                         'headerOptions'=>['style'=>'width:150px'],
                         'buttonOptions'=>['class'=>'btn btn-default btn-sm'],
+                        'visibleButtons' => [
+                            'delete' => function ($model, $key, $index) {
+                                return $model->id != Yii::$app->user->id;
+                            },
+                        ],
                     ],
                 ],
             ]); ?>

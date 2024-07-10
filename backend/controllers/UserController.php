@@ -86,4 +86,26 @@ class UserController extends Controller
             'roles' => $roles
         ]);
     }
+
+    /**
+     * Deletes an existing model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @desc 删除
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->id == Yii::$app->user->id) {
+            Yii::$app->session->setFlash('error', '不能删除自己！');
+            return $this->redirect(['index']);
+        }
+        
+        Yii::$app->session->setFlash('warning', $this->modelClass::$modelName . '#' . $model->id . '已成功删除。');
+        $model->delete();
+
+        return $this->redirect(['index']);
+    }
 }

@@ -4,8 +4,8 @@ use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
 $model = new $generator->modelClass;
-/* @var $this yii\web\View */
-/* @var $generator yii\gii\generators\crud\Generator */
+/** @var yii\web\View $this */
+/** @var backend\modules\bsgii\crud\Generator $generator  */
 $modelClassName = substr($generator->modelClass, strrpos($generator->modelClass, '\\')+1);
 
 echo "<?php\n";

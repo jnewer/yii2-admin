@@ -15,13 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header">
       <div class="btn-group">
         <?= Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-        <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
+        <?php if ($model->id != \Yii::$app->user->id) : ?>
+            <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-default',
             'data' => [
                 'confirm' => '您确定要删除该项目吗？',
                 'method' => 'post',
             ],
         ]) ?>
+        <?php endif; ?>
         <!-- /.btn-group -->
     </div>
     <div class="pull-right">
@@ -35,19 +37,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
                 'id',
                 'username',
-                // 'auth_key',
-                // 'password_hash',
-                // 'password_reset_token',
                 'email:email',
                 'RoleNames:text:角色',
-                ['label' => '管理项目', 'value' => empty($model->wechat) ? '' : $model->wechat],
                 'status',
-                'created_at',
-                'updated_at',
+                [
+                    'attribute' => 'created_at',
+                    'format' => ['datetime', 'php:Y-m-d H:i:s'],
+                ],
+                [
+                    'attribute' => 'updated_at',
+                    'format' => ['datetime', 'php:Y-m-d H:i:s'],
+                ],
             ],
         ]) ?>
 
     </div>
     <!-- /.box-body -->
 </div>
-

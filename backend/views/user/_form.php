@@ -19,6 +19,7 @@ use kartik\password\PasswordInput;
         ],
     ]); ?>
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
     <?php if ($model->isNewRecord) : ?>
         <?= $form->field($model, 'password')->widget(PasswordInput::class, [
             'pluginOptions' => [
@@ -36,7 +37,7 @@ use kartik\password\PasswordInput;
     <?php endif ?>
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'roles')->dropdownList($roles, ['prompt' => '', 'data-placeholder' => '角色', 'class' => 'form-control select2', 'style' => 'width:100%']) ?>
-    <?= $form->field($model, 'status')->dropdownList([User::STATUS_ACTIVE => '正常', User::STATUS_DELETED => '已禁用'], ['prompt' => '', 'data-placeholder' => '状态', 'class' => 'form-control select2', 'style' => 'width:100%']) ?>
+    <?= $form->field($model, 'status')->dropdownList(User::$statusMap, ['prompt' => '', 'data-placeholder' => '状态', 'class' => 'form-control select2', 'style' => 'width:100%']) ?>
     <div class="box-footer">
         <a href="javascript:history.back();" class="btn btn-default">取消</a>
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>

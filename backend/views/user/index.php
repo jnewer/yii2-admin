@@ -55,17 +55,12 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                 'columns' => [
                     'id',
                     'username',
+                    'nickname',
                     'email',
                     'RoleNames:text:角色',
                     'status',
-                    [
-                        'attribute' => 'created_at',
-                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
-                    ],
-                    [
-                        'attribute' => 'updated_at',
-                        'format' => ['datetime', 'php:Y-m-d H:i:s'],
-                    ],
+                    'created_at',
+                    'updated_at',
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header'=>'操作',

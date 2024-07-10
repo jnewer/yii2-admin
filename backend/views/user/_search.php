@@ -23,10 +23,9 @@ use common\models\User;
 
         <?= $form->field($model, 'id')->textInput(['placeholder'=>'ID']) ?>
         <?= $form->field($model, 'username')->textInput(['placeholder'=>'用户名']) ?>
-        <?= $form->field($model, 'email')->textInput(['placeholder'=>'Email']) ?>
-        <?= $form->field($model, 'status')->dropdownList([User::STATUS_ACTIVE=>'正常', User::STATUS_DELETED=>'已禁用'], ['prompt'=>'', 'data-placeholder'=>'状态', 'class'=>'form-control select2', 'style'=>'width:120px']) ?>
-        <?php // echo $form->field($model, 'created_at') ?>
-        <?php // echo $form->field($model, 'updated_at') ?>
+        <?= $form->field($model, 'nickname')->textInput(['placeholder'=>'昵称']) ?>
+        <?= $form->field($model, 'email')->textInput(['placeholder'=>'邮箱']) ?>
+        <?= $form->field($model, 'status')->dropdownList(User::$statusMap, ['prompt'=>'', 'data-placeholder'=>'状态', 'class'=>'form-control select2', 'style'=>'width:120px']) ?>
 
         <div class="form-group">
             <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn btn-default']) ?>

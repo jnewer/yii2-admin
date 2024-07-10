@@ -9,20 +9,21 @@ class m130524_201442_init extends Migration
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+            $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
         }
 
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
-
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'username' => $this->string(32)->notNull()->unique()->defaultValue('')->comment('用户名'),
+            'realname' => $this->string(32)->notNull()->defaultValue('')->comment('真实姓名'),
+            'auth_key' => $this->string(32)->notNull()->defaultValue('')->comment('授权KEY'),
+            'password_hash' => $this->string(64)->notNull()->defaultValue('')->comment('密码哈希值'),
+            'password_reset_token' => $this->string(64)->unique()->comment('密码重置TOKEN'),
+            'access_token' => $this->string(64)->unique()->comment('ACCESS TOKEN'),
+            'email' => $this->string(32)->notNull()->unique()->comment('邮箱'),
+            'status' => $this->tinyInteger(1)->notNull()->unsigned()->defaultValue(10)->comment('状态'),
+            'created_at' => $this->dateTime()->notNull()->comment('创建时间'),
+            'updated_at' => $this->dateTime()->notNull()->comment('更新时间'),
         ], $tableOptions);
     }
 

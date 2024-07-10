@@ -17,6 +17,7 @@ class SeedController extends Controller
         }
         $user = new User();
         $user->username = 'admin';
+        $user->realname = '超管';
         $user->email = 'admin@qq.com';
         $user->status = User::STATUS_ACTIVE;
         $user->setPassword('123456');

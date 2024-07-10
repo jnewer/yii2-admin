@@ -27,10 +27,10 @@ class PermissionController extends BaseController
             // Form is valid
             $model->attributes = $_POST['GenerateForm'];
             if ($model->validate() === true) {
-                $items = array(
-                    'tasks' => array(),
-                    'operations' => array(),
-                );
+                $items = [
+                    'tasks' => [],
+                    'operations' => [],
+                ];
 
                 // Get the chosen items
                 foreach ($model->items as $itemname => $value) {
@@ -42,12 +42,12 @@ class PermissionController extends BaseController
                 // Add the items to the generator as tasks and operations and run the generator.
                 /** @var Generator $generator */
                 $generator->addItems($items['operations']);
-                if (($generatedItems = $generator->run()) !== false && $generatedItems !== array()) {
+                if (($generatedItems = $generator->run()) !== false && $generatedItems !== []) {
                     Yii::$app->getSession()->setFlash(
                         'success',
                         '权限项已生成'
                     );
-                    return $this->redirect(array('permission/generate'));
+                    return $this->redirect(['permission/generate']);
                 }
             }
         }
@@ -57,16 +57,16 @@ class PermissionController extends BaseController
 
         // We need the existing operations for comparason
         $authItems = Yii::$app->authManager->getPermissions();
-        $existingItems = array();
+        $existingItems = [];
         foreach ($authItems as $itemName => $item) {
             $existingItems[$itemName] = $itemName;
         }
 
         // Render the view
-        return $this->render('generate', array(
+        return $this->render('generate', [
             'model' => $model,
             'items' => $items,
             'existingItems' => $existingItems,
-        ));
+        ]);
     }
 }

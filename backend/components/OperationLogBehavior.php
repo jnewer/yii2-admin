@@ -12,7 +12,7 @@ use common\components\behaviors\ActiveRecordBehavior;
 class OperationLogBehavior extends ActiveRecordBehavior
 {
 
-    private $_oldattributes = array();
+    private $oldAttributes = [];
 
     public function afterFind($event)
     {
@@ -45,13 +45,11 @@ class OperationLogBehavior extends ActiveRecordBehavior
         if (basename(Yii::$app->basePath) != 'backend') {
             return false;
         }
-        $newattributes = $this->owner->getAttributes();
-        $oldattributes = $this->getOldAttributes();
         // 获得该操作资源的类名
         $modelclass = get_class($this->owner);
         // 获得该操作资源的名称 如 ‘产品’、‘新闻’
-        $model_vars = get_class_vars($modelclass);
-        $resource_name = $model_vars['modelName'];
+        $modelVars = get_class_vars($modelclass);
+        $modelName = $modelVars['modelName'];
         // 获得该操作资源的主键
         $pk = $this->owner->getPrimaryKey();
         if (is_array($pk)) {
@@ -63,11 +61,11 @@ class OperationLogBehavior extends ActiveRecordBehavior
         //后台log
         $log = new OperationLog();
         //LOG 一级大类
-        $type = $resource_name . '管理';
+        $type = $modelName . '管理';
         //LOG 二级分类
-        $category = $act . $resource_name;
-        $model_attributes_old = json_encode($oldattributes);
-        $model_attributes_new = json_encode($newattributes);
+        $category = $act . $modelName;
+        $oldAttributes = Json::encode($this->getOldAttributes(), JSON_UNESCAPED_UNICODE);
+        $newAttributes = Json::encode($this->owner->getAttributes(), JSON_UNESCAPED_UNICODE);
         $info = array(
             'ip' => Yii::$app->request->getUserIP(),
             'operator_id' => Yii::$app->user->identity->id,
@@ -76,8 +74,8 @@ class OperationLogBehavior extends ActiveRecordBehavior
             'category' => $category,
             'model' => $modelclass,
             'model_pk' => $pk,
-            'model_attributes_old' => $model_attributes_old,
-            'model_attributes_new' => $act == '删除' ? json_encode([]) : $model_attributes_new,
+            'model_attributes_old' => $oldAttributes,
+            'model_attributes_new' => $act == '删除' ? Json::encode([]) : $newAttributes,
             'date' => date('Y-m-d H:i:s'),
             'time' => time(),
         );
@@ -92,11 +90,11 @@ class OperationLogBehavior extends ActiveRecordBehavior
 
     public function getOldAttributes()
     {
-        return $this->_oldattributes;
+        return $this->oldAttributes;
     }
 
     public function setOldAttributes($value)
     {
-        $this->_oldattributes = $value;
+        $this->oldAttributes = $value;
     }
 }

@@ -21,15 +21,6 @@ class ActiveController extends Controller
 {
     public $defaultFilter = [];
 
-    /**
-     * @var string
-     */
-    protected $requestId;
-
-    protected $requestKey;
-
-    protected $notFormat = [];
-
     public function init()
     {
         parent::init();
@@ -90,9 +81,6 @@ class ActiveController extends Controller
 
         $lastSlash = strrpos($modelClass, '\\') + 1;
         $searchModelClass = substr($modelClass, 0, $lastSlash - 1) . "\\search\\" . substr($modelClass, $lastSlash) . 'Search';
-        if (!class_exists($searchModelClass)) {
-            $searchModelClass = substr($modelClass, 0, $lastSlash - 1) . "\\query\\" . substr($modelClass, $lastSlash) . 'Query';
-        }
 
         $filter = new ActiveDataFilter([
             'searchModel' => $searchModelClass,
@@ -111,12 +99,15 @@ class ActiveController extends Controller
         } else {
             $query->andFilterWhere(ArrayHelper::filter($get, $modelClass::instance()->attributes()));
         }
-        if ($modelClass::instance()->hasAttribute('is_deleted')) {
-            $query->andFilterWhere(['is_deleted' => 0]);
+        
+        if ($modelClass::instance()->hasAttribute('deleted_at')) {
+            $query->andFilterWhere(['deleted_at' => null]);
         }
+
         if (!empty($this->defaultFilter)) {
             $query->andFilterWhere($this->defaultFilter);
         }
+
         $order = ['id' => SORT_DESC];
         if ($modelClass::instance()->hasAttribute('sort')) {
             $order = ['sort' => SORT_DESC];
@@ -160,35 +151,26 @@ class ActiveController extends Controller
 
     public function beforeAction($action)
     {
-        if (!in_array($action->id, $this->notFormat)) {
-            Yii::$app->setComponents([
-                'response' => [
-                    'class' => 'yii\web\Response',
-                    'format' => 'json',
-                    'on beforeSend' => function ($event) {
-                        $response = $event->sender;
-                        if (Yii::$app->getRequest()->getMethod() !== 'OPTIONS') {
-                            if ($this->requestId && Yii::$app->redis->sismember('response-id-list-' . date('W'), $this->requestId)) {
-                                if ($response->statusCode == 200) {
-                                    Yii::$app->redis->set($this->requestKey, Json::encode($response->data), 'PX', 3 * 24 * 3600000);
-                                } else {
-                                    Yii::$app->redis->srem('response-id-list-' . date('W'), $this->requestId);
-                                }
-                            }
-                            $responseData = [
-                                'data' => $response->data,
-                                'code' => $response->isSuccessful ? 0 : ($response->data['name'] == 'Exception' ? $response->data['code'] : $response->statusCode),
-                                'message' => $response->isSuccessful ? 'ok' : ($response->data['message'] ?? 'Internal Server Error'),
-                            ];
+        Yii::$app->setComponents([
+            'response' => [
+                'class' => 'yii\web\Response',
+                'format' => 'json',
+                'on beforeSend' => function ($event) {
+                    $response = $event->sender;
+                    if (Yii::$app->getRequest()->getMethod() !== 'OPTIONS') {
+                        $responseData = [
+                            'data' => $response->data,
+                            'code' => $response->isSuccessful ? 0 : ($response->data['name'] == 'Exception' ? $response->data['code'] : $response->statusCode),
+                            'message' => $response->isSuccessful ? 'ok' : ($response->data['message'] ?? 'Internal Server Error'),
+                        ];
 
-                            $response->data = $responseData;
-                        } else {
-                            $response->data = null;
-                        }
-                    },
-                ],
-            ]);
-        }
+                        $response->data = $responseData;
+                    } else {
+                        $response->data = null;
+                    }
+                },
+            ],
+        ]);
 
         return parent::beforeAction($action);
     }

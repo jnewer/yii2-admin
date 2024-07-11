@@ -146,4 +146,16 @@ class SiteController extends Controller
             'model'  => $model,
         ]);
     }
+
+    /**
+     * Displays server env.
+     *
+     * @desc 服务环境
+     *
+     * @return string
+     */
+    public function actionServerEnv()
+    {
+        return $this->render('server-env');
+    }
 }

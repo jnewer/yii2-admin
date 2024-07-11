@@ -29,9 +29,13 @@
             [
                 'options' => ['class' => 'sidebar-menu', 'data-widget' => "tree"],
                 'items' => [
-                    ['label' => '系统设置', 'icon' => 'fa fa-cog', 'url' => '#', 'options' => ['class' => 'treeview'], 'items' => [
+                    ['label' => '系统首页', 'icon' => 'fa fa-dashboard', 'url' => ['/']],
+                    ['label' => '服务环境', 'icon' => 'fa fa-file-code-o', 'url' => ['/site/server-env']],
+                    ['label' => '权限管理', 'icon' => 'fa fa-lock', 'url' => '#', 'options' => ['class' => 'treeview'], 'items' => [
                         ['label' => '用户管理', 'icon' => 'fa fa-users', 'url' => ['/user']],
                         ['label' => '权限管理', 'icon' => 'fa fa-lock', 'url' => ['/rbac'], 'visible' => Yii::$app->user->isAdmin],
+                    ]],
+                    ['label' => '系统设置', 'icon' => 'fa fa-cog', 'url' => '#', 'options' => ['class' => 'treeview'], 'items' => [
                         ['label' => '配置管理', 'icon' => 'fa fa-cogs', 'url' => ['/config']],
                     ]],
                     ['label' => '日志管理', 'icon' => 'fa fa-book', 'url' => '#', 'options' => ['class' => 'treeview'], 'items' => [

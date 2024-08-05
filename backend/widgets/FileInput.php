@@ -1,10 +1,7 @@
 <?php
 namespace backend\widgets;
 
-use Yii;
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use yii\web\JsExpression;
 
 /**
  * FileInput widget styled for Bootstrap 3.0 with ability to multiple file
@@ -35,8 +32,7 @@ class FileInput extends \kartik\base\InputWidget
 
         if ($this->hasModel()) {
             $input = Html::activeFileInput($this->model, $this->attribute, $this->options);
-        }
-        else{
+        } else {
             $input = Html::fileInput($this->name, $this->value, $this->options);
         }
 
@@ -54,7 +50,8 @@ class FileInput extends \kartik\base\InputWidget
     /**
      * Registers the asset bundle and locale
      */
-    public function registerAssetBundle() {
+    public function registerAssetBundle()
+    {
     }
 
     /**

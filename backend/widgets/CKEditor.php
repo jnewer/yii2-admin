@@ -1,10 +1,7 @@
 <?php
 namespace backend\widgets;
 
-use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
-use yii\widgets\InputWidget;
 
 /**
  * 为CKEditor加入ckfinder支持

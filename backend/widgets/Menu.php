@@ -5,6 +5,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
+
 /**
  * Class Menu
  * Theme menu widget.
@@ -25,18 +26,23 @@ class Menu extends \yii\widgets\Menu
     {
         parent::init();
 
-        if(Yii::$app->user->IsAdmin)
+        if (Yii::$app->user->IsAdmin) {
             return;
+        }
 
-        foreach($this->items as $key => $item){
-            if(!is_array($item)) continue;
-            if(isset($item['url']) && is_array($item['url'])){
+        foreach ($this->items as $key => $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            if (isset($item['url']) && is_array($item['url'])) {
                 $route = explode('/', trim($item['url'][0], '/'));
-                if(count($route) === 1) $route[1]='index';
-                if(count($route) === 2){
+                if (count($route) === 1) {
+                    $route[1]='index';
+                }
+                if (count($route) === 2) {
                     $parts = explode('-', $route[0]);
                     $controllerName = '';
-                    if(is_array($parts)){
+                    if (is_array($parts)) {
                         foreach ($parts as $part) {
                             $controllerName .= ucfirst($part);
                         }
@@ -44,71 +50,76 @@ class Menu extends \yii\widgets\Menu
                     $itemName = $controllerName.".*";
                     $subItemName = $controllerName.".".ucfirst($route[1]);
 
-                    if(!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)){
+                    if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
                         unset($this->items[$key]);
                     }
-                }elseif(count($route) === 3){
+                } elseif (count($route) === 3) {
                     $parts = explode('-', $route[1]);
                     $controllerName = ucfirst($route[0]).'.';
-                    if(is_array($parts)){
+                    if (is_array($parts)) {
                         foreach ($parts as $part) {
                             $controllerName .= ucfirst($part);
                         }
                     }
                     $itemName = $controllerName.".*";
                     $subItemName = $controllerName.".".ucfirst($route[2]);
-                    if(!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)){
+                    if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
                         // unset($this->items[$key]['items'][$index]);
                         unset($this->items[$key]);
                     }
-                }else{
+                } else {
                     unset($this->items[$key]);
                 }
             }
 
             $subcount = count($this->items[$key]['items']?:[]);
-            if(count($this->items[$key]['items']?:[]) > 0){
-                foreach($this->items[$key]['items'] as $index => $item){
-                    if(!is_array($item)) continue;
-                    if(isset($item['url']) && is_array($item['url'])){
-
+            if (count($this->items[$key]['items']?:[]) > 0) {
+                foreach ($this->items[$key]['items'] as $index => $item) {
+                    if (!is_array($item)) {
+                        continue;
+                    }
+                    if (isset($item['url']) && is_array($item['url'])) {
                         $route = explode('/', trim($item['url'][0], '/'));
-                        if(count($route) === 1) $route[1]='index';
-                        if(count($route) === 2){
+                        if (count($route) === 1) {
+                            $route[1]='index';
+                        }
+                        if (count($route) === 2) {
                             $parts = explode('-', $route[0]);
                             $controllerName = '';
-                            if(is_array($parts)){
+                            if (is_array($parts)) {
                                 foreach ($parts as $part) {
                                     $controllerName .= ucfirst($part);
                                 }
                             }
                             $itemName = $controllerName.".*";
                             $subItemName = $controllerName.".".ucfirst($route[1]);
-                            if(!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)){
+                            if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
                                 unset($this->items[$key]['items'][$index]);
                             }
-                        }elseif(count($route) === 3){
+                        } elseif (count($route) === 3) {
                             $parts = explode('-', $route[1]);
                             $controllerName = ucfirst($route[0]).'.';
-                            if(is_array($parts)){
+                            if (is_array($parts)) {
                                 foreach ($parts as $part) {
                                     $controllerName .= ucfirst($part);
                                 }
                             }
                             $itemName = $controllerName.".*";
                             $subItemName = $controllerName.".".ucfirst($route[2]);
-                            if(!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)){
+                            if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
                                 unset($this->items[$key]['items'][$index]);
                             }
-                        }else{
+                        } else {
                             unset($this->items[$key]['items'][$index]);
                         }
                     }
                 }
             }
 
-            if(count($this->items[$key]['items']?:[]) === 0){
-                if($subcount>0) unset($this->items[$key]);
+            if (count($this->items[$key]['items']?:[]) === 0) {
+                if ($subcount>0) {
+                    unset($this->items[$key]);
+                }
             }
         }
     }
@@ -118,7 +129,7 @@ class Menu extends \yii\widgets\Menu
      */
     public function run()
     {
-        if(count($this->items?:[]) == 0){
+        if (count($this->items?:[]) == 0) {
             return '';
         }
 
@@ -130,18 +141,17 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if(isset($item['items'])) {
+        if (isset($item['items'])) {
             $labelTemplate = '<a href="{url}" {options}>{label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
             $linkTemplate = '<a href="{url}" {options}>{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-        }
-        else {
+        } else {
             $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
         }
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
 
         $options = [];
-        foreach($linkOptions as $attr=>$val){
+        foreach ($linkOptions as $attr => $val) {
             $options[] = $attr.'="'.$val.'"';
         }
         if (isset($item['url'])) {

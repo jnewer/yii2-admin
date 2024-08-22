@@ -42,9 +42,8 @@ class OperationLog extends ActiveRecord
     {
         return [
             [['created_at'], 'safe'],
-            [['time', 'ip', 'operator_name', 'type', 'model_pk', 'model_attributes_old', 'model_attributes_new'], 'required'],
-            [['time', 'operator_id'], 'integer'],
-            [['is_delete'], 'boolean'],
+            [['ip', 'operator_name', 'type', 'model_pk', 'model_attributes_old', 'model_attributes_new'], 'required'],
+            [['operator_id'], 'integer'],
             [['model_attributes_old', 'model_attributes_new'], 'string'],
             [['ip'], 'string', 'max' => 15],
             [['operator_name', 'type', 'model'], 'string', 'max' => 50],

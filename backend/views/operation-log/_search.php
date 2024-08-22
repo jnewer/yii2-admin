@@ -13,15 +13,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'method' => 'get',
-        'options'=>['class'=>'form-inline', 'role'=>'form'],
-        'fieldConfig'=>[
-            'template'=>"{label}\n{input}\n",
-            'labelOptions'=>['class'=>'sr-only'],
+        'options' => ['class' => 'form-inline', 'role' => 'form'],
+        'fieldConfig' => [
+            'template' => "{label}\n{input}\n",
+            'labelOptions' => ['class' => 'sr-only'],
         ],
     ]); ?>
-    <?= $form->field($model, 'operator_name', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'用户名']]) ?>
-    <?= $form->field($model, 'type', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'操作大类']]) ?>
-    <?= $form->field($model, 'category', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'操作小类']]) ?>
+    <?= $form->field($model, 'operator_name', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '用户名']]) ?>
+    <?= $form->field($model, 'type', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作大类']]) ?>
+    <?= $form->field($model, 'category', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作小类']]) ?>
     <div class="form-group">
         <div class="input-daterange input-group">
             <?= $form->field($model, 'created_at_from', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作时间', 'style' => 'width:120px']]); ?>

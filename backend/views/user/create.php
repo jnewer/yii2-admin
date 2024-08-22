@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 
-
-/** @var $this yii\web\View */
-/** @var $model common\models\User */
+/** @var yii\web\View $this */
+/** @var common\models\User $model */
 
 $this->title = '创建用户';
 $this->params['breadcrumbs'][] = ['label' => '用户管理', 'url' => ['index']];
@@ -22,4 +21,3 @@ $this->params['breadcrumbs'][] = $this->title;
         'roles' => $roles,
     ]) ?>
 </div>
-

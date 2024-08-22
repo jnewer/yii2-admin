@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
-/** @var $this yii\web\View */
-/** @var $searchModel common\models\UserSearch */
-/** @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var common\models\UserSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = '用户管理';
 $this->params['breadcrumbs'][] = $this->title;
 
-$dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 20);
+$dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize', 20);
 ?>
 
 <div class="row">
@@ -43,11 +43,11 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "<div class=\"box-body table-responsive\">{items}</div>\n<div class=\"box-footer clearfix\"><div class=\"row\"><div class=\"col-xs-12 col-sm-7\">{pager}</div><div class=\"col-xs-12 col-sm-5 text-right\">{summary}</div></div></div>",
-                'tableOptions'=>['class'=>'table table-bordered table-hover'],
-                'summary'=>'第{page}页，共{pageCount}页，当前第{begin}-{end}项，共{totalCount}项',
-                'filterModel'=>null,
-                'pager'=>[
-                    'class'=>'backend\widgets\LinkPager',
+                'tableOptions' => ['class' => 'table table-bordered table-hover'],
+                'summary' => '第{page}页，共{pageCount}页，当前第{begin}-{end}项，共{totalCount}项',
+                'filterModel' => null,
+                'pager' => [
+                    'class' => 'backend\widgets\LinkPager',
                     'options' => [
                         'class' => 'pagination pagination-sm no-margin',
                     ],
@@ -63,9 +63,9 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                     'updated_at',
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'header'=>'操作',
-                        'headerOptions'=>['style'=>'width:150px'],
-                        'buttonOptions'=>['class'=>'btn btn-default btn-sm'],
+                        'header' => '操作',
+                        'headerOptions' => ['style' => 'width:150px'],
+                        'buttonOptions' => ['class' => 'btn btn-default btn-sm'],
                         'visibleButtons' => [
                             'delete' => function ($model, $key, $index) {
                                 return $model->id != Yii::$app->user->id;

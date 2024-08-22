@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/** @var $this yii\web\View */
-/** @var $model common\models\User */
+/** @var yii\web\View $this */
+/** @var common\models\User $model */
 
 $this->title = '更新用户: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="box-header">
           <div class="btn-group">
             <?=  Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-default',
+                'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => '您确定要删除该项目吗？',
                     'method' => 'post',
@@ -32,4 +32,3 @@ $this->params['breadcrumbs'][] = 'Update';
         'roles' => $roles,
     ]) ?>
 </div>
-

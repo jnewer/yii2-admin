@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/** @var $this \yii\web\View */
-/** @var $content string */
+/** @var \yii\web\View $this */
+/** @var string $content */
 
 $this->registerJsFile('/js/moment.min.js', ['position' => \yii\web\View::POS_HEAD]);
 if (Yii::$app->controller->action->id === 'login') {

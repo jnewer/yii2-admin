@@ -11,12 +11,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dektrium\user\widgets\Connect;
 
-/**
- * @var yii\web\View                   $this
- * @var frontend\models\LoginForm $model
- */
+/** @var yii\web\View $this */
+/** @var frontend\models\LoginForm $model */
 
 $this->title = '修改登录密码';
 $this->params['breadcrumbs'][] = $this->title;

@@ -5,9 +5,9 @@ use common\models\User;
 use yii\widgets\ActiveForm;
 use kartik\password\PasswordInput;
 
-/** @var $this yii\web\View */
+/** @var yii\web\View $this */
 /** @var $model common\models\User */
-/** @var $form yii\widgets\ActiveForm */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="box-body">

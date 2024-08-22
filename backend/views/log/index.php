@@ -1,12 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
 /** @var common\models\search\LogSearch $searchModel  */
-/** @var yii\data\ActiveDataProvider$dataProvider  */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = '系统日志管理';
 $this->params['breadcrumbs'][] = $this->title;
@@ -64,7 +63,6 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                     'category',
                     'log_time:datetime',
                     'prefix:ntext',
-                    // 'message:ntext',
 
                     [
                         'class' => 'yii\grid\ActionColumn',

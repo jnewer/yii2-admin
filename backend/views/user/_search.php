@@ -28,7 +28,7 @@ use common\models\User;
         <?= $form->field($model, 'status')->dropdownList(User::$statusMap, ['prompt'=>'', 'data-placeholder'=>'状态', 'class'=>'form-control select2', 'style'=>'width:120px']) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn btn-default']) ?>
+            <?= Html::submitButton('搜索', ['class' => 'btn btn-default']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

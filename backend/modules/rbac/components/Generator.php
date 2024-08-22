@@ -312,7 +312,7 @@ class Generator extends \yii\base\Component
             $action = 'action' . $authItem[2];
         }
 
-        if ($action === '*') {
+        if ($action === 'action*') {
             return $this->getClassDesc($controller);
         }
 

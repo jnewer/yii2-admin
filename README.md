@@ -33,11 +33,18 @@ common/config/main-local.php
 ```
 3.php yii migrate/up --migrationPath=@yii/log/migrations
 ```
+
 ```
 4.php yii migrate/up --migrationPath=@vendor/abhi1693/yii2-config/migrations
 ```
 
-5. 启动服务
+5. 创建管理员账号
+
+```
+php yii seed/create-admin
+```
+
+6. 启动服务
 
 ```
 php yii serve

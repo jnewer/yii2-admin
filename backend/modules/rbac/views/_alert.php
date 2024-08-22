@@ -10,16 +10,16 @@
  */
 
 /**
- * @var $module dektrium\rbac\Module
+ * @var backend\modules\rbac\RbacWebModule $module
  */
 
 ?>
 
-<?php //if ($module->enableFlashMessages): ?>
+<?php if ($module->enableFlashMessages) : ?>
     <div class="row">
         <div class="col-xs-12">
-            <?php foreach (Yii::$app->session->getAllFlashes() as $type => $message): ?>
-                <?php if (in_array($type, ['success', 'danger', 'warning', 'info'])): ?>
+            <?php foreach (Yii::$app->session->getAllFlashes() as $type => $message) : ?>
+                <?php if (in_array($type, ['success', 'danger', 'warning', 'info'])) : ?>
                     <div class="alert alert-<?= $type ?>">
                         <?= $message ?>
                     </div>
@@ -27,4 +27,4 @@
             <?php endforeach ?>
         </div>
     </div>
-<?php //endif ?>
+<?php endif ?>

@@ -15,6 +15,7 @@ return [
     'modules' => [
         'rbac' => [
             'class' => 'backend\modules\rbac\RbacWebModule',
+            'enableFlashMessages' => false,
             'admins' => ['admin'],
         ],
         'log-reader' => [
@@ -83,20 +84,6 @@ return [
         'assetManager' => [
             'bundles' => require(__DIR__ . '/' . (YII_ENV === 'prod' ? 'assets-prod.php' : 'assets-dev.php'))
         ],
-        // 'i18n' => [
-        //     'translations' => [
-        //         'app*' => [
-        //             'class' => 'yii\i18n\PhpMessageSource',
-        //             //'basePath' => '@app/messages',
-        //             //'sourceLanguage' => 'en-US',
-        //             'fileMap' => [
-        //                 'app' => 'app.php',
-        //                 'rbac' => '@app/modules/rbac/messages',
-        //             ],
-        //         ],
-        //     ],
-        // ],
-
     ],
     'params' => $params,
 ];

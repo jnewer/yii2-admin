@@ -10,19 +10,19 @@ use yii\helpers\Json;
  * This is the model class for table "operation_log".
  *
  * @property integer $id [int(11)] ID
- * @property string $date [datetime] 操作时间
- * @property integer $time [int(11)] 时间戳
- * @property string $ip [char(15)] 操作员ip
- * @property integer $operator_id [int(11)] 操作员id
- * @property string $operator_name [varchar(50)] 操作员名
+ * @property integer $operator_id [int(11)] 操作人id
+ * @property string $operator_name [varchar(50)] 操作人名
  * @property string $type [varchar(50)] 操作行为的大类
  * @property string $category [varchar(40)] 该操作属于何种性质的操作(常规维护 或者其它 )
+ * @property string $ip [char(15)] 操作员ip
  * @property string $description [varchar(255)] 操作员输入的操作描述
- * @property integer $is_delete [tinyint(1)] 是否已标记为删除. 0否, 1是.
  * @property string $model [varchar(50)] 操作的model
  * @property string $model_pk [varchar(100)] 操作的model的主键
  * @property string $model_attributes_old [text] 旧数据
  * @property string $model_attributes_new [text] 新数据
+ * @property string $created_at [datetime] 操作时间
+ *
+ * @property-read string $attributeDesc
  */
 class OperationLog extends ActiveRecord
 {
@@ -41,7 +41,7 @@ class OperationLog extends ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'safe'],
+            [['created_at'], 'safe'],
             [['time', 'ip', 'operator_name', 'type', 'model_pk', 'model_attributes_old', 'model_attributes_new'], 'required'],
             [['time', 'operator_id'], 'integer'],
             [['is_delete'], 'boolean'],
@@ -60,20 +60,17 @@ class OperationLog extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date' => '操作时间',
-            'time' => '时间戳',
-            'ip' => '用户ip',
-            'operator_id' => '用户id',
-            'operator_name' => '用户名',
+            'operator_id' => '操作人id',
+            'operator_name' => '操作人名',
             'type' => '操作大类',
             'category' => '操作小类',
-            'description' => '操作员输入的操作描述',
-            'is_delete' => '是否已标记为删除. 0否, 1是.',
+            'ip' => '操作人ip',
+            'description' => '描述',
             'model' => '操作的model',
             'model_pk' => '操作的model的主键',
             'model_attributes_old' => '旧数据',
             'model_attributes_new' => '新数据',
-            'attributeDesc' => '操作描述',
+            'created_at' => '操作时间',
         ];
     }
 
@@ -135,8 +132,7 @@ class OperationLog extends ActiveRecord
             'model_pk'=>0,
             'model_attributes_old'=>Json::encode($attributes_old),
             'model_attributes_new'=>Json::encode($attributes_new),
-            'date'=>date('Y-m-d H:i:s'),
-            'time'=>time(),
+            'created_at'=>date('Y-m-d H:i:s')
         );
         $log->attributes = $info;
         $log->save();

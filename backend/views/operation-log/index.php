@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type',
                     'category',
                     'ip',
-                    'date',
+                    'created_at',
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header'=>'操作',

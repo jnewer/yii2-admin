@@ -105,6 +105,7 @@ class SiteController extends Controller
             $log->user_id = Yii::$app->user->identity->id;
             $log->username = Yii::$app->user->identity->username;
             $log->login_ip = Yii::$app->request->getUserIP();
+            $log->created_at = date('Y-m-d H:i:s');
             $log->save();
 
             return $this->goBack();

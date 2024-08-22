@@ -12,8 +12,8 @@ use backend\models\OperationLog;
 class OperationLogSearch extends OperationLog
 {
 
-    public $date_from;
-    public $date_to;
+    public $created_at_from;
+    public $created_at_to;
 
     /**
      * {@inheritdoc}
@@ -21,8 +21,8 @@ class OperationLogSearch extends OperationLog
     public function rules()
     {
         return [
-            [['id', 'time', 'operator_id', 'is_delete'], 'integer'],
-            [['date', 'ip', 'operator_name', 'type', 'category', 'description', 'model', 'model_pk', 'model_attributes_old', 'model_attributes_new', 'date_from', 'date_to'], 'safe'],
+            [['id','operator_id'], 'integer'],
+            [['date', 'ip', 'operator_name', 'type', 'category', 'description', 'model', 'model_pk', 'model_attributes_old', 'model_attributes_new', 'created_at_from', 'created_at_to'], 'safe'],
         ];
     }
 
@@ -64,10 +64,8 @@ class OperationLogSearch extends OperationLog
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date' => $this->date,
-            'time' => $this->time,
+            'created_at' => $this->created_at,
             'operator_id' => $this->operator_id,
-            'is_delete' => $this->is_delete,
         ]);
 
         $query->andFilterWhere(['like', 'ip', $this->ip])
@@ -78,11 +76,11 @@ class OperationLogSearch extends OperationLog
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'model_pk', $this->model_pk]);
 
-        if ($this->date_from) {
-            $query->andFilterWhere(['>=', 'date', $this->date_from . ' 00:00:00']);
+        if ($this->created_at_from) {
+            $query->andFilterWhere(['>=', 'created_at', $this->created_at_from . ' 00:00:00']);
         }
-        if ($this->date_to) {
-            $query->andFilterWhere(['<=', 'date', $this->date_to . ' 23:59:59']);
+        if ($this->created_at_to) {
+            $query->andFilterWhere(['<=', 'created_at', $this->created_at_to . ' 23:59:59']);
         }
 
         return $dataProvider;

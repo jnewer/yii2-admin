@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/** @var $this yii\web\View */
-/** @var $model backend\models\search\OperationLogSearch */
-/** @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var backend\models\search\OperationLogSearch $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 
@@ -24,9 +24,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'category', ['labelOptions'=>['class'=>'sr-only'], 'inputOptions'=>['class'=>'form-control', 'placeholder'=>'操作小类']]) ?>
     <div class="form-group">
         <div class="input-daterange input-group">
-            <?= $form->field($model, 'date_from', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作时间', 'style' => 'width:120px']]); ?>
+            <?= $form->field($model, 'created_at_from', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作时间', 'style' => 'width:120px']]); ?>
             <span class="input-group-addon">至</span>
-            <?= $form->field($model, 'date_to', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作时间', 'style' => 'width:120px']]); ?>
+            <?= $form->field($model, 'created_at_to', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作时间', 'style' => 'width:120px']]); ?>
         </div>
     </div>
     <div class="form-group">

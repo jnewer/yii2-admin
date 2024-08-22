@@ -18,8 +18,8 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use <?php echo $generator->modelClass ?>;
 
-/** @var $this yii\web\View */
-/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/** @var yii\web\View $this */
+/** @var <?= ltrim($generator->modelClass, '\\') ?>  $model */
 
 $this->title = <?= $modelClassName ?>::$modelName.'详情 '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'id', 'url' => ['index']];
@@ -55,10 +55,9 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 } else {
     foreach ($generator->getTableSchema()->columns as $column) {
         $format = $generator->generateColumnFormat($column);
-        if(strpos($column->name, 'image')!==false||strpos($column->name, 'photo')!==false||strpos($column->name, 'picture')!==false){
+        if (strpos($column->name, 'image')!==false||strpos($column->name, 'photo')!==false||strpos($column->name, 'picture')!==false) {
             echo "            ['attribute'=>'" . $column->name."', 'format'=>'raw', 'value'=>Yii::\$app->formatter->asImage(\$model->" . $column->name.", ['height'=>200])],\n";
-        }
-        else{
+        } else {
             echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
         }
     }

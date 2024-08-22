@@ -15,8 +15,8 @@ echo "<?php\n";
 
 use yii\helpers\Html;
 
-/** @var $this yii\web\View */
-/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
+/** @var yii\web\View $this */
+/** @var <?= ltrim($generator->modelClass, '\\') ?>  $model */
 use <?php echo $generator->modelClass ?>;
 
 $this->title = '修改' .<?= $modelClassName ?>::$modelName. ' ' . $model->id;

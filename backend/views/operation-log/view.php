@@ -1,12 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
 use backend\models\OperationLog;
 
-/** @var $this yii\web\View */
-/** @var $model common\models\Sms */
+/** @var yii\web\View $this */
+/** @var common\models\Sms $model */
 
 $this->title = OperationLog::$modelName.'详情 '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'id', 'url' => ['index']];
@@ -32,13 +31,14 @@ $this->params['breadcrumbs'][] = OperationLog::$modelName.'详情';
             'type',
             'category',
             'ip',
-            'date',
+            'created_at',
             'model',
             'model_pk',
             [
                 'attribute'     =>  'attributeDesc',
-                'value' =>  function ($data) {
-                    return $data->attributeDesc;
+                'label'     =>  '属性',
+                'value' =>  function ($model) {
+                    return $model->attributeDesc;
                 },
                 'format'    => 'html',
             ],

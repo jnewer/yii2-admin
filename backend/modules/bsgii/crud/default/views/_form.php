@@ -21,13 +21,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-<?php foreach($generator->foreignKeyClassNames as $foreignKeyClassName): ?>
+<?php foreach ($generator->foreignKeyClassNames as $foreignKeyClassName) : ?>
 use <?=$foreignKeyClassName?>;
 <?php endforeach;?>
 
-/** @var $this yii\web\View */
-/** @var $model <?= ltrim($generator->modelClass, '\\') ?> */
-/** @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var <?= ltrim($generator->modelClass, '\\') ?> $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="box-body">
@@ -39,11 +39,13 @@ use <?=$foreignKeyClassName?>;
         ],
     ]); ?>
 <?php foreach ($generator->getColumnNames() as $attribute) {
-    if(in_array($attribute, ['created_at', 'updated_at'])) continue;
-        if (in_array($attribute, $safeAttributes)) {
-            echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n";
-        }
-    } ?>
+    if (in_array($attribute, ['created_at', 'updated_at'])) {
+        continue;
+    }
+    if (in_array($attribute, $safeAttributes)) {
+        echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n";
+    }
+} ?>
     <div class="box-footer">
         <a data-dismiss="modal" href="javascript:history.back();" class="btn btn-default">取消</a>
         <?= "<?= " ?> Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>

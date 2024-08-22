@@ -19,9 +19,9 @@ use yii\helpers\Url;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 use <?php echo $generator->modelClass ?>;
 
-/** @var $this yii\web\View */
+/** @var yii\web\View $this */
 <?= !empty($generator->searchModelClass) ? "/** @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
-/** @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = <?= $modelClassName ?>::$modelName.'管理';
 $this->params['breadcrumbs'][] = $this->title;
@@ -48,8 +48,8 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                             <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                         </div>
                     </div> -->
-                    <?php if(!empty($generator->searchModelClass)): ?>
-                    <?= "<?= " ?> $this->render('_search', [
+                    <?php if (!empty($generator->searchModelClass)) : ?>
+                        <?= "<?= " ?> $this->render('_search', [
                         'model' => $searchModel,
                     ]); ?>
                     <?php endif; ?>
@@ -57,7 +57,7 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                 </div>
                 <!-- /.pull-right -->
             </div>
-<?php if ($generator->indexWidgetType === 'grid'): ?>
+<?php if ($generator->indexWidgetType === 'grid') : ?>
             <!-- /.box-header -->
             <?= "<?= " ?> GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -73,27 +73,27 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
                 ],
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-<?php
-$count = 0;
-if (($tableSchema = $generator->getTableSchema()) === false) {
-    foreach ($generator->getColumnNames() as $name) {
-        if (++$count < 6) {
-            echo "                  '" . $name . "',\n";
-        } else {
-            echo "                  // '" . $name . "',\n";
+    <?php
+    $count = 0;
+    if (($tableSchema = $generator->getTableSchema()) === false) {
+        foreach ($generator->getColumnNames() as $name) {
+            if (++$count < 6) {
+                echo "                  '" . $name . "',\n";
+            } else {
+                echo "                  // '" . $name . "',\n";
+            }
+        }
+    } else {
+        foreach ($tableSchema->columns as $column) {
+            $format = $generator->generateColumnFormat($column);
+            if (++$count < 6) {
+                echo "                  '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+            } else {
+                echo "                   // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
+            }
         }
     }
-} else {
-    foreach ($tableSchema->columns as $column) {
-        $format = $generator->generateColumnFormat($column);
-        if (++$count < 6) {
-            echo "                  '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        } else {
-            echo "                   // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
-        }
-    }
-}
-?>
+    ?>
 
                 [
                     'class' => 'yii\grid\ActionColumn',
@@ -103,7 +103,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
                 ],
             ],
         ]); ?>
-<?php else: ?>
+<?php else : ?>
     <?= "<?= " ?>ListView::widget([
         'dataProvider' => $dataProvider,
         'summary'=>'第{page}页，共{pageCount}页，当前第{begin}-{end}条，共{totalCount}条数据.',

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
             <?php if ($model->id != \Yii::$app->user->id) : ?>
                 <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-default',
+                    'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => '您确定要删除该项目吗？',
                         'method' => 'post',

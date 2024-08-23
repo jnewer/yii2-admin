@@ -16,9 +16,9 @@
  */
 
 
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\GridView;
+use backend\widgets\ActionColumn;
 
 $this->title = Yii::t('rbac', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;

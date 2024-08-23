@@ -96,10 +96,9 @@ $dataProvider->pagination->pageSize= Yii::$app->config->get('backend_pagesize', 
     ?>
 
                 [
-                    'class' => 'yii\grid\ActionColumn',
+                    'class' => 'backend\widgets\ActionColumn',
                     'header'=>'操作',
                     'headerOptions'=>['style'=>'width:150px'],
-                    'buttonOptions'=>['class'=>'btn btn-default btn-sm'],
                 ],
             ],
         ]); ?>

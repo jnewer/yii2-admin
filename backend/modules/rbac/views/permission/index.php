@@ -15,9 +15,9 @@
  * @var $filterModel  dektrium\rbac\models\Search
  */
 
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\GridView;
+use backend\widgets\ActionColumn;
 
 $this->title = '权限';
 $this->params['breadcrumbs'][] = $this->title;

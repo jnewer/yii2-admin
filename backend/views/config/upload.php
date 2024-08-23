@@ -14,25 +14,25 @@ use yii\bootstrap\ActiveForm;
 <div class="form-group">
     <label class="col-lg-3 control-label">文件类型</label>
     <div class="col-lg-9">
-        <input type="text" name="upload_allow_file_ext" class="form-control" value="<?php echo $config['upload_allow_file_ext'] ?>">
+        <input type="text" name="upload_allow_file_ext" class="form-control" value="<?php echo $config['upload_allow_file_ext'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">文件大小(M)</label>
     <div class="col-lg-9">
-        <input type="text" name="upload_allow_file_size" class="form-control" value="<?php echo $config['upload_allow_file_size'] ?>">
+        <input type="text" name="upload_allow_file_size" class="form-control" value="<?php echo $config['upload_allow_file_size'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">图片类型</label>
     <div class="col-lg-9">
-        <input type="text" name="upload_allow_image_ext" class="form-control" value="<?php echo $config['upload_allow_image_ext'] ?>">
+        <input type="text" name="upload_allow_image_ext" class="form-control" value="<?php echo $config['upload_allow_image_ext'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">
     <label class="col-lg-3 control-label">图片大小(M)</label>
     <div class="col-lg-9">
-        <input type="text" name="upload_allow_image_size" class="form-control" value="<?php echo $config['upload_allow_image_size'] ?>">
+        <input type="text" name="upload_allow_image_size" class="form-control" value="<?php echo $config['upload_allow_image_size'] ?? '' ?>">
     </div>
 </div>
 <div class="form-group">

@@ -21,7 +21,6 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.4.0",
-        "2amigos/yii2-chartjs-widget": "^3.0",
         "2amigos/yii2-ckeditor-widget": "^2.2",
         "abhi1693/yii2-config": "^1.0",
         "almasaeed2010/adminlte": "2.4.18",

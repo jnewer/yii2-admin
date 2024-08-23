@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\assets;
 
 use yii\base\Exception;
@@ -12,9 +13,7 @@ class AdminLtePluginAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/almasaeed2010/adminlte/plugins';
 
-    public $depends = [
-        'dosamigos\chartjs\ChartJsAsset',
-    ];
+    public $depends = [];
 
     public $css = [
         'timepicker/bootstrap-timepicker.min.css',

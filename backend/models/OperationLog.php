@@ -89,21 +89,21 @@ class OperationLog extends ActiveRecord
                 $string .= "<TABLE class='operation_log' style='width: 100%'>";
                 $string .= "<TBODY><TR><TH style='min-width: 100px;'>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
                 foreach ($attributeLabels as $key => $name) {
-                    $old_value = $model_attributes_old[$key];
-                    $new_value = $model_attributes_new[$key];
+                    $old_value = $model_attributes_old[$key] ?? '';
+                    $new_value = $model_attributes_new[$key] ?? '';
                     $class = $old_value == $new_value ? '' : ' class="update_diff"';
-                    $string .= "<TR".$class."><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
+                    $string .= "<TR" . $class . "><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
                 }
                 $string .= "</TBODY></TABLE>";
             }
         } else {
-            $attributeLabels = $model_attributes_old?$model_attributes_old:$model_attributes_new;
+            $attributeLabels = $model_attributes_old ? $model_attributes_old : $model_attributes_new;
             $attributeLabels = array_keys($attributeLabels);
             $string .= "<TABLE class=operation_log style='width: 100%'>";
             $string .= "<TBODY><TR><TH>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
             foreach ($attributeLabels as $key => $name) {
-                $old_value = $model_attributes_old[$name];
-                $new_value = $model_attributes_new[$name];
+                $old_value = $model_attributes_old[$name] ?? '';
+                $new_value = $model_attributes_new[$name] ?? '';
                 $class = $old_value == $new_value ? '' : ' class="update_diff"';
                 if (is_array($old_value)) {
                     $old_value = implode(',', $old_value);
@@ -111,7 +111,7 @@ class OperationLog extends ActiveRecord
                 if (is_array($new_value)) {
                     $new_value = implode(',', $new_value);
                 }
-                $string .= "<TR".$class."><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
+                $string .= "<TR" . $class . "><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
             }
             $string .= "</TBODY></TABLE>";
         }
@@ -122,16 +122,16 @@ class OperationLog extends ActiveRecord
     {
         $log = new OperationLog();
         $info = array(
-            'ip'=>Yii::$app->request->getUserIP(),
-            'operator_id'=>Yii::$app->user->identity->id,
-            'operator_name'=>Yii::$app->user->identity->username,
-            'type'=>$type,
-            'category'=>$category,
-            'model'=>'',
-            'model_pk'=>0,
-            'model_attributes_old'=>Json::encode($attributes_old),
-            'model_attributes_new'=>Json::encode($attributes_new),
-            'created_at'=>date('Y-m-d H:i:s')
+            'ip' => Yii::$app->request->getUserIP(),
+            'operator_id' => Yii::$app->user->identity->id,
+            'operator_name' => Yii::$app->user->identity->username,
+            'type' => $type,
+            'category' => $category,
+            'model' => '',
+            'model_pk' => 0,
+            'model_attributes_old' => Json::encode($attributes_old),
+            'model_attributes_new' => Json::encode($attributes_new),
+            'created_at' => date('Y-m-d H:i:s')
         );
         $log->attributes = $info;
         $log->save();

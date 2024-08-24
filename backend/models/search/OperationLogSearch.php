@@ -22,7 +22,7 @@ class OperationLogSearch extends OperationLog
     {
         return [
             [['id','operator_id'], 'integer'],
-            [['date', 'ip', 'operator_name', 'type', 'category', 'description', 'model', 'model_pk', 'model_attributes_old', 'model_attributes_new', 'created_at_from', 'created_at_to'], 'safe'],
+            [['date', 'ip', 'operator_name', 'type', 'category', 'description', 'model', 'model_pk', 'old_attributes', 'new_attributes', 'created_at_from', 'created_at_to'], 'safe'],
         ];
     }
 

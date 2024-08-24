@@ -17,9 +17,9 @@ use yii\helpers\Json;
  * @property string $ip [char(15)] 操作员ip
  * @property string $description [varchar(255)] 操作员输入的操作描述
  * @property string $model [varchar(50)] 操作的model
- * @property string $model_pk [varchar(100)] 操作的model的主键
- * @property string $model_attributes_old [text] 旧数据
- * @property string $model_attributes_new [text] 新数据
+ * @property string $model_pk [varchar(20)] 操作的model的主键
+ * @property string $oldAttributes [text] 旧数据
+ * @property string $newAttributes [text] 新数据
  * @property string $created_at [datetime] 操作时间
  *
  * @property-read string $attributeDesc
@@ -42,9 +42,9 @@ class OperationLog extends ActiveRecord
     {
         return [
             [['created_at'], 'safe'],
-            [['ip', 'operator_name', 'type', 'model_pk', 'model_attributes_old', 'model_attributes_new'], 'required'],
+            [['ip', 'operator_name', 'type', 'model_pk', 'old_attributes', 'new_attributes'], 'required'],
             [['operator_id'], 'integer'],
-            [['model_attributes_old', 'model_attributes_new'], 'string'],
+            [['old_attributes', 'new_attributes'], 'string'],
             [['ip'], 'string', 'max' => 15],
             [['operator_name', 'type', 'model'], 'string', 'max' => 50],
             [['category'], 'string', 'max' => 40],
@@ -65,18 +65,18 @@ class OperationLog extends ActiveRecord
             'category' => '操作小类',
             'ip' => '操作人ip',
             'description' => '描述',
-            'model' => '操作的model',
-            'model_pk' => '操作的model的主键',
-            'model_attributes_old' => '旧数据',
-            'model_attributes_new' => '新数据',
+            'model' => '模型',
+            'model_pk' => '模型主键',
+            'old_attributes' => '旧数据',
+            'new_attributes' => '新数据',
             'created_at' => '操作时间',
         ];
     }
 
     public function getAttributeDesc()
     {
-        $model_attributes_old = Json::decode($this->model_attributes_old, true);
-        $model_attributes_new = Json::decode($this->model_attributes_new, true);
+        $oldAttributes = Json::decode($this->old_attributes, true);
+        $newAttributes = Json::decode($this->new_attributes, true);
 
         $string = '';
         // 日志记录的资源类 如Product、Notice
@@ -86,34 +86,38 @@ class OperationLog extends ActiveRecord
             $model = new $modelclass;
             $attributeLabels = $model->attributeLabels();
             if (!empty($attributeLabels)) {
-                $string .= "<TABLE class='operation_log' style='width: 100%'>";
-                $string .= "<TBODY><TR><TH style='min-width: 100px;'>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
+                $string .= "<table class='operation_log' style='width: 100%'>";
+                $string .= "<tbody><tr><th style='min-width: 100px;'>修改项</th><th>旧数据</th><th>新数据</th></tr>";
                 foreach ($attributeLabels as $key => $name) {
-                    $old_value = $model_attributes_old[$key] ?? '';
-                    $new_value = $model_attributes_new[$key] ?? '';
-                    $class = $old_value == $new_value ? '' : ' class="update_diff"';
-                    $string .= "<TR" . $class . "><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
+                    $oldValue = $oldAttributes[$key] ?? '';
+                    $newValue = $newAttributes[$key] ?? '';
+                    if ($oldValue !== $newValue) {
+                        $class = ' style="background-color: yellow;"';
+                        $string .= "<tr" . $class . "><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
+                    }
                 }
-                $string .= "</TBODY></TABLE>";
+                $string .= "</tbody></table>";
             }
         } else {
-            $attributeLabels = $model_attributes_old ? $model_attributes_old : $model_attributes_new;
+            $attributeLabels = $oldAttributes ?: $newAttributes;
             $attributeLabels = array_keys($attributeLabels);
-            $string .= "<TABLE class=operation_log style='width: 100%'>";
-            $string .= "<TBODY><TR><TH>修改项</TH><TH>旧数据</TH><TH>新数据</TH></TR>";
+            $string .= "<table class=operation_log style='width: 100%'>";
+            $string .= "<tbody><tr><th>修改项</th><th>旧数据</th><th>新数据</th></tr>";
             foreach ($attributeLabels as $key => $name) {
-                $old_value = $model_attributes_old[$name] ?? '';
-                $new_value = $model_attributes_new[$name] ?? '';
-                $class = $old_value == $new_value ? '' : ' class="update_diff"';
-                if (is_array($old_value)) {
-                    $old_value = implode(',', $old_value);
+                $oldValue = $oldAttributes[$name] ?? '';
+                $newValue = $newAttributes[$name] ?? '';
+                if ($oldValue !== $newValue) {
+                    $class = ' style="background-color: yellow;"';
+                    if (is_array($oldValue)) {
+                        $oldValue = implode(',', $oldValue);
+                    }
+                    if (is_array($newValue)) {
+                        $newValue = implode(',', $newValue);
+                    }
+                    $string .= "<tr" . $class . "><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
                 }
-                if (is_array($new_value)) {
-                    $new_value = implode(',', $new_value);
-                }
-                $string .= "<TR" . $class . "><TR><TD>$name</TD><TD>$old_value</TD><TD>$new_value</TD></TR>";
             }
-            $string .= "</TBODY></TABLE>";
+            $string .= "</tbody></table>";
         }
         return $string;
     }
@@ -129,8 +133,8 @@ class OperationLog extends ActiveRecord
             'category' => $category,
             'model' => '',
             'model_pk' => 0,
-            'model_attributes_old' => Json::encode($attributes_old),
-            'model_attributes_new' => Json::encode($attributes_new),
+            'old_attributes' => Json::encode($attributes_old),
+            'new_attributes' => Json::encode($attributes_new),
             'created_at' => date('Y-m-d H:i:s')
         );
         $log->attributes = $info;

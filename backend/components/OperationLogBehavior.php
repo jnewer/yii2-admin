@@ -74,8 +74,8 @@ class OperationLogBehavior extends ActiveRecordBehavior
             'category' => $category,
             'model' => $modelclass,
             'model_pk' => $pk,
-            'model_attributes_old' => $oldAttributes,
-            'model_attributes_new' => $act == '删除' ? Json::encode([]) : $newAttributes,
+            'old_attributes' => $oldAttributes,
+            'new_attributes' => $act == '删除' ? Json::encode([]) : $newAttributes,
             'created_at' => date('Y-m-d H:i:s'),
         );
 

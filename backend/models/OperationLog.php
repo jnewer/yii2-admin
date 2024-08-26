@@ -91,10 +91,8 @@ class OperationLog extends ActiveRecord
                 foreach ($attributeLabels as $key => $name) {
                     $oldValue = $oldAttributes[$key] ?? '';
                     $newValue = $newAttributes[$key] ?? '';
-                    if ($oldValue !== $newValue) {
-                        $class = ' style="background-color: yellow;"';
-                        $string .= "<tr" . $class . "><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
-                    }
+                    $style = $oldValue == $newValue ? '' : 'style="background-color: yellow;"';
+                    $string .= "<tr" . $style . "><tr><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
                 }
                 $string .= "</tbody></table>";
             }
@@ -106,19 +104,18 @@ class OperationLog extends ActiveRecord
             foreach ($attributeLabels as $key => $name) {
                 $oldValue = $oldAttributes[$name] ?? '';
                 $newValue = $newAttributes[$name] ?? '';
-                if ($oldValue !== $newValue) {
-                    $class = ' style="background-color: yellow;"';
-                    if (is_array($oldValue)) {
-                        $oldValue = implode(',', $oldValue);
-                    }
-                    if (is_array($newValue)) {
-                        $newValue = implode(',', $newValue);
-                    }
-                    $string .= "<tr" . $class . "><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
+                $style = $oldValue == $newValue ? '' : 'style="background-color: yellow;"';
+                if (is_array($oldValue)) {
+                    $oldValue = implode(',', $oldValue);
                 }
+                if (is_array($newValue)) {
+                    $newValue = implode(',', $newValue);
+                }
+                $string .= "<tr" . $style . "><tr><td>$name</td><td>$oldValue</td><td>$newValue</td></tr>";
             }
             $string .= "</tbody></table>";
         }
+
         return $string;
     }
 

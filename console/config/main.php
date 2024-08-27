@@ -23,7 +23,7 @@ return [
     ],
     'controllerMap' => [
         'cron' => [
-            'class' => 'denisog\cronjobs\CronController'
+            'class' => 'console\controllers\CronController'
         ],
     ],
     'modules' => [

@@ -66,7 +66,9 @@ class Menu extends \yii\widgets\Menu
     private function rbacItems(&$items)
     {
         foreach ($items as $key => $item) {
-            if (!is_array($item)) continue;
+            if (!is_array($item)) {
+                continue;
+            }
             if (isset($item['url']) && is_array($item['url'])) {
                 $route = explode('/', trim($item['url'][0], '/'));
                 $modules = array_keys(Yii::$app->getModules());
@@ -85,7 +87,9 @@ class Menu extends \yii\widgets\Menu
                         $route[$module_count + 1] = 'index';
                     }
                 }
-                if (count($route) === 1) $route[1] = 'index';
+                if (count($route) === 1) {
+                    $route[1] = 'index';
+                }
                 if (count($route) === 2) {
                     $parts = explode('-', $route[0]);
                     $controllerName = '';

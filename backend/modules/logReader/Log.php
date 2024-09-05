@@ -99,7 +99,7 @@ class Log extends BaseObject
      */
     public function getIsZip()
     {
-        return $this->getIsExist() ? StringHelper::endsWith($this->getFileName(), '.zip') : false;
+        return $this->getIsExist() && StringHelper::endsWith($this->getFileName(), '.zip');
     }
 
     /**

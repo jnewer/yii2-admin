@@ -14,9 +14,6 @@ class SignupPage extends BasePage
 
     public $route = 'site/signup';
 
-    /**
-     * @param array $signupData
-     */
     public function submit(array $signupData)
     {
         $signupForm = new SignupForm;

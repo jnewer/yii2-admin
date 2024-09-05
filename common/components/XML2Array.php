@@ -23,7 +23,7 @@ namespace common\components;
 class XML2Array
 {
 
-    private static $xml = null;
+    private static $xml;
     private static $encoding = 'UTF-8';
 
     /**

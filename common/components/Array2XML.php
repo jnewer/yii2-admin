@@ -36,7 +36,7 @@ namespace common\components;
 class Array2XML
 {
 
-    private static $xml = null;
+    private static $xml;
     private static $encoding = 'UTF-8';
 
     /**
@@ -108,25 +108,22 @@ class Array2XML
         }
 
         //create subnodes using recursion
-        if (is_array($arr)) {
-            // recurse to get the node for that key
-            foreach ($arr as $key => $value) {
-                if (!self::isValidTagName($key)) {
-                    throw new \Exception('[Array2XML] Illegal character in tag name. tag: '.$key.' in node: '.$node_name);
-                }
-                if (is_array($value) && is_numeric(key($value))) {
-                    // MORE THAN ONE NODE OF ITS KIND;
-                    // if the new array is numeric index, means it is array of nodes of the same kind
-                    // it should follow the parent key name
-                    foreach ($value as $k => $v) {
-                        $node->appendChild(self::convert($key, $v));
-                    }
-                } else {
-                    // ONLY ONE NODE OF ITS KIND
-                    $node->appendChild(self::convert($key, $value));
-                }
-                unset($arr[$key]); //remove the key from the array once done.
+        foreach ($arr as $key => $value) {
+            if (!self::isValidTagName($key)) {
+                throw new \Exception('[Array2XML] Illegal character in tag name. tag: '.$key.' in node: '.$node_name);
             }
+            if (is_array($value) && is_numeric(key($value))) {
+                // MORE THAN ONE NODE OF ITS KIND;
+                // if the new array is numeric index, means it is array of nodes of the same kind
+                // it should follow the parent key name
+                foreach ($value as $v) {
+                    $node->appendChild(self::convert($key, $v));
+                }
+            } else {
+                // ONLY ONE NODE OF ITS KIND
+                $node->appendChild(self::convert($key, $value));
+            }
+            unset($arr[$key]); //remove the key from the array once done.
         }
 
         // after we are done with all the keys in the array (if it is one)
@@ -156,8 +153,7 @@ class Array2XML
     {
         //convert boolean to text value.
         $v = $v === true ? 'true' : $v;
-        $v = $v === false ? 'false' : $v;
-        return $v;
+        return $v === false ? 'false' : $v;
     }
 
     /*

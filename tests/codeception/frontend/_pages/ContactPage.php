@@ -13,9 +13,6 @@ class ContactPage extends BasePage
 {
     public $route = 'site/contact';
 
-    /**
-     * @param array $contactData
-     */
     public function submit(array $contactData)
     {
         $contactForm = new ContactForm;

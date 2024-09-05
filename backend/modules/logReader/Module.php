@@ -89,7 +89,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
     }
 
     /**
-     * @param Log $log
      * @return Log[]
      */
     public function getHistory(Log $log)

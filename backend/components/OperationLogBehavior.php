@@ -23,23 +23,23 @@ class OperationLogBehavior extends ActiveRecordBehavior
 
     public function afterUpdate($event)
     {
-        $this->saveLogs($event, '修改');
+        $this->saveLogs('修改');
         parent::afterUpdate($event);
     }
 
     public function afterInsert($event)
     {
-        $this->saveLogs($event, '添加');
+        $this->saveLogs('添加');
         parent::afterInsert($event);
     }
 
     public function afterDelete($event)
     {
-        $this->saveLogs($event, '删除');
+        $this->saveLogs('删除');
         parent::afterDelete($event);
     }
 
-    private function saveLogs($event, $act)
+    private function saveLogs($act)
     {
         // 只记录后台操作
         if (basename(Yii::$app->basePath) != 'backend') {

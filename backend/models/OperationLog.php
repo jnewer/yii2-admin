@@ -101,7 +101,7 @@ class OperationLog extends ActiveRecord
             $attributeLabels = array_keys($attributeLabels);
             $string .= "<table class=operation_log style='width: 100%'>";
             $string .= "<tbody><tr><th>修改项</th><th>旧数据</th><th>新数据</th></tr>";
-            foreach ($attributeLabels as $key => $name) {
+            foreach ($attributeLabels as $name) {
                 $oldValue = $oldAttributes[$name] ?? '';
                 $newValue = $newAttributes[$name] ?? '';
                 $style = $oldValue == $newValue ? '' : 'style="background-color: yellow;"';

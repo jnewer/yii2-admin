@@ -23,11 +23,11 @@ class CronController extends Controller
     /**
      * @var string PHP interpriter path (if empty, path will be checked automaticly)
      */
-    public $interpreterPath = null;
+    public $interpreterPath;
     /**
      * @var string path to writing logs
      */
-    public $logsDir = null;
+    public $logsDir;
 
     /**
      * Update or rewrite log file
@@ -48,7 +48,7 @@ class CronController extends Controller
     /**
      * @var string Bootstrap script path (if empty, current command runner will be used)
      */
-    public $bootstrapScript = null;
+    public $bootstrapScript;
     /**
      * @var string Timestamp used as current datetime
      * @see http://php.net/manual/en/function.strtotime.php
@@ -119,7 +119,6 @@ RAW;
     /**
      * Transform string datetime expressions to array sets
      *
-     * @param array $parameters
      * @return array
      */
     protected function transformDatePieces(array $parameters)
@@ -381,9 +380,8 @@ RAW;
         foreach ($runSettings as $key => $setting) {
             $result .= '* @' . $key . ' ' . $setting . "\n";
         }
-        $result .= "*/\n";
 
-        return $result;
+        return $result . "*/\n";
     }
 
 

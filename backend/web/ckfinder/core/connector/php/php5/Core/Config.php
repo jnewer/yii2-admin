@@ -573,7 +573,7 @@ class CKFinder_Connector_Core_Config
         }
 
         $_names = array();
-        foreach ($GLOBALS['config']['ResourceType'] as $key => $_resourceType) {
+        foreach ($GLOBALS['config']['ResourceType'] as $_resourceType) {
             if (isset($_resourceType['name'])) {
                 $_names[] = (string)$_resourceType['name'];
             }

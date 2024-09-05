@@ -70,7 +70,6 @@ class SerializeAttributesBehavior extends AttributeBehavior
     }
 
     /**
-     * @param array $value
      * @param $type
      * @return string
      */

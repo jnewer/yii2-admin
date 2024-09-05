@@ -176,8 +176,7 @@ class Ckfinder_Connector_Utils_XmlNode
 
         //if there is nothing more todo, close empty tag and exit
         if (is_null($this->_value) && !sizeof($this->_childNodes)) {
-            $ret .= " />";
-            return $ret;
+            return $ret . " />";
         }
 
         //close opening tag
@@ -195,8 +194,6 @@ class Ckfinder_Connector_Utils_XmlNode
             }
         }
 
-        $ret .= "</" . $this->_name . ">";
-
-        return $ret;
+        return $ret . ("</" . $this->_name . ">");
     }
 }

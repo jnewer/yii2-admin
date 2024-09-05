@@ -59,7 +59,7 @@ class Generator extends \yii\gii\generators\crud\Generator
     public function generate()
     {
         $tableSchema = $this->getTableSchema();
-        foreach ($tableSchema->columns as $attribute => $column) {
+        foreach ($tableSchema->columns as $column) {
             $this->getForeignKeyClassName($column->name);
         }
         return parent::generate();

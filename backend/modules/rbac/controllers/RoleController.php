@@ -14,7 +14,6 @@ class RoleController extends BaseController
 
     /**
      * Performs ajax validation.
-     * @param Model $model
      * @throws \yii\base\ExitException
      */
     protected function performAjaxValidation(Model $model)

@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\widgets;
 
 use Yii;
@@ -26,19 +27,65 @@ class Menu extends \yii\widgets\Menu
     {
         parent::init();
 
+        foreach (Yii::$app->modules as $id => $module) {
+            $session = Yii::$app->session['config'];
+            if ($session && $id != 'wechat') {
+                if ($session['module_id'] != $id) {
+                    continue;
+                }
+            }
+
+            if (is_array($module)) {
+                $module = new $module['class']($id);
+                $module->init();
+            }
+
+            // $config = \common\models\WechatConfig::findOne(['module_id' => $id]);
+            // if ($config !== null && !$config->is_enabled) {
+            //     continue;
+            // }
+
+            $filename = $module->getViewPath() . '/menu.php';
+
+            if (file_exists($filename)) {
+                $moduleMenu = include($filename);
+                if (is_array($moduleMenu)) {
+                    $this->items = array_merge_recursive($this->items, [$moduleMenu]);
+                }
+            }
+        }
+
         if (Yii::$app->user->IsAdmin) {
             return;
         }
 
-        foreach ($this->items as $key => $item) {
-            if (!is_array($item)) {
-                continue;
-            }
+
+        $this->rbacItems($this->items);
+    }
+
+    private function rbacItems(&$items)
+    {
+        foreach ($items as $key => $item) {
+            if (!is_array($item)) continue;
             if (isset($item['url']) && is_array($item['url'])) {
                 $route = explode('/', trim($item['url'][0], '/'));
-                if (count($route) === 1) {
-                    $route[1]='index';
+                $modules = array_keys(Yii::$app->getModules());
+                $module_count = 0;
+                foreach ($route as $id) {
+                    if (in_array($id, $modules)) {
+                        $module_count++;
+                    }
                 }
+                if ($module_count > 0) {
+                    if (count($route) == $module_count) {
+                        $route[$module_count] = 'default';
+                        $route[$module_count + 1] = 'index';
+                    }
+                    if (count($route) == $module_count + 1) {
+                        $route[$module_count + 1] = 'index';
+                    }
+                }
+                if (count($route) === 1) $route[1] = 'index';
                 if (count($route) === 2) {
                     $parts = explode('-', $route[0]);
                     $controllerName = '';
@@ -47,78 +94,41 @@ class Menu extends \yii\widgets\Menu
                             $controllerName .= ucfirst($part);
                         }
                     }
-                    $itemName = $controllerName.".*";
-                    $subItemName = $controllerName.".".ucfirst($route[1]);
+                    $itemName = $controllerName . ".*";
+                    $subItemName = $controllerName . "." . ucfirst($route[1]);
 
                     if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
-                        unset($this->items[$key]);
+                        unset($items[$key]);
                     }
                 } elseif (count($route) === 3) {
                     $parts = explode('-', $route[1]);
-                    $controllerName = ucfirst($route[0]).'.';
+                    $controllerName = ucfirst($route[0]) . '.';
                     if (is_array($parts)) {
                         foreach ($parts as $part) {
                             $controllerName .= ucfirst($part);
                         }
                     }
-                    $itemName = $controllerName.".*";
-                    $subItemName = $controllerName.".".ucfirst($route[2]);
+                    $itemName = $controllerName . ".*";
+                    $action = array_reduce(explode('-', $route[2]), function ($carry, $item) {
+                        return $carry . ucfirst($item);
+                    }, '');
+                    $subItemName = $controllerName . "." . $action;
                     if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
-                        // unset($this->items[$key]['items'][$index]);
-                        unset($this->items[$key]);
+                        unset($items[$key]);
                     }
                 } else {
-                    unset($this->items[$key]);
+                    unset($items[$key]);
                 }
             }
 
-            $subcount = count($this->items[$key]['items']?:[]);
-            if (count($this->items[$key]['items']?:[]) > 0) {
-                foreach ($this->items[$key]['items'] as $index => $item) {
-                    if (!is_array($item)) {
-                        continue;
-                    }
-                    if (isset($item['url']) && is_array($item['url'])) {
-                        $route = explode('/', trim($item['url'][0], '/'));
-                        if (count($route) === 1) {
-                            $route[1]='index';
-                        }
-                        if (count($route) === 2) {
-                            $parts = explode('-', $route[0]);
-                            $controllerName = '';
-                            if (is_array($parts)) {
-                                foreach ($parts as $part) {
-                                    $controllerName .= ucfirst($part);
-                                }
-                            }
-                            $itemName = $controllerName.".*";
-                            $subItemName = $controllerName.".".ucfirst($route[1]);
-                            if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
-                                unset($this->items[$key]['items'][$index]);
-                            }
-                        } elseif (count($route) === 3) {
-                            $parts = explode('-', $route[1]);
-                            $controllerName = ucfirst($route[0]).'.';
-                            if (is_array($parts)) {
-                                foreach ($parts as $part) {
-                                    $controllerName .= ucfirst($part);
-                                }
-                            }
-                            $itemName = $controllerName.".*";
-                            $subItemName = $controllerName.".".ucfirst($route[2]);
-                            if (!Yii::$app->user->can($itemName) && !Yii::$app->user->can($subItemName)) {
-                                unset($this->items[$key]['items'][$index]);
-                            }
-                        } else {
-                            unset($this->items[$key]['items'][$index]);
-                        }
-                    }
+            if (isset($items[$key]['items']) && is_array($items[$key]['items'])) {
+                $subcount = count($items[$key]['items']);
+                if ($subcount > 0) {
+                    $this->rbacItems($items[$key]['items']);
                 }
-            }
 
-            if (count($this->items[$key]['items']?:[]) === 0) {
-                if ($subcount>0) {
-                    unset($this->items[$key]);
+                if (count($items[$key]['items']) == 0) {
+                    unset($items[$key]);
                 }
             }
         }
@@ -129,7 +139,7 @@ class Menu extends \yii\widgets\Menu
      */
     public function run()
     {
-        if (count($this->items?:[]) == 0) {
+        if (count($this->items) == 0) {
             return '';
         }
 
@@ -152,18 +162,18 @@ class Menu extends \yii\widgets\Menu
 
         $options = [];
         foreach ($linkOptions as $attr => $val) {
-            $options[] = $attr.'="'.$val.'"';
+            $options[] = $attr . '="' . $val . '"';
         }
         if (isset($item['url'])) {
             $template = ArrayHelper::getValue($item, 'template', $linkTemplate);
             $template = str_replace('{options}', implode(' ', $options), $template);
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{icon}' => '<i class="' . $item['icon'] . '"></i> '
             ] : [
                 '{url}' => Url::to($item['url']),
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{icon}' => null,
             ];
             return strtr($template, $replace);
@@ -171,10 +181,10 @@ class Menu extends \yii\widgets\Menu
             $template = ArrayHelper::getValue($item, 'template', $labelTemplate);
             $template = str_replace('{options}', implode(' ', $options), $template);
             $replace = !empty($item['icon']) ? [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
                 '{icon}' => '<i class="' . $item['icon'] . '"></i> '
             ] : [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => '<span>' . $item['label'] . '</span>',
             ];
             return strtr($template, $replace);
         }
@@ -186,7 +196,7 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItems($items)
     {
-        $n = count($items?:[]);
+        $n = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
@@ -287,7 +297,7 @@ class Menu extends \yii\widgets\Menu
                 return false;
             }
             unset($item['url']['#']);
-            if (count($item['url']?:[]) > 1) {
+            if (count($item['url']) > 1) {
                 foreach (array_splice($item['url'], 1) as $name => $value) {
                     if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
                         return false;

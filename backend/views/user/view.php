@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-header">
         <div class="btn-group">
             <?= Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-            <?php if ($model->id != \Yii::$app->user->id) : ?>
+            <?php if ($model->id != \Yii::$app->user->id && \Yii::$app->user->identity->username != 'admin') : ?>
                 <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [

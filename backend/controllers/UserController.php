@@ -98,11 +98,16 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
+        if ($model->username === 'admin') {
+            Yii::$app->session->setFlash('error', '不能删除管理员！');
+            return $this->redirect(['index']);
+        }
+
         if ($model->id == Yii::$app->user->id) {
             Yii::$app->session->setFlash('error', '不能删除自己！');
             return $this->redirect(['index']);
         }
-        
+
         Yii::$app->session->setFlash('warning', $this->modelClass::$modelName . '#' . $model->id . '已成功删除。');
         $model->delete();
 

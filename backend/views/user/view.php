@@ -14,18 +14,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="box">
     <div class="box-header">
         <div class="btn-group">
-            <?= Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
-            <?php if ($model->id != \Yii::$app->user->id && \Yii::$app->user->identity->username != 'admin') : ?>
-                <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => '您确定要删除该项目吗？',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-            <?php endif; ?>
+            <?= Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <!-- /.btn-group -->
         </div>
+        <?php if ($model->id != \Yii::$app->user->id && $model->username != 'admin') : ?>
+            <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '您确定要删除该项目吗？',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php endif; ?>
         <div class="pull-right">
             <?= Html::a('<i class="fa fa-reply"></i>', ['index'], ['class' => 'btn btn-default']) ?>
         </div>

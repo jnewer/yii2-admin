@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -8,6 +9,7 @@
 namespace common\widgets;
 
 use Yii;
+use common\widgets\LayerMsgWidget;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
@@ -67,9 +69,15 @@ class Alert extends \yii\bootstrap\Widget
                     /* assign unique id to each alert box */
                     $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
-                    echo \yii\bootstrap\Alert::widget([
-                        'body' => $message,
-                        'closeButton' => $this->closeButton,
+                    // echo \yii\bootstrap\Alert::widget([
+                    //     'body' => $message,
+                    //     'closeButton' => $this->closeButton,
+                    //     'options' => $this->options,
+                    // ]);
+
+                    echo LayerMsgWidget::widget([
+                        'message' => $message,
+                        'type' => $type,
                         'options' => $this->options,
                     ]);
                 }

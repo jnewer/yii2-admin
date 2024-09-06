@@ -28,7 +28,10 @@ $this->params['breadcrumbs'][] = <?= $modelClassName ?>::$modelName.'详情';
 
 <div class="box">
     <div class="box-header">
-        <?= "<?= " ?> Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <div class="btn-group">
+            <?= "<?= " ?> Html::a('<i class="fa fa-pencil"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <!-- /.btn-group -->
+        </div>
         <?= "<?= " ?> Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -36,7 +39,6 @@ $this->params['breadcrumbs'][] = <?= $modelClassName ?>::$modelName.'详情';
                 'method' => 'post',
             ],
         ]) ?>
-        <!-- /.btn-group -->
         <div class="pull-right">
             <?= "<?= " ?> Html::a('<i class="fa fa-reply"></i>', ['index'], ['class' => 'btn btn-default']) ?>
         </div>

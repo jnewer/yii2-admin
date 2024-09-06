@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Update';
 <div class="box box-info">
     <div class="box-header">
         <div class="btn-group">
-            <?php if ($model->id != \Yii::$app->user->id && \Yii::$app->user->identity->username != 'admin') : ?>
+            <?php if ($model->id != \Yii::$app->user->id && $model->username != 'admin') : ?>
                 <?= Html::a('<i class="fa fa-trash-o"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [

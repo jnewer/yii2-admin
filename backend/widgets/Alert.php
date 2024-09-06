@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -7,8 +8,9 @@
 
 namespace backend\widgets;
 
-use \yii\bootstrap\Alert as BootstrapAlert;
 use \yii\bootstrap\Widget;
+use common\widgets\LayerMsgWidget;
+use \yii\bootstrap\Alert as BootstrapAlert;
 
 /**
  * Alert widget renders a message from session flash for AdminLTE alerts. All flash messages are displayed
@@ -84,11 +86,16 @@ class Alert extends Widget
                     $this->options['class'] = $this->alertTypes[$type]['class'] . $appendCss;
                     $this->options['id'] = $this->getId() . '-' . $type;
 
-                    echo BootstrapAlert::widget([
-                            'body' => $this->alertTypes[$type]['icon'] . $message,
-                            'closeButton' => $this->closeButton,
-                            'options' => $this->options,
-                        ]);
+                    // echo BootstrapAlert::widget([
+                    //         'body' => $this->alertTypes[$type]['icon'] . $message,
+                    //         'closeButton' => $this->closeButton,
+                    //         'options' => $this->options,
+                    //     ]);
+                    echo LayerMsgWidget::widget([
+                        'message' => $message,
+                        'type' => $type,
+                        'options' => $this->options,
+                    ]);
                 }
 
                 $session->removeFlash($type);

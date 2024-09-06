@@ -15,6 +15,7 @@ return [
         'cache' => [
             'class' => 'yii\redis\Cache',
             'redis' => 'redis',
+            'keyPrefix' => 'yii2_admin:',
         ],
         'assetManager' => [
             'appendTimestamp' => true,

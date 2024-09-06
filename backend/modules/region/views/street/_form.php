@@ -19,6 +19,7 @@ use yii\bootstrap\ActiveForm;
         ],
     ]); ?>
     <?= $form->field($model, 'pid')->dropdownList(Area::instance()->getListData(), ['prompt' => '', 'data-placeholder' => '请选择', 'class' => 'form-control select2', 'style' => 'width:100%'])->label('所属区域') ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <div class="box-footer">
         <a data-dismiss="modal" href="javascript:history.back();" class="btn btn-default">取消</a>
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>

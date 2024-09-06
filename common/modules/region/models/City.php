@@ -53,7 +53,7 @@ class City extends ActiveRecord
         ];
     }
 
-    public function getProince()
+    public function getProvince()
     {
         return $this->hasOne(Province::class, ['id' => 'pid']);
     }

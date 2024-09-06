@@ -35,7 +35,10 @@ return [
                 'console-db' => '@console/runtime/logs/db.log',
                 'console-email' => '@console/runtime/logs/email.log',
             ],
-        ]
+        ],
+        'region' => [
+            'class' => 'backend\modules\region\Module',
+        ],
     ],
     'components' => [
         'request' => [

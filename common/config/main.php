@@ -114,4 +114,9 @@ return [
             'as log' => \yii\queue\LogBehavior::class,
         ],
     ],
+    'modules' => [
+        'region' => [
+            'class' => 'backend\modules\region\Module',
+        ],
+    ]
 ];

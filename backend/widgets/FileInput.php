@@ -1,7 +1,10 @@
 <?php
 namespace backend\widgets;
 
+use Yii;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 /**
  * FileInput widget styled for Bootstrap 3.0 with ability to multiple file
@@ -14,6 +17,7 @@ use yii\helpers\Html;
  *
  * @see http://www.jasny.net/bootstrap/javascript/#fileinput
  *
+ * @author 王勇 <lonestone@qq.com>
  * @since 2.0
  */
 class FileInput extends \kartik\base\InputWidget
@@ -31,6 +35,7 @@ class FileInput extends \kartik\base\InputWidget
         }
 
         if ($this->hasModel()) {
+            $this->options['hiddenOptions'] = ['value'=>$this->value];
             $input = Html::activeFileInput($this->model, $this->attribute, $this->options);
         } else {
             $input = Html::fileInput($this->name, $this->value, $this->options);

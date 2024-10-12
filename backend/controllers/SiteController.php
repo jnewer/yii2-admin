@@ -156,7 +156,7 @@ class SiteController extends Controller
     /**
      * Displays server env.
      *
-     * @desc 服务环境
+     * @desc 服务器环境
      *
      * @return string
      */

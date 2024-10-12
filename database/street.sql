@@ -1,18 +1,4 @@
-<?php
-
-use yii\db\Migration;
-
-/**
- * Class m240906_005514_create_street_data
- */
-class m240906_005514_create_street_data extends Migration
-{
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
-    {
-        $this->execute("INSERT INTO `street` (`id`, `name`,`pid`) VALUES 
+INSERT INTO `street` (`id`, `name`,`pid`) VALUES 
 (7228,'白坝镇',2036),
 (71599,'白塔街道',2036),
 (7231,'八渡乡',2036),
@@ -43576,31 +43562,4 @@ class m240906_005514_create_street_data extends Migration
 (21005,'苗尾傈僳族乡',2351),
 (21006,'民建乡',2351),
 (20996,'诺邓镇',2351),
-(21002,'团结彝族乡',2351);");
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
-    {
-        echo "m240906_005514_create_street_data cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m240906_005514_create_street_data cannot be reverted.\n";
-
-        return false;
-    }
-    */
-}
+(21002,'团结彝族乡',2351);

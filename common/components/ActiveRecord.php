@@ -43,19 +43,12 @@ class ActiveRecord extends BaseActiveRecord
      */
     public function save($runValidation = true, $attributes = null, $throwException = true)
     {
-        if ($throwException) {
-            if (!parent::save($runValidation, $attributes)) {
-                $ers = [];
-                foreach ($this->errors as $val) {
-                    $ers[] = implode('', $val);
-                }
-                throw new \yii\base\UserException(implode('', $ers));
-            }
-            
-            return true;
+        if ($throwException && !parent::save($runValidation, $attributes)) {
+            $ers = array_map('implode', $this->errors);
+            throw new UserException(implode('', $ers));
         }
-        
-        return parent::save($runValidation, $attributes);
+
+        return true;
     }
 
     /**
@@ -130,23 +123,17 @@ class ActiveRecord extends BaseActiveRecord
         $validator = new FileValidator(['skipOnEmpty' => true, 'extensions' => $extensions]);
         foreach ($attributes as $attribute) {
             $file = UploadedFile::getInstance($this, $attribute);
-            if ($file !== null) {
-                if ($validator->validate($file, $error)) {
-                    $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
+            if ($file && $validator->validate($file, $error)) {
+                $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
+                $dir = '/upload/' . strtolower($className) . '/' . $attribute . '/' . date('Ym') . '/';
+                FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, true);
 
-                    $dir = '/upload/' . strtolower($className) . '/' . $attribute . '/' . date('Ym') . '/';
-                    if (!file_exists(Yii::getAlias('@webroot') . $dir)) {
-                        FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir);
-                    }
-
-                    $filepath = '@webroot' . $dir . $filename;
-                    $filepath = Yii::getAlias($filepath);
-                    if ($file->saveAs($filepath)) {
-                        $this->$attribute = $dir . $filename;
-                    }
-                } else {
-                    $this->addError($attribute, $error);
+                $filepath = Yii::getAlias('@webroot' . $dir . $filename);
+                if ($file->saveAs($filepath)) {
+                    $this->$attribute = $dir . $filename;
                 }
+            } else {
+                $this->addError($attribute, $error);
             }
         }
     }
@@ -164,12 +151,9 @@ class ActiveRecord extends BaseActiveRecord
                     $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
 
                     $dir = ($dirPrefix ? $dirPrefix : '/upload/' . strtolower($className) . '/' . $attribute) . '/' . date('Ym') . '/';
-                    if (!file_exists(Yii::getAlias('@webroot') . $dir)) {
-                        FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir);
-                    }
+                    FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, true);
 
-                    $filepath = '@webroot' . $dir . $filename;
-                    $filepath = Yii::getAlias($filepath);
+                    $filepath = Yii::getAlias('@webroot' . $dir . $filename);
                     if ($file->saveAs($filepath)) {
                         $this->$attribute = $dir . $filename;
                     }
@@ -213,10 +197,9 @@ class ActiveRecord extends BaseActiveRecord
 
     public function getErrorstr()
     {
-        foreach ($this->errors as $val) {
-            $ers[] = implode('', $val);
-        }
-        return implode('', $ers);
+        return array_reduce($this->errors, function ($carry, $val) {
+            return $carry . implode('', $val);
+        }, '');
     }
 
     /**

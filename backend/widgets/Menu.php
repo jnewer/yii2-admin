@@ -40,11 +40,6 @@ class Menu extends \yii\widgets\Menu
                 $module->init();
             }
 
-            // $config = \common\models\WechatConfig::findOne(['module_id' => $id]);
-            // if ($config !== null && !$config->is_enabled) {
-            //     continue;
-            // }
-
             $filename = $module->getViewPath() . '/menu.php';
 
             if (file_exists($filename)) {
@@ -254,7 +249,7 @@ class Menu extends \yii\widgets\Menu
                 $items[$i]['items'] = $this->normalizeItems($item['items'], $hasActiveChild);
                 if (empty($items[$i]['items']) && $this->hideEmptyItems) {
                     unset($items[$i]['items']);
-                    if (!isset($item['url'])) {
+                    if (!isset($item['url']) || $item['url'] === '#') {
                         unset($items[$i]);
                         continue;
                     }

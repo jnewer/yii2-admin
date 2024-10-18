@@ -15,6 +15,8 @@ class Controller extends BaseController
 {
     protected $modelClass = '';
 
+    public static $parentActions = [];
+
     public function behaviors()
     {
         return [

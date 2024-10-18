@@ -10,9 +10,11 @@ use yii\web\NotFoundHttpException;
 
 /**
  * CityController implements the CRUD actions for City model.
- * @desc 城市表管理
+ * @desc 城市管理
  */
 class CityController extends Controller
 {
     protected $modelClass = City::class;
+
+    public static $parentActions = ['index', 'create', 'view', 'update', 'delete'];
 }

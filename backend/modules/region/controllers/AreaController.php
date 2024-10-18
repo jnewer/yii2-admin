@@ -10,9 +10,11 @@ use yii\web\NotFoundHttpException;
 
 /**
  * AreaController implements the CRUD actions for Area model.
- * @desc 区域表管理
+ * @desc 区域管理
  */
 class AreaController extends Controller
 {
     protected $modelClass = Area::class;
+
+    public static $parentActions = ['index', 'create', 'view', 'update', 'delete'];
 }

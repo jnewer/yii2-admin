@@ -10,9 +10,11 @@ use yii\web\NotFoundHttpException;
 
 /**
  * ProvinceController implements the CRUD actions for Province model.
- * @desc 省份表管理
+ * @desc 省份管理
  */
 class ProvinceController extends Controller
 {
     protected $modelClass = Province::class;
+
+    public static $parentActions = ['index', 'create', 'view', 'update', 'delete'];
 }

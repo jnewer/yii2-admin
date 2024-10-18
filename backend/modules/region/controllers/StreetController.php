@@ -10,9 +10,11 @@ use yii\web\NotFoundHttpException;
 
 /**
  * StreetController implements the CRUD actions for Street model.
- * @desc 街道表管理
+ * @desc 街道管理
  */
 class StreetController extends Controller
 {
     protected $modelClass = Street::class;
+
+    public static $parentActions = ['index', 'create', 'view', 'update', 'delete'];
 }

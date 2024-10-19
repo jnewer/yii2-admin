@@ -351,7 +351,7 @@ if (!function_exists('db_cmd')) {
 
 
 if (!function_exists('mutex')) {
-    function mutex($name)
+    function mutex()
     {
         return app()->mutex;
     }

@@ -125,6 +125,10 @@ return [
             'redis' => 'redis',
             'as log' => \yii\queue\LogBehavior::class,
         ],
+        'mutex' => [
+            'class' => \yii\redis\Mutex::class,
+            'redis' => 'redis',
+        ],
     ],
     'modules' => [
         'region' => [

@@ -348,3 +348,11 @@ if (!function_exists('db_cmd')) {
         return db()->createCommand($sql, $params);
     }
 }
+
+
+if (!function_exists('mutex')) {
+    function mutex($name)
+    {
+        return app()->mutex;
+    }
+}

@@ -62,6 +62,8 @@ return [
                         'yii\base\UserException',
                         'yii\db\*',
                     ],
+                    'logFile' => '@runtime/logs/app.log',
+                    'maxLogFiles' => 30,
                 ],
                 'api' => [
                     'class' => 'yii\log\FileTarget',
@@ -69,6 +71,7 @@ return [
                     'categories' => ['api', 'yii\base\UserException'],
                     'logVars' => ['_GET', '_POST', '_SESSION'],
                     'logFile' => '@runtime/logs/api.log',
+                    'maxLogFiles' => 30,
                 ],
                 'email' => [
                     'class' => 'yii\log\EmailTarget',
@@ -106,6 +109,14 @@ return [
                     'categories' => ['debug'],
                     'logVars' => ['_GET', '_POST', '_SESSION'],
                     'logFile' => '@runtime/logs/debug.log',
+                    'maxLogFiles' => 30,
+                ],
+                'sql' => [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning', 'info', 'trace'],
+                    'categories' => ['yii\db\Command::execute', 'yii\db\Command::query'],
+                    'logFile' => '@runtime/logs/sql.log',
+                    'maxLogFiles' => 30,
                 ],
             ],
         ],

@@ -30,7 +30,7 @@ use yii\filters\RateLimiter;
  *
  *        // 自定义用户类
  *        user' => function() {
- *            return CRateLimiterUser::findByKey('127.0.0.1', 100, 600, 'ip')
+ *            return CRateLimiterUser::findByKey('127.0.0.1', 100, 600, 'ip');
  *        }
  *    ];
  *

@@ -349,3 +349,16 @@ if (!function_exists('db_cmd')) {
     }
 }
 
+if (!function_exists('mutex_lock')) {
+    function mutex_lock($name, $timeout = 0)
+    {
+        return mutex()->acquire($name, $timeout);
+    }
+}
+
+if (!function_exists('mutex_unlock')) {
+    function mutex_unlock($name)
+    {
+        return mutex()->release($name);
+    }
+}

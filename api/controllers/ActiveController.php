@@ -13,6 +13,7 @@ use yii\filters\ContentNegotiator;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\rest\ActiveController as Controller;
+use common\components\behaviors\RequestIdBehavior;
 
 /**
  * ActiveController
@@ -54,6 +55,11 @@ class ActiveController extends Controller
         ];
 
         unset($behaviors['rateLimiter']);
+
+        $behaviors['requestId'] = [
+            'class' => RequestIdBehavior::class,
+        ];
+
         return $behaviors;
     }
 

@@ -9,6 +9,7 @@ class Role extends BaseRole
 {
     public function getUnassignedItemsDataProvider()
     {
+        $items = [];
         foreach ($this->getUnassignedItems() as $name => $value) {
             $items[] = ['name' => $name, 'description' => $value];
         }

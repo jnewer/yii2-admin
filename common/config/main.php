@@ -40,14 +40,15 @@ return [
             'timeout' => 24 * 3600,
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => 'yii\symfonymailer\Mailer',
             'viewPath' => '@common/mail',
             'useFileTransport' => false,
             'transport' => [
-                'class' => 'Swift_SmtpTransport',
+                'scheme' => 'smtps',
                 'host' => 'smtp.163.com',
                 'username' => '',
                 'password' => '',
+                'port' => 587,
             ],
         ],
         'log' => [

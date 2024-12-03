@@ -40,7 +40,7 @@
         "yiisoft/yii2-queue": "^2.3",
         "yiisoft/yii2-redis": "^2.0",
         "yiisoft/yii2-shell": "^2.0",
-        "yiisoft/yii2-swiftmailer": "^2.1"
+        "yiisoft/yii2-symfonymailer": "^4.0"
     },
     "require-dev": {
         "rector/rector": "^1.1",

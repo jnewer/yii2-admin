@@ -9,8 +9,16 @@ return [
             'charset' => 'utf8',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => 'yii\symfonymailer\Mailer',
             'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'scheme' => 'smtps',
+                'host' => 'smtp.163.com',
+                'username' => '',
+                'password' => '',
+                'port' => 587,
+            ],
         ],
     ],
 ];

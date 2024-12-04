@@ -281,4 +281,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return self::$statusMap[$this->status] ?? '';
     }
+
+    public function getStatusLabelClass()
+    {
+        if ($this->status == self::STATUS_ACTIVE) {
+            return 'label-success';
+        } elseif ($this->status == self::STATUS_INACTIVE) {
+            return 'label-danger';
+        }
+
+        return 'label-default';
+    }
 }

@@ -42,8 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'roleNames:text:角色',
                 [
                     'label' => '状态',
+                    'format' => 'raw',
                     'value' => function ($model) {
-                        return $model->getStatusText();
+                        return Html::tag('span', $model->getStatusText(), [
+                            'class' => 'label ' . $model->getStatusLabelClass(),
+                        ]);
                     }
                 ],
                 'created_at',

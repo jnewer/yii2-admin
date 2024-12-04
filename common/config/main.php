@@ -116,6 +116,7 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning', 'info', 'trace'],
                     'categories' => ['yii\db\Command::execute', 'yii\db\Command::query'],
+                    'logVars' => [],
                     'logFile' => '@runtime/logs/sql.log',
                     'maxLogFiles' => 30,
                 ],

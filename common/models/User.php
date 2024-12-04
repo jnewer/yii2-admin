@@ -23,6 +23,7 @@ use common\components\behaviors\DatetimeBehavior;
  * @property integer $status [smallint(1)] 状态
  * @property integer $created_at [datetime] 创建时间
  * @property integer $updated_at [datetime] 更新时间
+ * @property string  $statusText 状态文字描述
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -274,5 +275,10 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return implode('/', $names);
+    }
+
+    public function getStatusText()
+    {
+        return self::$statusMap[$this->status] ?? '';
     }
 }

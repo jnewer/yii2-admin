@@ -40,7 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'nickname',
                 'email',
                 'roleNames:text:角色',
-                'status',
+                [
+                    'label' => '状态',
+                    'value' => function ($model) {
+                        return $model->getStatusText();
+                    }
+                ],
                 'created_at',
                 'updated_at',
             ],

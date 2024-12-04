@@ -58,7 +58,12 @@ $dataProvider->pagination->pageSize = Yii::$app->config->get('backend_pagesize',
                     'nickname',
                     'email',
                     'RoleNames:text:角色',
-                    'status',
+                    [
+                        'label' => '状态',
+                        'value' => function ($model) {
+                            return $model->getStatusText();
+                        },
+                    ],
                     'created_at',
                     'updated_at',
                     [

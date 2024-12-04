@@ -1,11 +1,11 @@
-# Yii2 Admin Template
+# Yii2 Skeleton
 
 ### 快速开始
 
 #### 克隆项目到本地
 
 ```shell
-git clone https://github.com/jnewer/yii2-admin.git
+git clone https://github.com/jnewer/yii2-skeleton.git
 ```
 
 #### 安装依赖
@@ -78,8 +78,16 @@ if (YII_ENV === 'dev') {
 
 #### 启动服务
 
+##### 启动后台服务
+
 ```
-php yii serve
+php yii serve --port=8080
+```
+
+##### 启动API服务
+
+```
+php yii serve --port=8081 --docroot=api/web
 ```
 
 #### 关于权限生成

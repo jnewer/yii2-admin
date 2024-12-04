@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
             'labelOptions' => ['class' => 'sr-only'],
         ],
     ]); ?>
-    <?= $form->field($model, 'operator_name', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '用户名']]) ?>
+    <?= $form->field($model, 'operator_name', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作人用户名']]) ?>
     <?= $form->field($model, 'type', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作大类']]) ?>
     <?= $form->field($model, 'category', ['labelOptions' => ['class' => 'sr-only'], 'inputOptions' => ['class' => 'form-control', 'placeholder' => '操作小类']]) ?>
     <div class="form-group">

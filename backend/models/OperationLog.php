@@ -59,8 +59,8 @@ class OperationLog extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'operator_id' => '操作人id',
-            'operator_name' => '操作人名',
+            'operator_id' => '操作人ID',
+            'operator_name' => '操作人用户名',
             'type' => '操作大类',
             'category' => '操作小类',
             'ip' => '操作人ip',

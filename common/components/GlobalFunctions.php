@@ -61,11 +61,11 @@ if (!function_exists('response')) {
     }
 }
 
-if (!function_exists('isPost')) {
+if (!function_exists('is_post')) {
     /**
      * @inheritdoc
      */
-    function isPost()
+    function is_post()
     {
         return request()->getIsPost();
     }
@@ -87,7 +87,7 @@ if (!function_exists('is_get')) {
      */
     function is_get()
     {
-        return request()->getis_get();
+        return request()->getIsGet();
     }
 }
 
@@ -107,7 +107,7 @@ if (!function_exists('is_options')) {
      */
     function is_options()
     {
-        return request()->getis_options();
+        return request()->getIsOptions();
     }
 }
 

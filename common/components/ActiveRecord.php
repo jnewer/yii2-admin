@@ -126,7 +126,7 @@ class ActiveRecord extends BaseActiveRecord
             if ($file && $validator->validate($file, $error)) {
                 $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
                 $dir = '/upload/' . strtolower($className) . '/' . $attribute . '/' . date('Ym') . '/';
-                FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, true);
+                FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, 755, true);
 
                 $filepath = Yii::getAlias('@webroot' . $dir . $filename);
                 if ($file->saveAs($filepath)) {
@@ -151,7 +151,7 @@ class ActiveRecord extends BaseActiveRecord
                     $filename = time() . rand(1000, 9999) . '.' . $file->getExtension();
 
                     $dir = ($dirPrefix ? $dirPrefix : '/upload/' . strtolower($className) . '/' . $attribute) . '/' . date('Ym') . '/';
-                    FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, true);
+                    FileHelper::createDirectory(Yii::getAlias('@webroot') . $dir, 755, true);
 
                     $filepath = Yii::getAlias('@webroot' . $dir . $filename);
                     if ($file->saveAs($filepath)) {

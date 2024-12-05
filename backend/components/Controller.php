@@ -106,7 +106,7 @@ class Controller extends BaseController
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
      * @param integer $id
-     * @return User the loaded model
+     * @return \common\components\ActiveRecord the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
@@ -160,6 +160,7 @@ class Controller extends BaseController
     public function actionCreate()
     {
         $model = new $this->modelClass();
+        /** @var \common\components\ActiveRecord $model */
         $model->loadDefaultValues();
 
         if (Yii::$app->request->isPost) {

@@ -4,8 +4,8 @@ namespace api\modules\wechat\models;
 
 use Yii;
 use yii\queue\LogBehavior;
+use yii\web\IdentityInterface;
 use common\components\ActiveRecord;
-use yii\behaviors\AttributeBehavior;
 use common\components\behaviors\DatetimeBehavior;
 
 /**
@@ -26,10 +26,11 @@ use common\components\behaviors\DatetimeBehavior;
  * @property string $created_at [datetime] 创建时间
  * @property string $updated_at [datetime] 更新时间
  * @property string $subscribed_at [datetime] 关注时间
+ * @property string $auth_key [varchar(32)] 授权KEY
  *
  * @property WechatConfig $wechatConfig
  */
-class WechatUser extends ActiveRecord
+class WechatUser extends ActiveRecord implements IdentityInterface
 {
     public static $modelName = '微信用户表';
     public $fileAttributes = ['headimgurl'];
@@ -72,7 +73,8 @@ class WechatUser extends ActiveRecord
             [['province', 'city', 'country'], 'string', 'max' => 20],
             [['headimgurl'], 'string', 'max' => 255],
             [['privilege'], 'string', 'max' => 512],
-            [['access_token'], 'string', 'max' => 64]
+            [['access_token'], 'string', 'max' => 64],
+            [['auth_key'], 'string', 'max' => 32],
         ];
     }
 
@@ -98,6 +100,7 @@ class WechatUser extends ActiveRecord
             'updated_at' => '更新时间',
             'subscribed_at' => '关注时间',
             'wechatConfig.name' => '微信配置名称',
+            'auth_key' => '授权KEY',
         ];
     }
 
@@ -108,6 +111,55 @@ class WechatUser extends ActiveRecord
 
     public function getSexText()
     {
-        return self::$sexMap[$this->sex]?? '';
+        return self::$sexMap[$this->sex] ?? '';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        unset($fields['auth_key']);
+        unset($fields['access_token']);
+
+        return $fields;
     }
 }

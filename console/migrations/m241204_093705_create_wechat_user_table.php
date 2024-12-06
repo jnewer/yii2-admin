@@ -25,6 +25,7 @@ class m241204_093705_create_wechat_user_table extends Migration
             'privilege' => $this->string(512)->comment('用户特权信息'),
             'unionid' => $this->string(32)->comment('unionid'),
             'access_token' => $this->string(64)->notNull()->defaultValue('')->comment('access_token'),
+            'auth_key' => $this->string(32)->notNull()->defaultValue('')->comment('授权KEY'),
             'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP')->comment('创建时间'),
             'updated_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')->comment('更新时间'),
             'subscribed_at' => $this->dateTime()->null()->comment('关注时间'),

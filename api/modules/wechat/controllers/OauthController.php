@@ -154,6 +154,6 @@ class OauthController extends BaseController
             "addCard",
             "chooseCard",
             "openCard",
-        ], false, false, false);
+        ], !!$this->wechatConfig->enable_debug, false, false);
     }
 }

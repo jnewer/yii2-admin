@@ -75,6 +75,12 @@ $this->params['breadcrumbs'][] = WechatConfig::$modelName.'详情';
                 }
             ],
             'welcome_msg',
+            [
+                'attribute' => 'enable_debug',
+                'value' => function ($model) {
+                    return WechatConfig::$enableDebugMap[$model->enable_debug] ?? '否';
+                }
+            ],
             'created_at',
             'updated_at',
         ],

@@ -26,8 +26,9 @@ class m241204_094823_create_wechat_config_table extends Migration
             'original_id' => $this->string(30)->null()->comment('原始ID'),
             'qrcode_url' => $this->string(200)->notNull()->defaultValue('')->comment('二维码URL'),
             'auth_type' => $this->tinyInteger()->unsigned()->notNull()->defaultValue(0)->comment('授权类型'),
-            'status' => $this->integer()->unsigned()->notNull()->defaultValue(1)->comment('状态'),
+            'status' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(1)->comment('状态'),
             'welcome_msg' => $this->string(200)->notNull()->defaultValue('')->comment('欢迎语'),
+            'enable_debug' => $this->tinyInteger(1)->unsigned()->notNull()->defaultValue(0)->comment('是否开启调试模式'),
             'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP')->comment('创建时间'),
             'updated_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')->comment('更新时间'),
         ]);

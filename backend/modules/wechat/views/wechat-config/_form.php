@@ -31,6 +31,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'original_id')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'qrcode_url')->widget(backend\widgets\FileInput::class)->hint('支持JPG、PNG格式，不要超过500KB为宜') ?>
     <?= $form->field($model, 'welcome_msg')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'enable_debug')->dropDownList(WechatConfig::$enableDebugMap, ['prompt'=>'', 'data-placeholder'=>'请选择', 'class' => 'select2', 'style' => 'width:100%']) ?>
     <div class="box-footer">
         <a data-dismiss="modal" href="javascript:history.back();" class="btn btn-default">取消</a>
         <?=  Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>

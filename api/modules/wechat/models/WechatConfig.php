@@ -24,8 +24,9 @@ use yii\queue\LogBehavior;
  * @property string $original_id [varchar(30)] 原始ID
  * @property string $qrcode_url [varchar(200)] 二维码URL
  * @property integer $auth_type [tinyint(3) unsigned] 授权类型
- * @property integer $status [int(11) unsigned] 状态
+ * @property integer $status [tinyint(3) unsigned] 状态
  * @property string $welcome_msg [varchar(200)] 欢迎语
+ * @property integer $enable_debug [tinyint(3) unsigned] 是否开启调试模式
  * @property string $created_at [datetime] 创建时间
  * @property string $updated_at [datetime] 更新时间
  *
@@ -64,6 +65,11 @@ class WechatConfig extends ActiveRecord
         self::AUTH_TYPE_OPEN_PLATFORM => '开放平台授权',
     ];
 
+    public static $enableDebugMap = [
+        0 => '否',
+        1 => '是',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -86,7 +92,7 @@ class WechatConfig extends ActiveRecord
     {
         return [
             [['name', 'app_id', 'app_secret', 'kind', 'status'], 'required'],
-            [['kind', 'status'], 'integer'],
+            [['kind', 'status', 'enable_debug'], 'integer'],
             [['name', 'app_id', 'app_secret', 'token', 'encoding_aes_key', 'login_email', 'login_password'], 'string', 'max' => 50],
             [['server_url'], 'string', 'max' => 100],
             [['original_id'], 'string', 'max' => 30],
@@ -116,6 +122,7 @@ class WechatConfig extends ActiveRecord
             'qrcode_url' => '二维码URL',
             'auth_type' => '授权类型',
             'status' => '状态',
+            'enable_debug' => '是否开启调试模式',
             'welcome_msg' => '欢迎语',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',

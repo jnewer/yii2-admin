@@ -28,7 +28,6 @@
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
         "kartik-v/yii2-password": "^1.5",
         "kartik-v/yii2-widgets": "^3.4",
-        "overtrue/wechat": "~5.0",
         "rmrevin/yii2-fontawesome": "~2.15",
         "yiisoft/yii2": "^2.0",
         "yiisoft/yii2-bootstrap": "*",
